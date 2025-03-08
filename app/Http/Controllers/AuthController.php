@@ -39,14 +39,21 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required'
         ]);
+        
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => $request['password']
+            'password' => $request['password'],
+            'role_id' => $request['role'],
         ]);
-        return redirect('/login');
+        if($request['role'] == 1){
+            return redirect('/login');
+        }else{
+            return redirect('/entreprise');
+        }
     }
     public function logout()
     {

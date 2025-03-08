@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
+Route::get('/entreprise', function () {
+    return view('chihaja');
+});
 
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');

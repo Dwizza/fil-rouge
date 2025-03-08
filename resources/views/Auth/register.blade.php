@@ -1,6 +1,29 @@
-@extends('layouts.app')
-@section('content')
-
+<!DOCTYPE html>
+   <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Odor - Vape Store WooCommerce HTML Template</title>
+        <!-- Favicon img -->
+        <link rel="shortcut icon" href="assets/images/favicon.png">
+        <!-- Bootstarp min css -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <!-- All min css -->
+        <link rel="stylesheet" href="assets/css/all.min.css">
+        <!-- Swiper bundle min css -->
+        <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+        <!-- Magnigic popup css -->
+        <link rel="stylesheet" href="assets/css/magnific-popup.css">
+        <!-- Animate css -->
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <!-- Nice select css -->
+        <link rel="stylesheet" href="assets/css/nice-select.css">
+        <!-- Style css -->
+        <link rel="stylesheet" href="assets/css/style.css">
+        @vite('resources/css/app.css')
+    </head>
+   <body>
 <!-- Sidebar area start here -->
 <div id="targetElement" class="side_bar slideInRight side_bar_hidden">
     <div class="side_bar_overlay"></div>
@@ -75,6 +98,16 @@
                                     <input type="text" name="name" placeholder="User Name">
                                     <input class="mt-30" name="email" type="email" placeholder="Email">
                                     <input class="mt-30" name="password" type="password" placeholder="Enter Password">
+                                    <div class="mt-30 flex justify-between">
+                                        <label class="inline-flex items-center">
+                                            <input type="radio" class="form-radio h-5 w-5 text-gray-600" name="role" value="1" checked>
+                                            <span class="ml-2 text-gray-700">Particulier</span>
+                                        </label>
+                                        <label class="inline-flex items-center">
+                                            <input type="radio" class="form-radio h-5 w-5 text-gray-600" name="role" value="2">
+                                            <span class="ml-2 text-gray-700">Entreprise</span>
+                                        </label>
+                                    </div>
                                     <button class="mt-30" type="submit" name="submit">Create Account</button>
                                     <div class="radio-btn mt-30">
                                         <span></span>
@@ -99,4 +132,28 @@
     <!-- Login area end here -->
 </main>
 
-@endsection
+<!-- Jquery 3. 7. 1 Min Js -->
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<!-- Bootstrap min Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- Swiper bundle min Js -->
+<script src="assets/js/swiper-bundle.min.js"></script>
+<!-- Counterup min Js -->
+<script src="assets/js/jquery.counterup.min.js"></script>
+<!-- Wow min Js -->
+<script src="assets/js/wow.min.js"></script>
+<!-- Magnific popup min Js -->
+<script src="assets/js/magnific-popup.min.js"></script>
+<!-- Nice select min Js -->
+<script src="assets/js/nice-select.min.js"></script>
+<!-- Pace min Js -->
+<script src="assets/js/pace.min.js"></script>
+<!-- Isotope pkgd min Js -->
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<!-- Waypoints Js -->
+<script src="assets/js/jquery.waypoints.js"></script>
+<!-- Script Js -->
+<script src="assets/js/script.js"></script>
+
+   </body>
+   </html>

@@ -1,9 +1,31 @@
-@extends('layouts.app')
-@section('content')
-
-
- <!-- Sidebar area start here -->
- <div id="targetElement" class="side_bar slideInRight side_bar_hidden">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odor - Vape Store WooCommerce HTML Template</title>
+    <!-- Favicon img -->
+    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <!-- Bootstarp min css -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!-- All min css -->
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <!-- Swiper bundle min css -->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <!-- Magnigic popup css -->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <!-- Animate css -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!-- Nice select css -->
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <!-- Style css -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    @vite('resources/css/app.css')
+</head>
+<body>
+<!-- Sidebar area start here -->
+<div id="targetElement" class="side_bar slideInRight side_bar_hidden">
     <div class="side_bar_overlay"></div>
     <div class="logo mb-30">
         <img src="assets/images/logo/logo.svg" alt="logo">
@@ -52,54 +74,74 @@
 
 <main>
 
-    <!-- Login area start here -->
-    <section class="login-area pt-130 pb-130">
-        <div class="container">
-            <div class="login__item">
-                <div class="row g-4">
-                    <div class="col-xxl-8">
-                        <div class="login__image">
-                            <img src="assets/images/login/login-image1.jpg" alt="image">
-                            <div class="btn-wrp">
-                                <a class="active" href="/login">sign in</a>
-                                <a href="/register">create account</a>
-                            </div>
+<!-- Login area start here -->
+<section class="login-area pt-130 pb-130">
+    <div class="container">
+        <div class="login__item">
+            <div class="row g-4">
+                <div class="col-xxl-8">
+                    <div class="login__image">
+                        <img src="assets/images/login/login-image1.jpg" alt="image">
+                        <div class="btn-wrp">
+                            <a class="active" href="/login">sign in</a>
+                            <a href="/register">create account</a>
                         </div>
                     </div>
-                    <div class="col-xxl-4">
-                        <div class="login__content">
-                            <h2 class="text-white mb-65">Welcome Back</h2>
-                            <div class="form-area login__form">
-                                <form action="{{route('login')}}" method="POST">
-                                    @csrf
-                                    <input type="email" name="email" placeholder="Email">
-                                    <input class="mt-30" name="password" type="password" placeholder="Enter Password">
-                                    <button class="mt-30" type="submit" name="submit">Sign In</button>
-                                    <div class="radio-btn mt-30">
-                                        <span></span>
-                                        <p>I accept your terms & conditions</p>
-                                    </div>
-                                </form>
-                                <span class="or pt-30 pb-40">OR</span>
-                            </div>
-                            <div class="login__with">
-                                <a href="#0"><img src="assets/images/icon/google.svg" alt=""> continue with
-                                    google</a>
-                                <a class="mt-15" href="#0"><img src="assets/images/icon/facebook.svg" alt="">
-                                    continue with
-                                    facebook</a>
-                            </div>
+                </div>
+                <div class="col-xxl-4">
+                    <div class="login__content">
+                        <h2 class="text-white mb-65">Welcome Back</h2>
+                        <div class="form-area login__form">
+                            <form action="{{route('login')}}" method="POST">
+                                @csrf
+                                <input type="email" name="email" placeholder="Email">
+                                <input class="mt-30" name="password" type="password" placeholder="Enter Password">
+                                <button class="mt-30" type="submit" name="submit">Sign In</button>
+                                <div class="radio-btn mt-30">
+                                    <span></span>
+                                    <p>I accept your terms & conditions</p>
+                                </div>
+                            </form>
+                            <span class="or pt-30 pb-40">OR</span>
+                        </div>
+                        <div class="login__with">
+                            <a href="#0"><img src="assets/images/icon/google.svg" alt=""> continue with
+                                google</a>
+                            <a class="mt-15" href="#0"><img src="assets/images/icon/facebook.svg" alt="">
+                                continue with
+                                facebook</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Login area end here -->
+    </div>
+</section>
+<!-- Login area end here -->
 </main>
 
+<!-- Jquery 3. 7. 1 Min Js -->
+<script src="assets/js/jquery-3.7.1.min.js"></script>
+<!-- Bootstrap min Js -->
+<script src="assets/js/bootstrap.min.js"></script>
+<!-- Swiper bundle min Js -->
+<script src="assets/js/swiper-bundle.min.js"></script>
+<!-- Counterup min Js -->
+<script src="assets/js/jquery.counterup.min.js"></script>
+<!-- Wow min Js -->
+<script src="assets/js/wow.min.js"></script>
+<!-- Magnific popup min Js -->
+<script src="assets/js/magnific-popup.min.js"></script>
+<!-- Nice select min Js -->
+<script src="assets/js/nice-select.min.js"></script>
+<!-- Pace min Js -->
+<script src="assets/js/pace.min.js"></script>
+<!-- Isotope pkgd min Js -->
+<script src="assets/js/isotope.pkgd.min.js"></script>
+<!-- Waypoints Js -->
+<script src="assets/js/jquery.waypoints.js"></script>
+<!-- Script Js -->
+<script src="assets/js/script.js"></script>
 
-
-@endsection
-
-   
+</body>
+</html>

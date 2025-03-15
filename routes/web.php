@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware('auth');
 Route::get('/entreprise', function () {
-    return view('chihaja');
+    return view('Auth.entreprise');
 });
 
 

@@ -82,7 +82,7 @@
                     <div class="row g-4">
                         <div class="col-xxl-8">
                             <div class="login__image">
-                                <img src="assets/images/register/res-image1.jpg" alt="image">
+                                <img src="assets/images/entreprise/register.jpg" alt="image">
                                 <div class="btn-wrp">
                                     <a href="/login">sign in</a>
                                     <a class="active" href="/register">create account</a>
@@ -91,38 +91,14 @@
                         </div>
                         <div class="col-xxl-4">
                             <div class="login__content">
-                                <h2 class="text-white mb-65">create account</h2>
+                                <h2 class="text-white mb-65">Company</h2>
                                 <div class="form-area login__form">
                                     <form class="flex flex-col gap-6 items-center" action="{{ route('register')}}" method="POST">
                                         @csrf
-                                        <input type="text" name="name" placeholder="User Name"
-                                            class="w-full p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                                        <input
-                                            class="mt-6 w-full p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            name="email" type="email" placeholder="Email">
-                                        <input
-                                            class="mt-6 w-full p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            name="password" type="password" placeholder="Enter Password">
-                                        <input
-                                            class="mt-6 w-full p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            name="pic" type="file" placeholder="Profil picture" accept="image/*">
-                                        <input
-                                            class="mt-6 w-full p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            name="phone" type="tel" placeholder="Phone Number">
-                                        <input
-                                            class="mt-6 w-full p-4 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                                            name="address" type="text" placeholder="Address">
-                                            <div class="flex justify-between mt-4 w-72 border-2 border-orange-400 rounded-xl select-none">
-                                                <label class="radio text-center flex flex-grow items-center justify-center rounded-lg p-1 cursor-pointer">
-                                                    <input type="radio" name="role" value="1" class="peer hidden" />
-                                                    <span class="tracking-widest peer-checked:bg-gradient-to-r peer-checked:from-[orange] peer-checked:to-[red] peer-checked:text-white text-gray-700 p-2 rounded-lg transition duration-150 ease-in-out">Particler</span>
-                                                </label>
-                                                <label class="radio text-center flex flex-grow items-center justify-center rounded-lg p-1 cursor-pointer">
-                                                    <input type="radio" name="role" value="2" class="peer hidden" />
-                                                    <span class="tracking-widest peer-checked:bg-gradient-to-r peer-checked:from-[orange] peer-checked:to-[red] peer-checked:text-white text-gray-700 p-2 rounded-lg transition duration-150 ease-in-out">Company</span>
-                                                </label>
-                                            </div>
-                                        <button class="mt-30" type="submit" name="submit">Create Account</button>
+                                        <input class="border-none" type="text" name="company_name" placeholder="Company Name">
+                                        <input class="border-none" type="text" name="website" placeholder="Web Site">
+                                        <input class="border-none" type="file" name="logo" accept="image/*">
+                                        <button class="mt-30" type="submit" name="submit">Submit</button>
                                         <div class="radio-btn mt-30">
                                             <span></span>
                                             <p>I accept your terms & conditions</p>
@@ -131,11 +107,9 @@
                                     <span class="or pt-30 pb-40">OR</span>
                                 </div>
                                 <div class="login__with">
-                                    <a href="#0" class="flex"><img src="assets/images/icon/google.svg" alt=""> <span>continue with
-                                        google</span></a>
+                                    <a href="#0" class="flex"><img src="assets/images/icon/google.svg" alt=""> <span>continue with google</span></a>
                                     <a class="flex mt-15" href="#0"><img src="assets/images/icon/facebook.svg" alt="">
-                                        continue with
-                                        facebook</a>
+                                        <span>continue with facebook</span></a>
                                 </div>
                             </div>
                         </div>
@@ -172,5 +146,3 @@
 </body>
 
 </html>
-
-

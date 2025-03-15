@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odor - Vape Store WooCommerce HTML Template</title>
+    <title>Jotea</title>
     <!-- Favicon img -->
-    <link rel="shortcut icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" href="assets/images/logo.png">
     <!-- Bootstarp min css -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <!-- All min css -->
@@ -75,7 +75,7 @@
 <main>
 
 <!-- Login area start here -->
-<section class="login-area pt-130 pb-130">
+<section class="login-area pt-50 pb-50">
     <div class="container">
         <div class="login__item">
             <div class="row g-4">

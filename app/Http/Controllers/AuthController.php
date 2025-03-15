@@ -40,18 +40,25 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
+            'pic' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
             'role' => 'required'
         ]);
+        
         
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => $request['password'],
+            'photo' => $request['pic'],
+            'phone' => $request['phone'],
+            'address' => $request['address'],
             'role_id' => $request['role'],
         ]);
         if($request['role'] == 1){
             return redirect('/login');
-        }else{
+        }else if($request['role'] == 2){
             return redirect('/entreprise');
         }
     }

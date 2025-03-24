@@ -25,7 +25,13 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         if(auth()->attempt($user)){
-            return redirect('/');
+            if(auth()->user()->role_id == 3){
+            return redirect('/admin');
+            }else if(auth()->user()->role_id == 2){
+            return redirect('/entreprise');
+            }else{
+            return redirect('/home');
+            }
         }
         return redirect('/login')->with('error', 'Invalid login credentials');
     }

@@ -13,7 +13,7 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        //
+        return view('Particulier & entreprise View.AddAnnonce');
     }
 
     /**
@@ -21,7 +21,7 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -29,7 +29,26 @@ class AnnonceController extends Controller
      */
     public function store(StoreannonceRequest $request)
     {
-        //
+        $validate = $request->validated([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'category_id' => 'required',
+            'location' => 'required|string',
+            'image' => 'required|image',
+        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $validate['image'] = $imageName;
+        }
+
+        Annonce::create($validate);
+
+        return redirect()->route('addannonce')
+            ->with('success', 'annonce created successfully.');
+
     }
 
     /**
@@ -37,7 +56,7 @@ class AnnonceController extends Controller
      */
     public function show(annonce $annonce)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +64,7 @@ class AnnonceController extends Controller
      */
     public function edit(annonce $annonce)
     {
-        //
+        return view('Particulier & entreprise View.EditAnnonce', compact('annonce'));
     }
 
     /**
@@ -53,7 +72,25 @@ class AnnonceController extends Controller
      */
     public function update(UpdateannonceRequest $request, annonce $annonce)
     {
-        //
+        $validate = $request->validated([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'category_id' => 'required',
+            'location' => 'required|string',
+            'image' => 'nullable|image',
+        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $validate['image'] = $imageName;
+        }
+
+        $annonce->update($validate);
+
+        return redirect()->route('addannonce')
+            ->with('success', 'annonce updated successfully.');
     }
 
     /**
@@ -61,6 +98,9 @@ class AnnonceController extends Controller
      */
     public function destroy(annonce $annonce)
     {
-        //
+        $annonce->delete();
+
+        return redirect()->route('addannonce')
+            ->with('success', 'annonce deleted successfully.');
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\registerController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnnonceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Particulier & entreprise View.index');
 })->middleware('auth');
 Route::get('/entreprise', function () {
     return view('Auth.entreprise');
 });
+Route::resource('annonces', AnnonceController::class)->middleware('auth');
+route::group(['prefix' => 'admin'], function(){
+    Route::view('/', 'admin.index');
+    Route::view('/annonces', 'admin.annonces');
+    Route::view('/users', 'admin.users');
+})->middleware('auth');
+
 
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');

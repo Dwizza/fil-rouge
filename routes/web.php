@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('Particulier & entreprise View.index');
 })->middleware('auth');
 Route::get('/entreprise', function () {
-    return view('Auth.entreprise');
+    return view('Particulier & entreprise View.index');
 });
 Route::resource('annonces', AnnonceController::class)->middleware('auth');
 route::group(['prefix' => 'admin'], function(){

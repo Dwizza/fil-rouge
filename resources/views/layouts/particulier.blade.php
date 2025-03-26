@@ -1,352 +1,408 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zxx">
 <head>
-    <meta charset="UTF-8">
+	<!-- Meta Tag -->
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Odor - Vape Store WooCommerce HTML Template</title>
-    <!-- Favicon img -->
-    <link rel="shortcut icon" href="assets/images/favicon.png">
-    <!-- Bootstarp min css -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <!-- All min css -->
-    <link rel="stylesheet" href="assets/css/all.min.css">
-    <!-- Swiper bundle min css -->
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
-    <!-- Magnigic popup css -->
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <!-- Animate css -->
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <!-- Nice select css -->
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <!-- Style css -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    @vite('resources/css/app.css')
+	<meta name='copyright' content=''>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Title Tag  -->
+    <title>Eshop - eCommerce HTML5 Template.</title>
+	<!-- Favicon -->
+	<link rel="icon" type="assets1/image/png" href="assets1/images/favicon.png">
+	<!-- Web Font -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+	
+	<!-- StyleSheet -->
+	
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="assets1/css/bootstrap.css">
+	<!-- Magnific Popup -->
+    <link rel="stylesheet" href="assets1/css/magnific-popup.min.css">
+	<!-- Font Awesome -->
+    <link rel="stylesheet" href="assets1/css/font-awesome.css">
+	<!-- Fancybox -->
+	<link rel="stylesheet" href="assets1/css/jquery.fancybox.min.css">
+	<!-- Themify Icons -->
+    <link rel="stylesheet" href="assets1/css/themify-icons.css">
+	<!-- Nice Select CSS -->
+    <link rel="stylesheet" href="assets1/css/niceselect.css">
+	<!-- Animate CSS -->
+    <link rel="stylesheet" href="assets1/css/animate.css">
+	<!-- Flex Slider CSS -->
+    <link rel="stylesheet" href="assets1/css/flex-slider.min.css">
+	<!-- Owl Carousel -->
+    <link rel="stylesheet" href="assets1/css/owl-carousel.css">
+	<!-- Slicknav -->
+    <link rel="stylesheet" href="assets1/css/slicknav.min.css">
+	
+	<!-- Eshop StyleSheet -->
+	<link rel="stylesheet" href="assets1/css/reset.css">
+	<link rel="stylesheet" href="assets1/css/style.css">
+    <link rel="stylesheet" href="assets1/css/responsive.css">
+
+	<!-- Color CSS -->
+	<link rel="stylesheet" href="assets1/css/color/color1.css">
+	<!--<link rel="stylesheet" href="assets1/css/color/color2.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color3.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color4.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color5.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color6.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color7.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color8.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color9.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color10.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color11.css">-->
+	<!--<link rel="stylesheet" href="assets1/css/color/color12.css">-->
+
+	<link rel="stylesheet" href="#" id="colors">
+	
 </head>
+<body class="js">
+	
+	<!-- Preloader -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- End Preloader -->
+	
+	<!-- Eshop Color Plate -->
+	<div class="color-plate ">
+		<a class="color-plate-icon"><i class="ti-paint-bucket"></i></a>
+		<h4>Eshop Colors</h4>
+		<p>Here is some awesome color's available on Eshop Template.</p>
+		<span class="color1"></span>
+		<span class="color2"></span>
+		<span class="color3"></span>
+		<span class="color4"></span>
+		<span class="color5"></span>
+		<span class="color6"></span>
+		<span class="color7"></span>
+		<span class="color8"></span>
+		<span class="color9"></span>
+		<span class="color10"></span>
+		<span class="color11"></span>
+		<span class="color12"></span>
+	</div>
+	<!-- /End Color Plate -->
+	
+	<!-- Header -->
+	<header class="header shop v2">
+		<!-- Topbar -->
+		<div class="topbar">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-4 col-md-12 col-12">
+						<!-- Top Left -->
+						<div class="top-left">
+							<ul class="list-main">
+								<li><i class="ti-email"></i> support@jotea.com</li>
+							</ul>
+						</div>
+						<!--/ End Top Left -->
+					</div>
+					<div class="col-lg-8 col-md-12 col-12">
+						<!-- Top Right -->
+						<div class="right-content">
+							<ul class="list-main">
+								<li><i class="ti-power-off"></i><a href="login">Login</a></li>
+							</ul>
+						</div>
+						<!-- End Top Right -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Topbar -->
+		<div class="middle-inner">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-2 col-md-2 col-12">
+						<!-- Logo -->
+						<div class="logo">
+							<a href="index.html"><img src="assets1/images/logo.png" alt="logo"></a>
+						</div>
+						<!--/ End Logo -->
+						<!-- Search Form -->
+						<div class="search-top">
+							<div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+							<!-- Search Form -->
+							<div class="search-top">
+								<form class="search-form">
+									<input type="text" placeholder="Search here..." name="search">
+									<button value="search" type="submit"><i class="ti-search"></i></button>
+								</form>
+							</div>
+							<!--/ End Search Form -->
+						</div>
+						<!--/ End Search Form -->
+						<div class="mobile-nav"></div>
+					</div>
+					<div class="col-lg-8 col-md-7 col-12">
+						<div class="search-bar-top">
+							<div class="search-bar">
+								<select>
+									<option selected="selected">All Category</option>
+									<option>watch</option>
+									<option>mobile</option>
+									<option>kid’s item</option>
+								</select>
+								<form>
+									<input name="search" placeholder="Search Products Here....." type="search">
+									<button class="btnn"><i class="ti-search"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-3 col-12">
+						<div class="right-bar">
+							<!-- Search Form -->
+							<div class="sinlge-bar">
+								<a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+							</div>
+							<div class="sinlge-bar">
+								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+							</div>
+							<div class="sinlge-bar shopping">
+								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+								<!-- Shopping Item -->
+								<div class="shopping-item">
+									<div class="dropdown-cart-header">
+										<span>2 Items</span>
+										<a href="#">View Cart</a>
+									</div>
+									<ul class="shopping-list">
+										<li>
+											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
+											<h4><a href="#">Woman Ring</a></h4>
+											<p class="quantity">1x - <span class="amount">$99.00</span></p>
+										</li>
+										<li>
+											<a href="#" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+											<a class="cart-img" href="#"><img src="https://via.placeholder.com/70x70" alt="#"></a>
+											<h4><a href="#">Woman Necklace</a></h4>
+											<p class="quantity">1x - <span class="amount">$35.00</span></p>
+										</li>
+									</ul>
+									<div class="bottom">
+										<div class="total">
+											<span>Total</span>
+											<span class="total-amount">$134.00</span>
+										</div>
+										<a href="checkout.html" class="btn animate">Checkout</a>
+									</div>
+								</div>
+								<!--/ End Shopping Item -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Header Inner -->
+		<div class="header-inner">
+			<div class="container">
+				<div class="cat-nav-head">
+					<div class="row">
+						<div class="col-12">
+							<div class="menu-area">
+								<!-- Main Menu -->
+								<nav class="navbar navbar-expand-lg">
+									<div class="navbar-collapse">	
+										<div class="nav-inner">	
+											<ul class="nav main-menu menu navbar-nav">
+												<li class="active"><a href="#">Home<i class="ti-angle-down"></i></a>
+													<ul class="dropdown">
+														<li><a href="index.html">Home Ecommerce V1</a></li>
+														<li><a href="index2.html">Home Ecommerce V2</a></li>
+														<li><a href="index3.html">Home Ecommerce V3</a></li>
+														<li><a href="index4.html">Home Ecommerce V4</a></li>
+													</ul>
+												</li>
+												<li><a href="#">Product</a></li>												
+												<li><a href="#">Service</a></li>
+												<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
+													<ul class="dropdown">
+														<li><a href="shop-grid.html">Shop Grid</a></li>
+														<li><a href="shop-list.html">Shop List</a></li>
+														<li><a href="shop-single.html">shop Single</a></li>
+														<li><a href="cart.html">Cart</a></li>
+														<li><a href="checkout.html">Checkout</a></li>
+													</ul>
+												</li>
+												<li><a href="#">Pages<i class="ti-angle-down"></i></a>
+													<ul class="dropdown">
+														<li><a href="about-us.html">About Us</a></li>
+														<li><a href="login.html">Login</a></li>
+														<li><a href="register.html">Register</a></li>
+														<li><a href="mail-success.html">Mail Success</a></li>
+														<li><a href="404.html">404</a></li>
+													</ul>
+												</li>									
+												<li><a href="#">Blog<i class="ti-angle-down"></i></a>
+													<ul class="dropdown">
+														<li><a href="blog-grid.html">Blog Grid</a></li>
+														<li><a href="blog-grid-sidebar.html">Blog Grid Sidebar</a></li>
+														<li><a href="blog-single.html">Blog Single</a></li>
+														<li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
+													</ul>
+												</li>
+												<li><a href="contact.html">Contact Us</a></li>
+											</ul>
+										</div>
+									</div>
+								</nav>
+								<!--/ End Main Menu -->	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/ End Header Inner -->
+	</header>
+	<!--/ End Header -->
 
-<body>
+    @yield('content')
 
-    <!-- Header area start here -->
-    <div class="top__header top-header-one pt-30 pb-30">
+
+<!-- Start Footer Area -->
+<footer class="footer">
+    <!-- Footer Top -->
+    <div class="footer-top section">
         <div class="container">
-            <div class="top__wrapper">
-                <a href="index.html" class="main__logo">
-                    <img src="assets/images/logo/logo.svg" alt="logo__image">
-                </a>
-                <div class="search__wrp">
-                    <input placeholder="Search for" aria-label="Search">
-                    <button><i class="fa-solid fa-search"></i></button>
+            <div class="row">
+                <div class="col-lg-5 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer about">
+                        <div class="logo">
+                            <a href="index.html"><img src="assets1/images/logo2.png" alt="#"></a>
+                        </div>
+                        <p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+                        <p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>
+                    </div>
+                    <!-- End Single Widget -->
                 </div>
-                <div class="account__wrap">
-                    <div class="account d-flex align-items-center">
-                        <div class="user__icon">
-                            <a href="#0">
-                                <i class="fa-regular fa-user"></i>
-                            </a>
-                        </div>
-                        <a href="#0" class="acc__cont">
-                            <span class="text-white">
-                                My Account
-                            </span>
-                        </a>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Information</h4>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Faq</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
                     </div>
-                    <div class="cart d-flex align-items-center">
-                        <span class="cart__icon">
-                            <i class="fa-regular fa-cart-shopping"></i>
-                        </span>
-                        <a href="#0" class="c__one">
-                            <span class="text-white">
-                                $0.00
-                            </span>
-                        </a>
-                        <span class="one">
-                            0
-                        </span>
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-2 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer links">
+                        <h4>Customer Service</h4>
+                        <ul>
+                            <li><a href="#">Payment Methods</a></li>
+                            <li><a href="#">Money-back</a></li>
+                            <li><a href="#">Returns</a></li>
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
                     </div>
-                    <div class="flag__wrap">
-                        <div class="flag">
-                            <img src="assets/images/flag/us.png" alt="flag">
+                    <!-- End Single Widget -->
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Single Widget -->
+                    <div class="single-footer social">
+                        <h4>Get In Tuch</h4>
+                        <!-- Single Widget -->
+                        <div class="contact">
+                            <ul>
+                                <li>NO. 342 - London Oxford Street.</li>
+                                <li>012 United Kingdom.</li>
+                                <li>info@eshop.com</li>
+                                <li>+032 3456 7890</li>
+                            </ul>
                         </div>
-                        <select name="flag">
-                            <option value="0">
-                                Usa
-                            </option>
-                            <option value="1">
-                                Canada
-                            </option>
-                            <option value="2">
-                                Australia
-                            </option>
-                            <option value="3">
-                                Germany
-                            </option>
-                        </select>
+                        <!-- End Single Widget -->
+                        <ul>
+                            <li><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li><a href="#"><i class="ti-twitter"></i></a></li>
+                            <li><a href="#"><i class="ti-flickr"></i></a></li>
+                            <li><a href="#"><i class="ti-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- End Single Widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Footer Top -->
+    <div class="copyright">
+        <div class="container">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="left">
+                            <p>Copyright © 2020 <a href="http://www.wpthemesgrid.com" target="_blank">Wpthemesgrid</a>  -  All Rights Reserved.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="right">
+                            <img src="assets1/images/payments.png" alt="#">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <header class="header-section">
-        <div class="container">
-            <div class="header-wrapper pl-65">
-                <div class="header-bar d-lg-none">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                <ul class="main-menu">
-                    <li class="d-none d-lg-block"><button id="openButton" class="side-bar-btn"><i
-                                class="fa-sharp text-white fa-light mr-60 fa-bars"></i></button>
-                    </li>
-                    <li>
-                        <a href="#0">Home <i class="fa-regular fa-angle-down"></i></a>
-                        <ul class="sub-menu">
-                            <li class="subtwohober">
-                                <a href="index.html">
-                                    Home One
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="index-light.html">
-                                    Home One Light
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="index-2.html">
-                                    Home Two
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="index-2-light.html">
-                                    Home Two Light
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="about.html">About Us</a>
-                    </li>
-                    <li>
-                        <a href="#0">Pages <i class="fa-regular fa-angle-down"></i></a>
-                        <ul class="sub-menu">
-                            <li class="subtwohober">
-                                <a href="shop.html">
-                                    Shop Leftbar
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="shop-2.html">
-                                    Shop Rightbar
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="shop-single.html">
-                                    Shop Single
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="cart.html">
-                                    Cart Page
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="checkout.html">
-                                    Checkout Page
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="register.html">
-                                    Register
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="login.html">
-                                    Login
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="error.html">
-                                    404 Error
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#0">Blog <i class="fa-regular fa-angle-down"></i></a>
-                        <ul class="sub-menu">
-                            <li class="subtwohober">
-                                <a href="blog.html">
-                                    Blog Stander
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="blog-grid.html">
-                                    Blog Grid
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="blog-list.html">
-                                    Blog List
-                                </a>
-                            </li>
-                            <li class="subtwohober">
-                                <a href="blog-single.html">
-                                    Blog Single
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact Us</a>
-                    </li>
-                </ul>
-                <div class="shipping__item d-none d-sm-flex align-items-center">
-                    <div class="menu__right d-flex align-items-center">
-                        <div class="thumb">
-                            <img src="assets/images/flag/picking.png" alt="image">
-                        </div>
-                        <div class="content">
-                            <p>
-                                Picking up?
-                            </p>
-                            <div class="items">
-                                <select class="form__select p-0">
-                                    <option value="1">
-                                        Select Store
-                                    </option>
-                                    <option value="2">
-                                        Store One
-                                    </option>
-                                    <option value="3">
-                                        Store Two
-                                    </option>
-                                    <option value="3">
-                                        Store Three
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="menu__right d-flex align-items-center">
-                        <div class="thumb">
-                            <img src="assets/images/flag/shipping.png" alt="image">
-                        </div>
-                        <div class="content">
-                            <p>
-                                Free Shipping <br> on order <strong>over $100</strong>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header area end here -->
+</footer>
+<!-- /End Footer Area -->
 
-@yield('content')
-
-    <!-- Footer area start here -->
-    <footer class="footer-area bg-image" data-background="assets/images/footer/footer-bg.jpg">
-        <div class="container">
-            <div class="footer__wrp pt-65 pb-65 bor-top bor-bottom">
-                <div class="row g-4">
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.1s" data-wow-delay=".1s">
-                        <div class="footer__item">
-                            <h4 class="footer-title">Customer Service</h4>
-                            <ul>
-                                <li><a href="contact.html"><span></span>Help Portal</a></li>
-                                <li><a href="contact.html"><span></span>Contact Us</a></li>
-                                <li><a href="error.html"><span></span>Delivery Information</a></li>
-                                <li><a href="error.html"><span></span>Click and Collect</a></li>
-                                <li><a href="error.html"><span></span>Refunds and Returns</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".2s">
-                        <div class="footer__item">
-                            <h4 class="footer-title">Get to Know Us</h4>
-                            <ul>
-                                <li><a href="about.html"><span></span>About Us</a></li>
-                                <li><a href="blog-grid.html"><span></span>News & Blog</a></li>
-                                <li><a href="error.html"><span></span>Careers</a></li>
-                                <li><a href="error.html"><span></span>Investors</a></li>
-                                <li><a href="contact.html"><span></span>Contact Us</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".3s">
-                        <div class="footer__item">
-                            <h4 class="footer-title">vapes new collections</h4>
-                            <ul>
-                                <li><a href="shop.html"><span></span>E-Cigarettes</a></li>
-                                <li><a href="shop.html"><span></span>Vape Pens</a></li>
-                                <li><a href="shop.html"><span></span>Pod Systems</a></li>
-                                <li><a href="shop.html"><span></span>Disposable Vapes</a></li>
-                                <li><a href="shop.html"><span></span>Nicotine Salt Devices</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".4s">
-                        <div class="footer__item newsletter">
-                            <h4 class="footer-title">get newsletter</h4>
-                            <div class="subscribe">
-                                <input type="email" placeholder="Your Email">
-                                <button><i class="fa-solid fa-paper-plane"></i></button>
-                            </div>
-                            <div class="social-icon mt-40">
-                                <a href="#0"><i class="fa-brands fa-facebook-f"></i></a>
-                                <a href="#0"><i class="fa-brands fa-twitter"></i></a>
-                                <a href="#0"><i class="fa-brands fa-linkedin-in"></i></a>
-                                <a href="#0"><i class="fa-brands fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer__copy-text pt-50 pb-50">
-                <a href="index.html" class="logo d-block">
-                    <img src="assets/images/logo/logo.svg" alt="logo">
-                </a>
-                <p>&copy; Copyright 2023 <a href="#0" class="primary-hover">odor</a> All Rights Reserved</p>
-                <a href="#0" class="payment d-block image">
-                    <img src="assets/images/icon/payment.png" alt="icon">
-                </a>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer area end here -->
-
-    <!-- Back to top area start here -->
-    <div class="scroll-up">
-        <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
-            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
-        </svg>
-    </div>
-    <!-- Back to top area end here -->
-
-    <!-- Jquery 3. 7. 1 Min Js -->
-    <script src="assets/js/jquery-3.7.1.min.js"></script>
-    <!-- Bootstrap min Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- Swiper bundle min Js -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
-    <!-- Counterup min Js -->
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <!-- Wow min Js -->
-    <script src="assets/js/wow.min.js"></script>
-    <!-- Magnific popup min Js -->
-    <script src="assets/js/magnific-popup.min.js"></script>
-    <!-- Nice select min Js -->
-    <script src="assets/js/nice-select.min.js"></script>
-    <!-- Pace min Js -->
-    <script src="assets/js/pace.min.js"></script>
-    <!-- Isotope pkgd min Js -->
-    <script src="assets/js/isotope.pkgd.min.js"></script>
-    <!-- Waypoints Js -->
-    <script src="assets/js/jquery.waypoints.js"></script>
-    <!-- Script Js -->
-    <script src="assets/js/script.js"></script>
+<!-- Jquery -->
+<script src="assets1/js/jquery.min.js"></script>
+<script src="assets1/js/jquery-migrate-3.0.0.js"></script>
+<script src="assets1/js/jquery-ui.min.js"></script>
+<!-- Popper JS -->
+<script src="assets1/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="assets1/js/bootstrap.min.js"></script>
+<!-- Color JS -->
+<script src="assets1/js/colors.js"></script>
+<!-- Slicknav JS -->
+<script src="assets1/js/slicknav.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="assets1/js/owl-carousel.js"></script>
+<!-- Magnific Popup JS -->
+<script src="assets1/js/magnific-popup.js"></script>
+<!-- Fancybox JS -->
+<script src="assets1/js/facnybox.min.js"></script>
+<!-- Waypoints JS -->
+<script src="assets1/js/waypoints.min.js"></script>
+<!-- Countdown JS -->
+<script src="assets1/js/finalcountdown.min.js"></script>
+<!-- Nice Select JS -->
+<script src="assets1/js/nicesellect.js"></script>
+<!-- Ytplayer JS -->
+<script src="assets1/js/ytplayer.min.js"></script>
+<!-- Flex Slider JS -->
+<script src="assets1/js/flex-slider.js"></script>
+<!-- ScrollUp JS -->
+<script src="assets1/js/scrollup.js"></script>
+<!-- Onepage Nav JS -->
+<script src="assets1/js/onepage-nav.min.js"></script>
+<!-- Easing JS -->
+<script src="assets1/js/easing.js"></script>
+<!-- Active JS -->
+<script src="assets1/js/active.js"></script>
 </body>
-
 </html>
+
+

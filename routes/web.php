@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\registerController;
 use Illuminate\Support\Facades\Route;
@@ -16,18 +17,18 @@ use App\Http\Controllers\AnnonceController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', action: function () {
     return view('Particulier & entreprise View.index');
 })->middleware('auth');
-Route::get('/entreprise', function () {
-    return view('Particulier & entreprise View.index');
-});
-Route::resource('annonces', AnnonceController::class)->middleware('auth');
+
+// Route::resource('annonces', AnnonceController::class)->middleware('auth');
 route::group(['prefix' => 'admin'], function(){
     Route::view('/', 'admin.index');
     Route::view('/annonces', 'admin.annonces');
-    Route::view('/users', 'admin.users');
+    Route::get('/users',[ AdminController::class, 'index'])->name('admin.users');
 })->middleware('auth');
+
+
 
 
 

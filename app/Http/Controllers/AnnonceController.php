@@ -33,6 +33,7 @@ class AnnonceController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
+            'user_id' => auth()->id(),
             'category_id' => 'required',
             'location' => 'required|string',
             'image' => 'required|image',
@@ -89,8 +90,7 @@ class AnnonceController extends Controller
 
         $annonce->update($validate);
 
-        return redirect()->route('addannonce')
-            ->with('success', 'annonce updated successfully.');
+        return redirect()->route('addannonce')->with('success', 'annonce updated successfully.');
     }
 
     /**

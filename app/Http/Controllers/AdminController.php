@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -13,7 +14,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::with('role')->where('role_id', '!=', '3')->get();
+        
+    
+        return view('admin.users', compact('users'));
     }
 
     /**

@@ -13,7 +13,7 @@ class ParticulerController extends Controller
      */
     public function index()
     {
-        //
+        return view('Particulier & entreprise View.index');   
     }
 
     /**

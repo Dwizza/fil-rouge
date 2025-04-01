@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\annonce;
 use App\Http\Requests\StoreannonceRequest;
 use App\Http\Requests\UpdateannonceRequest;
+use App\Models\Category;
 
 class AnnonceController extends Controller
 {
@@ -13,7 +14,7 @@ class AnnonceController extends Controller
      */
     public function index()
     {
-        return view('Particulier & entreprise View.AddAnnonce');
+        return view('dashboard Entreprise.index');
     }
 
     /**
@@ -21,7 +22,8 @@ class AnnonceController extends Controller
      */
     public function create()
     {
-        
+        $categories = Category::all();
+        return view('dashboard entreprise.AddAnnonce', compact('categories'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\registerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnnonceController;
@@ -20,6 +21,10 @@ use App\Http\Controllers\AnnonceController;
 Route::get('/', action: function () {
     return view('Particulier & entreprise View.index');
 })->middleware('auth');
+
+route::get('/company', [AnnonceController::class, 'index']);
+route::get('/profile', [EntrepriseController::class, 'index']);
+route::get('/addannonce', [AnnonceController::class, 'create'])->name('addannonce');
 
 // Route::resource('annonces', AnnonceController::class)->middleware('auth');
 route::group(['prefix' => 'admin'], function(){

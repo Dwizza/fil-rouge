@@ -13,7 +13,7 @@ class EntrepriseController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard entreprise.profil');
     }
 
     /**
@@ -45,7 +45,7 @@ class EntrepriseController extends Controller
      */
     public function edit(Entreprise $entreprise)
     {
-        //
+        
     }
 
     /**

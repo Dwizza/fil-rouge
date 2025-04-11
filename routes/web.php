@@ -22,9 +22,15 @@ Route::get('/', action: function () {
     return view('Particulier & entreprise View.index');
 })->middleware('auth');
 
-route::get('/company', [AnnonceController::class, 'index']);
-route::get('/profile', [EntrepriseController::class, 'index']);
-route::get('/addannonce', [AnnonceController::class, 'create'])->name('addannonce');
+route::group(['prefix' => 'company'],function(){
+    route::get('/', [AnnonceController::class, 'index']);
+    route::get('/profile', [EntrepriseController::class, 'index']);
+    route::get('/annonces', [AnnonceController::class, 'annonces']);
+    route::get('/addannonce', [AnnonceController::class, 'create'])->name('addannonce');
+    route::post('/addannonce', [AnnonceController::class, 'store'])->name('addannonce');
+    route::get('/editannonce/{id}', [AnnonceController::class, 'edit'])->name('editannonce');
+    route::post('/editannonce/{id}', [AnnonceController::class, 'update'])->name('editannonce');
+});
 
 // Route::resource('annonces', AnnonceController::class)->middleware('auth');
 route::group(['prefix' => 'admin'], function(){

@@ -6,6 +6,7 @@ use App\Models\annonce;
 use App\Http\Requests\StoreannonceRequest;
 use App\Http\Requests\UpdateannonceRequest;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class AnnonceController extends Controller
 {
@@ -15,6 +16,14 @@ class AnnonceController extends Controller
     public function index()
     {
         return view('dashboard Entreprise.index');
+    }
+
+    // annonces user
+
+    public function annonces()
+    {
+        $annonces = annonce::where('user_id', auth()->id())->get();
+        return view('dashboard entreprise.allAnnonces', compact('annonces'));
     }
 
     /**
@@ -29,22 +38,23 @@ class AnnonceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreannonceRequest $request)
+    public function store(Request $request)
     {
-        $validate = $request->validated([
+        $validate = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'user_id' => auth()->id(),
+            'user_id' => 6,
             'category_id' => 'required',
             'location' => 'required|string',
-            'image' => 'required|image',
+            // 'photos' => 'required|image',
         ]);
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        // dd($validate);
+        if ($request->hasFile('photo')) {
+            $image = $request->file('photo');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images'), $imageName);
-            $validate['image'] = $imageName;
+            $validate['photos'] = $imageName;
         }
 
         Annonce::create($validate);

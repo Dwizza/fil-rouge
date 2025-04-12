@@ -40,23 +40,6 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {
-        // dd(auth()->id());
-       
-        // dd($validate);
-        // if ($request->hasFile('image')) {
-        //     $images = $request->file('image');
-        //     $imagePaths = [];
-            
-        //     foreach ($images as $image) {
-        //         $imageName = time() . '-' . uniqid() . '.' . $image->extension();
-        //         $image->move(public_path('images'), $imageName);
-        //         $imagePaths[] = 'images/' . $imageName;
-        //     }
-        //     $validate['image'] = implode(',', $imagePaths);
-        //     // dd($imageName);
-        // } else {
-        //     $validate['image'] = null; 
-        // }
         $validate = array_merge(
             $request->validate([
                 'title' => 'required|string|max:255',
@@ -64,17 +47,25 @@ class AnnonceController extends Controller
                 'price' => 'required|numeric',
                 'category_id' => 'required',
                 'location' => 'required|string',
-                'image' => 'required|image|mimes:jpeg,png,webp,jpg,gif|max:10240',
-                // 'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:10240'
+                'image' => 'required',
+                'image.*' => 'image|mimes:jpeg,png,webp,jpg,gif|max:10240'
             ]),
             ['user_id' => auth()->id()]
         );
+        // dd('dazt');
+
         
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->extension(); // ✅ صححنا هنا
-            $image->move(public_path('images'), $imageName);
-            $validate['image'] = 'images/' . $imageName;
+            $images = $request->file('image');
+            $imagePaths = [];
+            foreach ($images as $image) {
+                $imageName = time() . '-' . uniqid() . '.' . $image->extension();
+                $image->move(public_path('images'), $imageName);
+                $imagePaths[] = 'images/' . $imageName;
+            }
+            $validate['image'] = implode(',', $imagePaths);
+        } else {
+            $validate['image'] = null; 
         }
         
         Annonce::create($validate)->save();

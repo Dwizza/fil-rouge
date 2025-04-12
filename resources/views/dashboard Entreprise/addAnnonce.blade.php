@@ -1,7 +1,7 @@
 @extends('layouts.company')
 @section('dashboard.company')
 
-<div class="container mx-auto p-8 rounded-xl shadow-2xl bg-white bg-opacity-20">
+<div class="container mx-auto w-[1000px] p-8 rounded-xl shadow-2xl bg-white bg-opacity-20">
     <h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">
         Add Annonce
     </h1>
@@ -86,7 +86,7 @@
                     <div class="flex text-sm text-gray-300">
                         <label for="photos" class="relative cursor-pointer bg-gray-800 rounded-md font-medium text-blue-400 hover:text-blue-300 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
                             <span>Upload a file</span>
-                            <input id="photos" name="image" type="file" class="sr-only" multiple>
+                            <input id="photos" name="image[]" type="file" class="sr-only" multiple>
                         </label>
                         <p class="pl-1">or drag and drop</p>
                     </div>

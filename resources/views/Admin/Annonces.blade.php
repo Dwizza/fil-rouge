@@ -25,9 +25,14 @@
               <tr>
                 <td class="p-2 align-middle bg-transparent border-b border-white/40 whitespace-nowrap shadow-transparent">
                   <div class="flex px-2">
-                    <div>
-                      <img src="../assets/img/small-logos/logo-spotify.svg" class="inline-flex items-center justify-center mr-2 text-sm text-white transition-all duration-200 ease-in-out rounded-full h-9 w-9" alt="spotify" />
-                    </div>
+                    @php
+                        $images = explode(',', $annonce->image);
+                    @endphp
+
+                  <div class="relative w-16 h-16 rounded-xl overflow-hidden shadow-lg border border-gray-200 group" onmouseenter="startSlideshow(this)" onmouseleave="stopSlideshow(this)" data-images='@json($images)'>
+                    <img src="{{ asset($images[0]) }}" class="w-full h-full object-cover transition-all duration-500 image-slide" alt="annonce image" />
+                  </div>
+
                     <div class="my-auto">
                       <h6 class="mb-0 text-sm leading-normal text-white">{{$annonce->title}}</h6>
                     </div>
@@ -81,5 +86,30 @@
     </div>
   </div>
 </div>
+
+<script>
+  let slideshowInterval;
+
+  function startSlideshow(container) {
+      const images = JSON.parse(container.getAttribute('data-images'));
+      let currentIndex = 0;
+      const imgElement = container.querySelector('.image-slide');
+
+      if (images.length <= 1) return;
+
+      slideshowInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          imgElement.src = '/' + images[currentIndex];
+      }, 1000); // change image every 1s
+  }
+
+  function stopSlideshow(container) {
+      clearInterval(slideshowInterval);
+      const images = JSON.parse(container.getAttribute('data-images'));
+      const imgElement = container.querySelector('.image-slide');
+      imgElement.src = '/' + images[0]; // back to first image
+  }
+</script>
+
 
 @endsection

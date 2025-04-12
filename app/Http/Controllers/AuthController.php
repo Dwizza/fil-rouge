@@ -42,26 +42,30 @@ class AuthController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validate = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'pic' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png,webp,jpg,gif|max:10240',
             'phone' => 'required',
             'address' => 'required',
-            'role' => 'required'
+            'role_id' => 'required'
         ]);
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $extension = $file->getClientOriginalExtension();
+            $imageName = time() . '-' . uniqid() . '.' . $extension;
+            $file->storeAs('uploads/users', $imageName, 'public');
+            $imagePath = 'uploads/users/' . $imageName;
+            $validate['photo'] = $imagePath;
+        } else {
+            $validate['photo'] = null; 
+        }
+        // uploads\users\1744473349.png
+        // dd($validate);
         
-        
-        User::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => $request['password'],
-            'photo' => $request['pic'],
-            'phone' => $request['phone'],
-            'address' => $request['address'],
-            'role_id' => $request['role'],
-        ]);
+        User::create($validate)->save();
         // if($request['role'] == 1){
             return redirect('/login');
         // }else if($request['role'] == 2){

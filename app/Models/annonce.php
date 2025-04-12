@@ -14,7 +14,7 @@ class annonce extends Model
         'price',
         'category_id',
         'user_id',
-        'localisation',
-        'photo',
+        'location',
+        'image',
     ];
 }

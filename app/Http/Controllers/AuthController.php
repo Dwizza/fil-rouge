@@ -25,12 +25,12 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
         if(auth()->attempt($user)){
-            if(auth()->user()->role_id == 3){
+            if(auth()->user()->role_id == 1){
             return redirect('/admin');
             }else if(auth()->user()->role_id == 2){
-            return redirect('/entreprise');
+            return redirect('/company');
             }else{
-            return redirect('/home');
+            return redirect('/');
             }
         }
         return redirect('/login')->with('error', 'Invalid login credentials');
@@ -62,11 +62,11 @@ class AuthController extends Controller
             'address' => $request['address'],
             'role_id' => $request['role'],
         ]);
-        if($request['role'] == 1){
+        // if($request['role'] == 1){
             return redirect('/login');
-        }else if($request['role'] == 2){
-            return redirect('/entreprise');
-        }
+        // }else if($request['role'] == 2){
+        //     return redirect('/login');
+        // }
     }
     public function logout()
     {

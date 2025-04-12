@@ -40,24 +40,45 @@ class AnnonceController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'user_id' => 6,
-            'category_id' => 'required',
-            'location' => 'required|string',
-            // 'photos' => 'required|image',
-        ]);
+        // dd(auth()->id());
+       
         // dd($validate);
-        if ($request->hasFile('photo')) {
-            $image = $request->file('photo');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+        // if ($request->hasFile('image')) {
+        //     $images = $request->file('image');
+        //     $imagePaths = [];
+            
+        //     foreach ($images as $image) {
+        //         $imageName = time() . '-' . uniqid() . '.' . $image->extension();
+        //         $image->move(public_path('images'), $imageName);
+        //         $imagePaths[] = 'images/' . $imageName;
+        //     }
+        //     $validate['image'] = implode(',', $imagePaths);
+        //     // dd($imageName);
+        // } else {
+        //     $validate['image'] = null; 
+        // }
+        $validate = array_merge(
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                'price' => 'required|numeric',
+                'category_id' => 'required',
+                'location' => 'required|string',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+                // 'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:10240'
+            ]),
+            ['user_id' => auth()->id()]
+        );
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension(); // ✅ صححنا هنا
             $image->move(public_path('images'), $imageName);
-            $validate['photos'] = $imageName;
+            $validate['image'] = 'images/' . $imageName;
         }
-
+        
         Annonce::create($validate);
+        
 
         return redirect()->route('addannonce')
             ->with('success', 'annonce created successfully.');

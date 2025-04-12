@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
+use App\Models\annonce;
 use App\Models\User;
 
 class AdminController extends Controller
@@ -12,7 +13,7 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function users()
     {
         $users = User::with('role')->where('role_id', '!=', '1')->get();
         
@@ -23,9 +24,10 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function annonces()
     {
-        //
+        $annonces = annonce::with(['user','category'])->get();
+        return view('admin.annonces', compact('annonces'));
     }
 
     /**

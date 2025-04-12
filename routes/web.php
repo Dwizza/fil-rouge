@@ -22,7 +22,7 @@ Route::get('/', action: function () {
     return view('Particulier & entreprise View.index');
 })->middleware('auth');
 
-route::group(['prefix' => 'company'],function(){
+Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
     route::get('/', [AnnonceController::class, 'index']);
     route::get('/profile', [EntrepriseController::class, 'index']);
     route::get('/annonces', [AnnonceController::class, 'annonces']);
@@ -30,14 +30,14 @@ route::group(['prefix' => 'company'],function(){
     route::post('/addannonce', [AnnonceController::class, 'store'])->name('addannonce');
     route::get('/editannonce/{id}', [AnnonceController::class, 'edit'])->name('editannonce');
     route::post('/editannonce/{id}', [AnnonceController::class, 'update'])->name('editannonce');
-});
+})->middleware('checkRole:2');
 
 // Route::resource('annonces', AnnonceController::class)->middleware('auth');
-route::group(['prefix' => 'admin'], function(){
+Route::middleware(['auth', 'checkRole:1'])->prefix('admin')->group(function () {
     Route::view('/', 'admin.index');
-    Route::view('/annonces', 'admin.annonces');
-    Route::get('/users',[ AdminController::class, 'index'])->name('admin.users');
-})->middleware('auth');
+    Route::get('/annonces', [AdminController::class, 'annonces']);
+    Route::get('/users',[ AdminController::class, 'users'])->name('admin.users');
+});
 
 
 

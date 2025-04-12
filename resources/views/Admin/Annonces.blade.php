@@ -1,58 +1,79 @@
 @extends('layouts.app')
 @section('dashboard.admin')
 
-<div class="flex flex-wrap ">
+<div class="flex flex-wrap">
   <div class="flex-none w-full max-w-full px-3">
-    <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+    <div class="relative flex flex-col min-w-0 mb-6 break-words bg-gray-800 border-0 border-transparent border-solid shadow-xl rounded-2xl bg-clip-border">
       <div class="p-6 pb-0 mb-0 border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-        <h6 class="dark:text-white">Annonces</h6>
+        <h6 class="text-white">Annonces</h6>
       </div>
       <div class="flex-auto px-0 pt-0 pb-2">
         <div class="p-0 overflow-x-auto">
-          <table class="items-center justify-center w-full mb-0 align-top border-collapse dark:border-white/40 text-slate-500">
+          <table class="items-center justify-center w-full mb-0 align-top border-collapse border-white/40 text-gray-300">
             <thead class="align-bottom">
               <tr>
-                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Name</th>
-                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Budget</th>
-                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Status</th>
-                <th class="px-6 py-3 pl-2 font-bold text-center uppercase align-middle bg-transparent border-b shadow-none dark:border-white/40 dark:text-white text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">Completion</th>
-                <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-solid shadow-none dark:border-white/40 dark:text-white tracking-none whitespace-nowrap"></th>
+                <th class="px-6 py-3 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none border-white/40 text-white text-xxs border-b-solid tracking-none whitespace-nowrap opacity-70">title</th>
+                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none border-white/40 text-white text-xxs border-b-solid tracking-none whitespace-nowrap opacity-70">categories</th>
+                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none border-white/40 text-white text-xxs border-b-solid tracking-none whitespace-nowrap opacity-70">price</th>
+                <th class="px-6 py-3 pl-2 font-bold text-left uppercase align-middle bg-transparent border-b shadow-none border-white/40 text-white text-xxs border-b-solid tracking-none whitespace-nowrap opacity-70">username</th>
+                <th class="px-6 py-3 pl-2 font-bold text-center uppercase align-middle bg-transparent border-b shadow-none border-white/40 text-white text-xxs border-b-solid tracking-none whitespace-nowrap opacity-70">Status</th>
+                <th class="px-6 py-3 font-semibold capitalize align-middle bg-transparent border-b border-solid shadow-none border-white/40 text-white tracking-none whitespace-nowrap">action</th>
               </tr>
             </thead>
             <tbody class="border-t">
+              @foreach ($annonces as $annonce)
               <tr>
-                <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
+                <td class="p-2 align-middle bg-transparent border-b border-white/40 whitespace-nowrap shadow-transparent">
                   <div class="flex px-2">
                     <div>
                       <img src="../assets/img/small-logos/logo-spotify.svg" class="inline-flex items-center justify-center mr-2 text-sm text-white transition-all duration-200 ease-in-out rounded-full h-9 w-9" alt="spotify" />
                     </div>
                     <div class="my-auto">
-                      <h6 class="mb-0 text-sm leading-normal dark:text-white">Spotify</h6>
+                      <h6 class="mb-0 text-sm leading-normal text-white">{{$annonce->title}}</h6>
                     </div>
                   </div>
                 </td>
-                <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                  <p class="mb-0 text-sm font-semibold leading-normal dark:text-white dark:opacity-60">$2,500</p>
+                <td class="p-2 align-middle bg-transparent border-b border-white/40 whitespace-nowrap shadow-transparent">
+                  <p class="mb-0 text-sm font-semibold leading-normal text-white opacity-80">{{$annonce->category->name}}</p>
                 </td>
-                <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                  <span class="text-xs font-semibold leading-tight dark:text-white dark:opacity-60">working</span>
+                <td class="p-2 align-middle bg-transparent border-b border-white/40 whitespace-nowrap shadow-transparent">
+                  <span class="text-xs font-semibold leading-tight text-white opacity-80">{{$annonce->price}}$</span>
                 </td>
-                <td class="p-2 text-center align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                  <div class="flex items-center justify-center">
-                    <span class="mr-2 text-xs font-semibold leading-tight dark:text-white dark:opacity-60">60%</span>
-                    <div>
-                      <div class="text-xs h-0.75 w-30 m-0 flex overflow-visible rounded-lg bg-gray-200">
-                        <div class="flex flex-col justify-center w-3/5 h-auto overflow-hidden text-center text-white transition-all bg-blue-500 rounded duration-600 ease bg-gradient-to-tl from-blue-700 to-cyan-500 whitespace-nowrap" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </div>
+                <td class="p-2 align-middle bg-transparent border-b border-white/40 whitespace-nowrap shadow-transparent">
+                  <span class="text-xs font-semibold leading-tight text-white opacity-80">{{$annonce->user->name}}</span>
                 </td>
-                <td class="p-2 align-middle bg-transparent border-b dark:border-white/40 whitespace-nowrap shadow-transparent">
-                  <button class="inline-block px-5 py-2.5 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-normal text-sm ease-in bg-150 tracking-tight-rem bg-x-25 text-slate-400">
-                    <i class="text-xs leading-tight fa fa-ellipsis-v dark:text-white dark:opacity-60"></i>
-                  </button>
+                <td class="p-2 text-center align-middle bg-transparent border-b border-white/40 whitespace-nowrap shadow-transparent">
+                  @if ($annonce->status == 'published')
+                    <span class="bg-gradient-to-tr from-green-600 to-emerald-400 px-3 py-1.5 text-xs rounded-full inline-flex items-center justify-center font-bold uppercase tracking-wider text-white shadow-md hover:shadow-lg transition-all duration-300">
+                      <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
+                      Published
+                    </span>
+                  @elseif ($annonce->status == 'draft')
+                    <span class="bg-gradient-to-tr from-amber-500 to-yellow-300 px-3 py-1.5 text-xs rounded-full inline-flex items-center justify-center font-bold uppercase tracking-wider text-white shadow-md hover:shadow-lg transition-all duration-300">
+                      <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
+                      Draft
+                    </span>
+                  @elseif ($annonce->status == 'archived')
+                    <span class="bg-gradient-to-tr from-red-600 to-rose-400 px-3 py-1.5 text-xs rounded-full inline-flex items-center justify-center font-bold uppercase tracking-wider text-white shadow-md hover:shadow-lg transition-all duration-300">
+                      <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM4 8a1 1 0 011-1h6a1 1 0 110 2H5a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                      Archived
+                    </span>
+                  @endif
+                    
+                </td>
+                <td class="p-2 align-middle bg-transparent border-b text-center border-white/40 whitespace-nowrap shadow-transparent">
+                  <a href="" class="text-blue-500 hover:text-blue-700 mx-1">
+                    <span class="bg-blue-600/20 py-1.5 px-3 text-xs rounded-full inline-flex items-center justify-center font-bold">
+                      <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                      </svg>
+                      Edit
+                    </span>
+                  </a>
                 </td>
               </tr>
+              
+              @endforeach
             </tbody>
           </table>
         </div>

@@ -20,7 +20,7 @@ class AnnonceController extends Controller
 
     // annonces user
 
-    public function annonces()
+    public function userAnnonces()
     {
         $annonces = annonce::where('user_id', auth()->id())->get();
         return view('dashboard entreprise.allAnnonces', compact('annonces'));
@@ -64,7 +64,7 @@ class AnnonceController extends Controller
                 'price' => 'required|numeric',
                 'category_id' => 'required',
                 'location' => 'required|string',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10240',
+                'image' => 'required|image|mimes:jpeg,png,webp,jpg,gif|max:10240',
                 // 'image.*' => 'image|mimes:jpeg,png,jpg,gif|max:10240'
             ]),
             ['user_id' => auth()->id()]
@@ -77,7 +77,7 @@ class AnnonceController extends Controller
             $validate['image'] = 'images/' . $imageName;
         }
         
-        Annonce::create($validate);
+        Annonce::create($validate)->save();
         
 
         return redirect()->route('addannonce')

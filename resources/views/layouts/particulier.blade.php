@@ -88,39 +88,57 @@
         </div>
         <div>
           @if (Auth::user()->role->name == 'admin')
-            <a href="/admin" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+			<div class="flex gap-4 items-center">
+				<a href="/admin" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+				<form method="POST" action="{{ route('logout') }}">
+					@csrf
+					<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
+						<i class="fa-solid fa-right-from-bracket text-base"></i>
+						<span>Logout</span>
+					</button>
+				</form>
+			</div>
           @elseif(Auth::user()->role->name == 'company')
-            <a href="/company" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+			<div class="flex gap-4 items-center">
+				<a href="/company" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+				<form method="POST" action="{{ route('logout') }}">
+					@csrf
+					<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
+						<i class="fa-solid fa-right-from-bracket text-base"></i>
+						<span>Logout</span>
+					</button>
+				</form>
+			</div>
           @elseif(Auth::user()->role->name == 'particuler')
-            <a href="/user" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Your Annonces</a>
-			<form method="POST" action="{{ route('logout') }}">
-				@csrf
-				<button type="submit" class="">
-				<div class="">
-					<i class="fa-solid fa-right-from-bracket relative top-0 text-sm leading-normal text-red-500"></i>
-				</div>
-				<span class="">Logout</span>
-				</button>
-			</form>
+            <div class="flex gap-4 items-center">
+				<a href="/user" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Your Annonces</a>
+				<form method="POST" action="{{ route('logout') }}">
+					@csrf
+					<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
+						<i class="fa-solid fa-right-from-bracket text-base"></i>
+						<span>Logout</span>
+					</button>
+				</form>
+			</div>
           @endif
         </div>
       </div>
     </div>
 
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <a href="index.html">
-          <img src="assets1/images/JOTEA-logo.png" alt="Logo" class="h-10">
-        </a>
-      </div>
+		<div class="flex items-center gap-4">
+			<a href="index.html">
+			<img src="assets1/images/JOTEA-logo.png" alt="Logo" class="h-10">
+			</a>
+		</div>
 
-	  <div class="hidden md:flex w-2/3 justify-center">
+	  	<div class="hidden md:flex w-2/3 justify-center">
 		<form class="flex w-full max-w-2xl bg-white rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl h-12">
 			<select name="category" class="h-full px-5 bg-white border-r border-gray-200 text-gray-800 focus:ring-2 focus:ring-blue-300 focus:outline-none min-w-[150px] font-semibold rounded-l-full transition-colors duration-200 hover:bg-blue-50">
-				<option value="">All Categories</option>
-				<option value="voitures">Voitures</option>
-				<option value="electroniques">Electroniques</option>
-				<option value="emploi">Emploi</option>
+				<option value="">All categories</option>
+				@foreach ($categories as $category)
+					<option value="{{$category->id}}">{{$category->name}}</option>
+				@endforeach
 			</select>
 	
 			<input type="text" name="search" placeholder="Search Products Here..." class="h-full flex-grow px-5 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-200" id="search-input">
@@ -130,48 +148,19 @@
 				<span class="ml-2 hidden lg:inline">Search</span>
 			</button>
 		</form>
-	</div>
-	
-	
-
-
-	<div class="flex items-center space-x-4">
-	  <a href="#" class="text-gray-700"><i class="fa fa-heart-o"></i></a>
-	  <a href="#" class="text-gray-700"><i class="fa fa-user-circle-o"></i></a>
-	  <div class="relative">
-		<a href="#" class="text-gray-700"><i class="ti-bag"></i> <span class="ml-1 text-sm bg-red-500 text-white rounded-full px-2">2</span></a>
-		<!-- Dropdown (example) -->
-		<div class="absolute right-0 mt-2 w-64 bg-white border rounded shadow-lg hidden">
-		<div class="p-4 border-b">2 Items</div>
-		<ul class="divide-y">
-		  <li class="p-2 flex justify-between items-center">
-                <span>Woman Ring</span>
-                <span>$99.00</span>
-              </li>
-              <li class="p-2 flex justify-between items-center">
-                <span>Woman Necklace</span>
-                <span>$35.00</span>
-              </li>
-            </ul>
-            <div class="p-4 flex justify-between">
-              <strong>Total:</strong>
-              <span>$134.00</span>
-            </div>
-            <div class="p-4">
-              <a href="#" class="block text-center bg-blue-500 text-white py-2 rounded">Checkout</a>
-            </div>
-          </div>
-        </div>
-      </div>
+		</div>
+		<div class="flex items-center space-x-4">
+			<a href="#" class="text-gray-700"><i class="fa fa-heart-o"></i></a>
+			<a href="#" class="text-gray-700"><i class="fa fa-user-circle-o"></i></a>
+		</div>
     </div>
-
     <nav class="bg-gray-50 shadow-sm">
       <div class="container mx-auto px-4">
         <ul class="flex space-x-6 py-3 text-gray-700">
           <li><a href="/" class="hover:text-blue-500">Home</a></li>
-          <li><a href="/voiture" class="hover:text-blue-500">Voitures</a></li>
-          <li><a href="/electroniques" class="hover:text-blue-500">Electroniques</a></li>
-          <li><a href="/emploi" class="hover:text-blue-500">Emploi <span class="text-xs text-red-500">New</span></a></li>
+          <li><a href="/voiture" class="hover:text-blue-500">Cars</a></li>
+          <li><a href="/electroniques" class="hover:text-blue-500">Electronics</a></li>
+          <li><a href="/emploi" class="hover:text-blue-500">Jobs <span class="text-xs text-red-500">New</span></a></li>
           <li><a href="/contact" class="hover:text-blue-500">Contact Us</a></li>
         </ul>
       </div>
@@ -188,7 +177,7 @@
       <div>
 		<img src="assets1/images/JOTEA-logo.png" alt="Logo" class="h-24 w-40 mb-4 rounded-lg drop-shadow-[0_10px_40px_rgba(255,250,0,0.5)] "/>
         <p class="text-sm">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat.</p>
-        <p class="mt-4">Call us 24/7: <a href="tel:123456789" class="text-blue-400">+0123 456 789</a></p>
+        <p class="mt-4">Call us 24/7: <a href="tel:123456789" class="text-amber-500">+0123 456 789</a></p>
       </div>
 
       <div>

@@ -18,6 +18,14 @@ class AnnonceController extends Controller
         return view('dashboard Entreprise.index');
     }
 
+    public function home()
+    {
+        $annonces = annonce::all();
+        $categories = Category::all();
+        // return view('home', compact('annonces', 'categories'));
+        return view('particulier.index', compact('annonces', 'categories'));
+    }
+
     // annonces user
 
     public function userAnnonces()

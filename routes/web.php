@@ -18,9 +18,7 @@ use App\Http\Controllers\AnnonceController;
 |
 */
 
-Route::get('/', action: function () {
-    return view('Particulier.index');
-})->middleware('auth');
+Route::get('/',[AnnonceController::class, 'home'])->name('home');
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
     route::get('/', [AnnonceController::class, 'index']);

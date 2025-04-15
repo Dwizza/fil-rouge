@@ -1,6 +1,284 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
+  <!-- Meta Tag -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name='copyright' content=''>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Title Tag  -->
+  <title>Jotea</title>
+  <!-- Favicon -->
+  <link rel="icon" type="assets1/image/png" href="assets1/images/JOTEA-logo.png">
+  <!-- Web Font -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  
+  <!-- StyleSheet -->
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="assets1/css/bootstrap.css">
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="assets1/css/magnific-popup.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="assets1/css/font-awesome.css">
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="assets1/css/jquery.fancybox.min.css">
+  <!-- Themify Icons -->
+  <link rel="stylesheet" href="assets1/css/themify-icons.css">
+  <!-- Nice Select CSS -->
+  <link rel="stylesheet" href="assets1/css/niceselect.css">
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="assets1/css/animate.css">
+  <!-- Flex Slider CSS -->
+  <link rel="stylesheet" href="assets1/css/flex-slider.min.css">
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="assets1/css/owl-carousel.css">
+  <!-- Slicknav -->
+  <link rel="stylesheet" href="assets1/css/slicknav.min.css">
+  
+  <!-- Eshop StyleSheet -->
+  <link rel="stylesheet" href="assets1/css/reset.css">
+  <link rel="stylesheet" href="assets1/css/style.css">
+  <link rel="stylesheet" href="assets1/css/responsive.css">
+
+  <!-- Color CSS -->
+  <link rel="stylesheet" href="assets1/css/color/color1.css">
+  <!--<link rel="stylesheet" href="assets1/css/color/color2.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color3.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color4.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color5.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color6.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color7.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color8.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color9.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color10.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color11.css">-->
+  <!--<link rel="stylesheet" href="assets1/css/color/color12.css">-->
+
+  <link rel="stylesheet" href="#" id="colors">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+  </style>
+  
+</head>
+<body class="bg-white">
+
+	<!-- Preloader -->
+	<div class="preloader">
+		<div class="preloader-inner">
+			<div class="preloader-icon">
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</div>
+	<!-- End Preloader -->
+
+  <!-- Header -->
+  <header class="shadow">
+    <div class="bg-gray-100 py-2 text-sm">
+      <div class="container mx-auto px-4 flex justify-between">
+        <div>
+          <span class="text-gray-600"><i class="ti-email"></i> support@jotea.com</span>
+        </div>
+        <div>
+          @if (Auth::user()->role->name == 'admin')
+            <a href="/admin" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+          @elseif(Auth::user()->role->name == 'company')
+            <a href="/company" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+          @elseif(Auth::user()->role->name == 'particuler')
+            <a href="/user" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Your Annonces</a>
+			<form method="POST" action="{{ route('logout') }}">
+				@csrf
+				<button type="submit" class="">
+				<div class="">
+					<i class="fa-solid fa-right-from-bracket relative top-0 text-sm leading-normal text-red-500"></i>
+				</div>
+				<span class="">Logout</span>
+				</button>
+			</form>
+          @endif
+        </div>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="index.html">
+          <img src="assets1/images/JOTEA-logo.png" alt="Logo" class="h-10">
+        </a>
+      </div>
+
+	  <div class="hidden md:flex w-2/3 justify-center">
+		<form class="flex w-full max-w-2xl bg-white rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl h-12">
+			<select name="category" class="h-full px-5 bg-white border-r border-gray-200 text-gray-800 focus:ring-2 focus:ring-blue-300 focus:outline-none min-w-[150px] font-semibold rounded-l-full transition-colors duration-200 hover:bg-blue-50">
+				<option value="">All Categories</option>
+				<option value="voitures">Voitures</option>
+				<option value="electroniques">Electroniques</option>
+				<option value="emploi">Emploi</option>
+			</select>
+	
+			<input type="text" name="search" placeholder="Search Products Here..." class="h-full flex-grow px-5 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-200" id="search-input">
+	
+			<button class="h-full bg-gradient-to-r from-amber-300 to-amber-700 hover:from-amber-400 hover:to-amber-800 px-7 text-white font-bold transition rounded-r-full border-l border-gray-200 flex items-center shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300">
+				<i class="ti-search text-xl"></i>
+				<span class="ml-2 hidden lg:inline">Search</span>
+			</button>
+		</form>
+	</div>
+	
+	
+
+
+	<div class="flex items-center space-x-4">
+	  <a href="#" class="text-gray-700"><i class="fa fa-heart-o"></i></a>
+	  <a href="#" class="text-gray-700"><i class="fa fa-user-circle-o"></i></a>
+	  <div class="relative">
+		<a href="#" class="text-gray-700"><i class="ti-bag"></i> <span class="ml-1 text-sm bg-red-500 text-white rounded-full px-2">2</span></a>
+		<!-- Dropdown (example) -->
+		<div class="absolute right-0 mt-2 w-64 bg-white border rounded shadow-lg hidden">
+		<div class="p-4 border-b">2 Items</div>
+		<ul class="divide-y">
+		  <li class="p-2 flex justify-between items-center">
+                <span>Woman Ring</span>
+                <span>$99.00</span>
+              </li>
+              <li class="p-2 flex justify-between items-center">
+                <span>Woman Necklace</span>
+                <span>$35.00</span>
+              </li>
+            </ul>
+            <div class="p-4 flex justify-between">
+              <strong>Total:</strong>
+              <span>$134.00</span>
+            </div>
+            <div class="p-4">
+              <a href="#" class="block text-center bg-blue-500 text-white py-2 rounded">Checkout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="bg-gray-50 shadow-sm">
+      <div class="container mx-auto px-4">
+        <ul class="flex space-x-6 py-3 text-gray-700">
+          <li><a href="/" class="hover:text-blue-500">Home</a></li>
+          <li><a href="/voiture" class="hover:text-blue-500">Voitures</a></li>
+          <li><a href="/electroniques" class="hover:text-blue-500">Electroniques</a></li>
+          <li><a href="/emploi" class="hover:text-blue-500">Emploi <span class="text-xs text-red-500">New</span></a></li>
+          <li><a href="/contact" class="hover:text-blue-500">Contact Us</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container mx-auto px-4 py-10">
+    @yield('content')
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white">
+    <div class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+		<img src="assets1/images/JOTEA-logo.png" alt="Logo" class="h-24 w-40 mb-4 rounded-lg drop-shadow-[0_10px_40px_rgba(255,250,0,0.5)] "/>
+        <p class="text-sm">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat.</p>
+        <p class="mt-4">Call us 24/7: <a href="tel:123456789" class="text-blue-400">+0123 456 789</a></p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-3">Information</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-blue-400">About Us</a></li>
+          <li><a href="#" class="hover:text-blue-400">Faq</a></li>
+          <li><a href="#" class="hover:text-blue-400">Terms & Conditions</a></li>
+          <li><a href="#" class="hover:text-blue-400">Contact Us</a></li>
+          <li><a href="#" class="hover:text-blue-400">Help</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-3">Customer Service</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#" class="hover:text-blue-400">Payment Methods</a></li>
+          <li><a href="#" class="hover:text-blue-400">Money-back</a></li>
+          <li><a href="#" class="hover:text-blue-400">Returns</a></li>
+          <li><a href="#" class="hover:text-blue-400">Shipping</a></li>
+          <li><a href="#" class="hover:text-blue-400">Privacy Policy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-3">Get In Touch</h4>
+        <ul class="text-sm space-y-2">
+          <li>NO. 342 - London Oxford Street.</li>
+          <li>012 United Kingdom.</li>
+          <li>info@jotea.com</li>
+          <li>+032 3456 7890</li>
+        </ul>
+        <div class="flex space-x-3 mt-4">
+          <a href="#" class="text-white hover:text-blue-400"><i class="ti-facebook"></i></a>
+          <a href="#" class="text-white hover:text-blue-400"><i class="ti-twitter"></i></a>
+          <a href="#" class="text-white hover:text-blue-400"><i class="ti-flickr"></i></a>
+          <a href="#" class="text-white hover:text-blue-400"><i class="ti-instagram"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-gray-800 py-4 text-sm text-center">
+      <div class="container mx-auto px-4">
+        <p>Copyright © 2025 <a href="#" class="text-blue-400">JOTEA</a> - All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+<!-- Jquery -->
+<script src="assets1/js/jquery.min.js"></script>
+<script src="assets1/js/jquery-migrate-3.0.0.js"></script>
+<script src="assets1/js/jquery-ui.min.js"></script>
+<!-- Popper JS -->
+<script src="assets1/js/popper.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="assets1/js/bootstrap.min.js"></script>
+<!-- Color JS -->
+<script src="assets1/js/colors.js"></script>
+<!-- Slicknav JS -->
+<script src="assets1/js/slicknav.min.js"></script>
+<!-- Owl Carousel JS -->
+<script src="assets1/js/owl-carousel.js"></script>
+<!-- Magnific Popup JS -->
+<script src="assets1/js/magnific-popup.js"></script>
+<!-- Fancybox JS -->
+<script src="assets1/js/facnybox.min.js"></script>
+<!-- Waypoints JS -->
+<script src="assets1/js/waypoints.min.js"></script>
+<!-- Countdown JS -->
+<script src="assets1/js/finalcountdown.min.js"></script>
+<!-- Nice Select JS -->
+<script src="assets1/js/nicesellect.js"></script>
+<!-- Ytplayer JS -->
+<script src="assets1/js/ytplayer.min.js"></script>
+<!-- Flex Slider JS -->
+<script src="assets1/js/flex-slider.js"></script>
+<!-- ScrollUp JS -->
+<script src="assets1/js/scrollup.js"></script>
+<!-- Onepage Nav JS -->
+<script src="assets1/js/onepage-nav.min.js"></script>
+<!-- Easing JS -->
+<script src="assets1/js/easing.js"></script>
+<!-- Active JS -->
+<script src="assets1/js/active.js"></script>
+</html>
+
+
+
+{{-- <!DOCTYPE html>
+<html lang="zxx">
+<head>
 	<!-- Meta Tag -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -57,6 +335,8 @@
 	<!--<link rel="stylesheet" href="assets1/css/color/color12.css">-->
 
 	<link rel="stylesheet" href="#" id="colors">
+	<!-- Tailwind CSS -->
+	<script src="https://cdn.tailwindcss.com"></script>
 	
 </head>
 <body class="js">
@@ -121,7 +401,7 @@
 					<div class="col-lg-2 col-md-2 col-12">
 						<!-- Logo -->
 						<div class="logo">
-							<a href="index.html"><img src="assets1/images/logo.png" alt="logo"></a>
+							<a href="index.html"><img src="assets1/images/JOTEA-logo.png" alt="logo"></a>
 						</div>
 						<!--/ End Logo -->
 						<!-- Search Form -->
@@ -331,43 +611,6 @@
 </footer>
 <!-- /End Footer Area -->
 
-<!-- Jquery -->
-<script src="assets1/js/jquery.min.js"></script>
-<script src="assets1/js/jquery-migrate-3.0.0.js"></script>
-<script src="assets1/js/jquery-ui.min.js"></script>
-<!-- Popper JS -->
-<script src="assets1/js/popper.min.js"></script>
-<!-- Bootstrap JS -->
-<script src="assets1/js/bootstrap.min.js"></script>
-<!-- Color JS -->
-<script src="assets1/js/colors.js"></script>
-<!-- Slicknav JS -->
-<script src="assets1/js/slicknav.min.js"></script>
-<!-- Owl Carousel JS -->
-<script src="assets1/js/owl-carousel.js"></script>
-<!-- Magnific Popup JS -->
-<script src="assets1/js/magnific-popup.js"></script>
-<!-- Fancybox JS -->
-<script src="assets1/js/facnybox.min.js"></script>
-<!-- Waypoints JS -->
-<script src="assets1/js/waypoints.min.js"></script>
-<!-- Countdown JS -->
-<script src="assets1/js/finalcountdown.min.js"></script>
-<!-- Nice Select JS -->
-<script src="assets1/js/nicesellect.js"></script>
-<!-- Ytplayer JS -->
-<script src="assets1/js/ytplayer.min.js"></script>
-<!-- Flex Slider JS -->
-<script src="assets1/js/flex-slider.js"></script>
-<!-- ScrollUp JS -->
-<script src="assets1/js/scrollup.js"></script>
-<!-- Onepage Nav JS -->
-<script src="assets1/js/onepage-nav.min.js"></script>
-<!-- Easing JS -->
-<script src="assets1/js/easing.js"></script>
-<!-- Active JS -->
-<script src="assets1/js/active.js"></script>
+
 </body>
-</html>
-
-
+</html> --}}

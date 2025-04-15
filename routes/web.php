@@ -19,17 +19,21 @@ use App\Http\Controllers\AnnonceController;
 */
 
 Route::get('/', action: function () {
-    return view('Particulier & entreprise View.index');
+    return view('Particulier.index');
 })->middleware('auth');
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
     route::get('/', [AnnonceController::class, 'index']);
     route::get('/profile', [EntrepriseController::class, 'index']);
     route::get('/annonces', [AnnonceController::class, 'annonces']);
+    route::get('/allannonces', [entrepriseController::class, 'show'])->name('annonce.show');
     route::get('/addannonce', [AnnonceController::class, 'create'])->name('addannonce');
     route::post('/addannonce', [AnnonceController::class, 'store'])->name('addannonce');
-    route::get('/editannonce/{id}', [AnnonceController::class, 'edit'])->name('editannonce');
-    route::post('/editannonce/{id}', [AnnonceController::class, 'update'])->name('editannonce');
+    route::get('/editannonce/{annonce}', [AnnonceController::class, 'edit'])->name('editannonce');
+    route::post('/editannonce/{annonce}', [AnnonceController::class, 'update'])->name('editannonce');
+    route::post('/deleteannonce/{annonce}', [AnnonceController::class, 'destroy'])->name('deleteannonce');
+    route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    route::post('/profile', [AuthController::class, 'editProfile'])->name('editprofile');
 })->middleware('checkRole:2');
 
 // Route::resource('annonces', AnnonceController::class)->middleware('auth');
@@ -37,6 +41,8 @@ Route::middleware(['auth', 'checkRole:1'])->prefix('admin')->group(function () {
     Route::view('/', 'admin.index');
     Route::get('/annonces', [AdminController::class, 'annonces']);
     Route::get('/users',[ AdminController::class, 'users'])->name('admin.users');
+    Route::post('/annonces/{id}', [AdminController::class, 'updateStatus'])->name('updateStatus');
+
 });
 
 

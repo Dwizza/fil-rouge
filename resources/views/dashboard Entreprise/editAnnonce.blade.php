@@ -20,13 +20,13 @@
         </div>
     
     @endif
-    <form action="{{ route('addannonce') }}" method="POST" enctype="multipart/form-data" class="space-y-6 p-6 bg-gray-800 rounded-2xl shadow-xl max-w-4xl mx-auto">
+    <form action="{{ route('editannonce',$annonce) }}" method="POST" enctype="multipart/form-data" class="space-y-6 p-6 bg-gray-800 rounded-2xl shadow-xl max-w-4xl mx-auto">
         @csrf
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-200">Title</label>
                 <div class="mt-1">
-                    <input id="title" name="title" type="text" placeholder="e.g., Modern Loft Apartment" required class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400">
+                    <input id="title" value="{{$annonce->title}}" name="title" type="text" placeholder="e.g., Modern Loft Apartment" required class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400">
                 </div>
             </div>
     
@@ -36,13 +36,11 @@
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <span class="text-gray-400 sm:text-sm">$</span>
                     </div>
-                    <input type="number" name="price" id="price" placeholder="Enter amount" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400">
+                    <input type="number" value="{{$annonce->price}}" name="price" id="price" placeholder="Enter amount" required class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400">
                     <div class="absolute inset-y-0 right-0 pr-3 flex items-center">
                         <label for="currency" class="sr-only">Currency</label>
                         <select id="currency" name="currency" class="focus:ring-blue-500 focus:border-blue-500 h-full py-0 pl-2 pr-7 border-transparent bg-gray-700 text-gray-300 sm:text-sm rounded-xl">
                             <option>USD</option>
-                            <option>EUR</option>
-                            <option>GBP</option>
                         </select>
                     </div>
                 </div>
@@ -52,7 +50,7 @@
         <div>
             <label for="description" class="block text-sm font-medium text-gray-200">Description</label>
             <div class="mt-1">
-                <textarea id="description" name="description" rows="3" placeholder="Describe the property details" required class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400"></textarea>
+                <textarea id="description" name="description" rows="3" placeholder="Describe the property details" required class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400">{{$annonce->description}}</textarea>
             </div>
         </div>
     
@@ -61,8 +59,9 @@
                 <label for="category_id" class="block text-sm font-medium text-gray-200">Category</label>
                 <div class="mt-1">
                     <select id="category_id" name="category_id" class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white">
+                        <option value="{{$categori[0]->id}}">{{$categori[0]->name}}</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -71,7 +70,7 @@
             <div>
                 <label for="location" class="block text-sm font-medium text-gray-200">Location</label>
                 <div class="mt-1">
-                    <input type="text" name="location" id="location" placeholder="City, State" required class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400">
+                    <input type="text" name="location" value="{{$annonce->location}}" id="location" placeholder="City, State" required class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-600 rounded-xl p-3 bg-gray-700 text-white placeholder-gray-400">
                 </div>
             </div>
         </div>
@@ -100,10 +99,28 @@
             </div>
           
             <!-- Preview Area -->
-            <div id="preview" class="mt-4 flex flex-wrap gap-4"></div>
+
+            @php
+                $images = explode(',', $annonce->image);
+            @endphp
+
+            <div id="existing-photos" class="mt-4 flex flex-wrap gap-4">
+                @foreach ($images as $image)
+                    <div class="relative group image-wrapper" data-image="{{ $image }}">
+                        <img src="/{{  $image }}" class="w-24 h-24 object-cover rounded-lg shadow">
+                        <button type="button" class="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition"
+                            onclick="removeImage(this, '{{ $image }}')">
+                            ×
+                        </button>
+                        <input type="hidden" name="remaining_images[]" value="{{ $image }}">
+                    </div>
+                @endforeach
+            </div>
+            
+            
           </div>
     
-        <div id="image-preview" class="mt-4 flex flex-wrap gap-4">
+        <div id="preview" class="mt-4 flex flex-wrap gap-4">
             <!-- Image previews will be displayed here -->
         </div>
     
@@ -120,7 +137,7 @@
   
   <script>
     const input = document.getElementById('photos');
-    const dropzone = document.getElementById('dropzone');
+    const dropzone = document.getElementById('existing-photos');
     const preview = document.getElementById('preview');
   
     // Handle file selection
@@ -176,5 +193,14 @@
       });
     }
   </script>
+
+<script>
+    function removeImage(button, imageName) {
+        const wrapper = button.closest('.image-wrapper');
+        wrapper.remove(); // remove image preview and input from DOM
+    }
+</script>
+
   
+
 @endsection

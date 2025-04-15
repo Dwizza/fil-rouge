@@ -7,6 +7,7 @@ use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
 use App\Models\annonce;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -26,6 +27,7 @@ class AdminController extends Controller
      */
     public function annonces()
     {
+        
         $annonces = annonce::with(['user','category'])->get();
         return view('admin.annonces', compact('annonces'));
     }
@@ -69,4 +71,17 @@ class AdminController extends Controller
     {
         //
     }
+    public function updateStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:draft,published,archived'
+    ]);
+
+    $annonce = Annonce::findOrFail($id);
+    $annonce->status = $request->status;
+    $annonce->save();
+
+    return redirect()->back()->with('success', 'Status updated!');
+}
+
 }

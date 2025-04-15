@@ -89,33 +89,44 @@ class AnnonceController extends Controller
      */
     public function edit(annonce $annonce)
     {
-        return view('Particulier & entreprise View.EditAnnonce', compact('annonce'));
+        $categori = Category::where('id', '=', $annonce->category_id)->get();
+        $categories = Category::where('id', '!=', $categori[0]->id)->get();
+        return view('dashboard entreprise.editannonce',compact('annonce', 'categories', 'categori'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateannonceRequest $request, annonce $annonce)
-    {
-        $validate = $request->validated([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            'category_id' => 'required',
-            'location' => 'required|string',
-            'image' => 'nullable|image',
-        ]);
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $validate['image'] = $imageName;
+    public function update(Request $request, $id)
+{
+    $annonce = Annonce::findOrFail($id);
+
+    // 1. Get remaining old images
+    $remaining = $request->input('remaining_images', []); // array
+
+    // 2. Handle new images
+    $newImages = [];
+    if ($request->hasFile('image')) {
+        foreach ($request->file('image') as $file) {
+            $path = $file->move('images');
+            $newImages[] = $path;
         }
-
-        $annonce->update($validate);
-
-        return redirect()->route('addannonce')->with('success', 'annonce updated successfully.');
     }
+    
+    $finalImages = array_merge($remaining, $newImages);
+
+    $annonce->image = implode(',', $finalImages);
+
+    $annonce->title = $request->title;
+    $annonce->price = $request->price;
+    $annonce->description = $request->description;
+    $annonce->location = $request->location;
+    $annonce->category_id = $request->category_id;
+    $annonce->save();
+
+    return redirect()->route('annonce.show')->with('success', 'annonce updated successfully.');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -124,7 +135,7 @@ class AnnonceController extends Controller
     {
         $annonce->delete();
 
-        return redirect()->route('addannonce')
+        return redirect()->route('annonce.show')
             ->with('success', 'annonce deleted successfully.');
     }
 }

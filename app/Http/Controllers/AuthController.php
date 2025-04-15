@@ -56,14 +56,12 @@ class AuthController extends Controller
             $file = $request->file('photo');
             $extension = $file->getClientOriginalExtension();
             $imageName = time() . '-' . uniqid() . '.' . $extension;
-            $file->storeAs('uploads/users', $imageName, 'public');
-            $imagePath = 'uploads/users/' . $imageName;
+            $file->storeAs('storage/uploads/users', $imageName, 'public');
+            $imagePath = 'storage/uploads/users/' . $imageName;
             $validate['photo'] = $imagePath;
         } else {
             $validate['photo'] = null; 
         }
-        // uploads\users\1744473349.png
-        // dd($validate);
         
         User::create($validate)->save();
         // if($request['role'] == 1){
@@ -77,4 +75,35 @@ class AuthController extends Controller
         auth()->logout();
         return redirect('/login');
     }
+    public function profile(){
+        $user = User::where('id', auth()->id())->first();
+        return view('dashboard entreprise.profile', compact('user'));
+    }
+    public function editProfile(Request $request)
+{
+    $user = auth()->user();
+
+    $validatedData = $request->validate([
+        'username' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,' . $user->id,
+        'phone' => 'nullable|string|max:20',
+        'address' => 'nullable|string|max:255',
+        'new_password' => 'nullable|string|min:8|confirmed',
+    ]);
+
+    $user->name = $validatedData['username'];
+    $user->email = $validatedData['email'];
+    $user->phone = $validatedData['phone'] ?? null;
+    $user->address = $validatedData['address'] ?? null;
+
+    // Check if user entered a new password
+    if (!empty($validatedData['new_password'])) {
+        $user->password = bcrypt($validatedData['password']);
+    }
+
+    $user->save();
+
+    return redirect('/company/profile')->with('success', 'Profile updated successfully.');
+}
+
 }

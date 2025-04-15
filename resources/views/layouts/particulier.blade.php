@@ -72,26 +72,6 @@
 	</div>
 	<!-- End Preloader -->
 	
-	<!-- Eshop Color Plate -->
-	<div class="color-plate ">
-		<a class="color-plate-icon"><i class="ti-paint-bucket"></i></a>
-		<h4>Eshop Colors</h4>
-		<p>Here is some awesome color's available on Eshop Template.</p>
-		<span class="color1"></span>
-		<span class="color2"></span>
-		<span class="color3"></span>
-		<span class="color4"></span>
-		<span class="color5"></span>
-		<span class="color6"></span>
-		<span class="color7"></span>
-		<span class="color8"></span>
-		<span class="color9"></span>
-		<span class="color10"></span>
-		<span class="color11"></span>
-		<span class="color12"></span>
-	</div>
-	<!-- /End Color Plate -->
-	
 	<!-- Header -->
 	<header class="header shop v2">
 		<!-- Topbar -->
@@ -109,11 +89,26 @@
 					</div>
 					<div class="col-lg-8 col-md-12 col-12">
 						<!-- Top Right -->
+						
+						@if (Auth::user()->role->name == 'admin')
 						<div class="right-content">
 							<ul class="list-main">
-								<li><i class="ti-power-off"></i><a href="login">Login</a></li>
+								<li><i class="ti-power-off"></i><a href="/admin">Dashboard</a></li>
 							</ul>
 						</div>
+						@elseif(Auth::user()->role->name == 'company')
+						<div class="right-content">
+							<ul class="list-main">
+								<li><i class="ti-power-off"></i><a href="/company">Dashboard</a></li>
+							</ul>
+						</div>
+						@elseif(Auth::user()->role->name == 'particuler')
+						<div class="right-content">
+							<ul class="list-main">
+								<li><i class="ti-power-off"></i><a href="/user">Your Annonces</a></li>
+							</ul>
+						</div>
+						@endif
 						<!-- End Top Right -->
 					</div>
 				</div>
@@ -218,41 +213,11 @@
 									<div class="navbar-collapse">	
 										<div class="nav-inner">	
 											<ul class="nav main-menu menu navbar-nav">
-												<li class="active"><a href="#">Home<i class="ti-angle-down"></i></a>
-													<ul class="dropdown">
-														<li><a href="index.html">Home Ecommerce V1</a></li>
-														<li><a href="index2.html">Home Ecommerce V2</a></li>
-														<li><a href="index3.html">Home Ecommerce V3</a></li>
-														<li><a href="index4.html">Home Ecommerce V4</a></li>
-													</ul>
+												<li class="active"><a href="#">Home</a>
 												</li>
-												<li><a href="#">Product</a></li>												
-												<li><a href="#">Service</a></li>
-												<li><a href="#">Shop<i class="ti-angle-down"></i><span class="new">New</span></a>
-													<ul class="dropdown">
-														<li><a href="shop-grid.html">Shop Grid</a></li>
-														<li><a href="shop-list.html">Shop List</a></li>
-														<li><a href="shop-single.html">shop Single</a></li>
-														<li><a href="cart.html">Cart</a></li>
-														<li><a href="checkout.html">Checkout</a></li>
-													</ul>
-												</li>
-												<li><a href="#">Pages<i class="ti-angle-down"></i></a>
-													<ul class="dropdown">
-														<li><a href="about-us.html">About Us</a></li>
-														<li><a href="login.html">Login</a></li>
-														<li><a href="register.html">Register</a></li>
-														<li><a href="mail-success.html">Mail Success</a></li>
-														<li><a href="404.html">404</a></li>
-													</ul>
-												</li>									
-												<li><a href="#">Blog<i class="ti-angle-down"></i></a>
-													<ul class="dropdown">
-														<li><a href="blog-grid.html">Blog Grid</a></li>
-														<li><a href="blog-grid-sidebar.html">Blog Grid Sidebar</a></li>
-														<li><a href="blog-single.html">Blog Single</a></li>
-														<li><a href="blog-single-sidebar.html">Blog Single Sidebar</a></li>
-													</ul>
+												<li><a href="#">Voitures</a></li>												
+												<li><a href="#">Electroniques</a></li>
+												<li><a href="#">Emploi<span class="new">New</span></a>
 												</li>
 												<li><a href="contact.html">Contact Us</a></li>
 											</ul>

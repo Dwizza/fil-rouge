@@ -25,11 +25,27 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function annonces()
+    public function annonces(Request $request)
     {
-        
-        $annonces = annonce::with(['user','category'])->get();
-        return view('admin.annonces', compact('annonces'));
+        $search = $request->input('search');
+        $query = Annonce::query()->with(['category', 'user']);
+
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('price', 'like', "%{$search}%")
+                  ->orWhereHas('category', function($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                  })
+                  ->orWhereHas('user', function($q) use ($search) {
+                      $q->where('name', 'like', "%{$search}%");
+                  });
+            });
+        }
+
+        $annonces = $query->paginate(10)->withQueryString();
+        // $annonces = annonce::with(['user','category'])->get();
+        return view('admin.annonces', compact('annonces','search'));
     }
 
     public function dashboard()

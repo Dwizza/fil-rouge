@@ -20,7 +20,7 @@ use App\Http\Controllers\AnnonceController;
 |
 */
 
-Route::get('/',[ParticulerController::class, 'home'])->name('home');
+Route::get('/',[ParticulerController::class, 'home'])->name('home')->middleware('auth');
 
 
 

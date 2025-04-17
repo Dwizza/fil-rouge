@@ -88,172 +88,193 @@
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Left Column - Listings -->
         <div class="lg:col-span-2">
-          <div class="bg-white rounded-lg shadow-md">
-            <div class="border-b border-gray-200 p-4 flex items-center justify-between">
-              <h2 class="text-lg font-semibold text-gray-800">Your Recent Listings</h2>
-              <a href="#" class="text-blue-500 hover:text-blue-700 text-sm font-medium">View All</a>
-            </div>
-            @if (session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Success!</strong>
-                    <span class="block sm:inline">{{ session('success') }}</span>
-                </div>
-            
-            @endif
-            <div class="p-4">
-              <div class="divide-y divide-gray-200">
-
-                @foreach ($annonces as $annonce)
-                @php
-                    $images = explode(',', $annonce->image);
-                @endphp
-                
-                {{-- {{print_r($images[0])}} --}}
-                <div class="py-3 flex items-center">
-                  <div class="w-16 h-16 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
-                    <img src="{{ asset($images[0]) }}" alt="Product" class="w-full h-full object-cover">
+            <div class="bg-white rounded-lg shadow-md">
+              <div class="border-b border-gray-200 p-4 flex items-center justify-between">
+                <h2 class="text-lg font-semibold text-gray-800">Your Recent Listings</h2>
+              </div>
+              @if (session('success'))
+                  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                      <strong class="font-bold">Success!</strong>
+                      <span class="block sm:inline">{{ session('success') }}</span>
                   </div>
-                  <div class="ml-4 flex-grow">
-                    <h4 class="font-medium text-gray-800">{{$annonce->title}}</h4>
-                    <div class="flex items-center text-sm text-gray-500">
-                      <span class="flex items-center"><i class="fa-solid fa-location-dot pr-2" style="color: #b5b5b5;"></i>{{$annonce->location}}</span>
-                      <span class="mx-2">•</span>
-                      <span class="flex items-center"><i class="fa-light fa-icons pr-2" style="color: #b5b5b5;"></i>{{$annonce->category->name}}</span>
-                      <span class="mx-2">•</span>
-                      <span class="font-medium text-green-600">{{$annonce->price}}$</span>
+              @endif
+              <div class="p-4">
+                <div class="divide-y divide-gray-200">
+                  @foreach ($annonces as $annonce)
+                  @php
+                      $images = explode(',', $annonce->image);
+                  @endphp
+                  <div class="py-3 flex items-center">
+                    <div class="w-16 h-16 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
+                      <img src="{{ asset($images[0]) }}" alt="Product" class="w-full h-full object-cover">
+                    </div>
+                    <div class="ml-4 flex-grow">
+                      <h4 class="font-medium text-gray-800">{{$annonce->title}}</h4>
+                      <div class="flex items-center text-sm text-gray-500">
+                        <span class="flex items-center"><i class="fa-solid fa-location-dot pr-2" style="color: #b5b5b5;"></i>{{$annonce->location}}</span>
+                        <span class="mx-2">•</span>
+                        <span class="flex items-center"><i class="fa-light fa-icons pr-2" style="color: #b5b5b5;"></i>{{$annonce->category->name}}</span>
+                        <span class="mx-2">•</span>
+                        <span class="font-medium text-green-600">{{$annonce->price}}$</span>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      @if ($annonce->status == 'published')
+                          <span class="text-green-500 text-xs font-semibold bg-green-100 px-2 py-1 rounded-full">published</span>
+                          <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
+                              <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                          </a>
+                          <a href="/user/annonce/delete/{{$annonce->id}}" class="p-2 ">
+                              <i class="fa-solid fa-trash" style="color: #d81103;"></i>
+                          </a>
+                      @elseif ($annonce->status == 'draft')
+                          <span class="text-yellow-500 text-xs font-semibold bg-yellow-100 px-2 py-1 rounded-full">Draft</span>
+                          <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
+                              <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                          </a>
+                          <form action="/user/annonce/delete/{{$annonce->id}}" method="POST">
+                              @csrf
+                              <button type="submit" class="p-2 ">
+                                  <i class="fa-solid fa-trash" style="color: #d81103;"></i>
+                              </button>
+                          </form>
+                      @elseif ($annonce->status == 'archived')
+                          <span class="text-red-500 text-xs font-semibold bg-red-100 px-2 py-1 rounded-full">Archived</span>
+                          <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
+                              <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
+                          </a>
+                          <a href="/user/annonce/delete/{{$annonce->id}}" class="p-2 ">
+                              <i class="fa-solid fa-trash" style="color: #d81103;"></i>
+                          </a>
+                      @endif
                     </div>
                   </div>
-                  <div class="flex items-center space-x-2">
-                    @if ($annonce->status == 'published')
-                        <span class="text-green-500 text-xs font-semibold bg-green-100 px-2 py-1 rounded-full">published</span>
-                        <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
-                            <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                        </a>
-                        <a href="/user/annonce/delete/{{$annonce->id}}" class="p-2 ">
-                            <i class="fa-solid fa-trash" style="color: #d81103;"></i>
-                        </a>
-                    @elseif ($annonce->status == 'draft')
-                        <span class="text-yellow-500 text-xs font-semibold bg-yellow-100 px-2 py-1 rounded-full">Draft</span>
-                        <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
-                            <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                        </a>
-                        {{-- <a href="/user/annonce/delete/{{$annonce->id}}" class="p-2 ">
-                            <i class="fa-solid fa-trash" style="color: #d81103;"></i>
-                        </a> --}}
-                        <form action="/user/annonce/delete/{{$annonce->id}}" method="POST">
-                            @csrf
-                            <button type="submit" class="p-2 ">
-                                <i class="fa-solid fa-trash" style="color: #d81103;"></i>
-                            </button>
-                        </form>
-                    @elseif ($annonce->status == 'archived')
-                        <span class="text-red-500 text-xs font-semibold bg-red-100 px-2 py-1 rounded-full">Archived</span>
-                        <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
-                            <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
-                        </a>
-                        <a href="/user/annonce/delete/{{$annonce->id}}" class="p-2 ">
-                            <i class="fa-solid fa-trash" style="color: #d81103;"></i>
-                        </a>
-                    @endif
-                    
-                    
-                  </div>
+                  @endforeach
                 </div>
-
-                @endforeach
-
+                
+                
+                <div class="mt-6">
+                  @if($annonces->hasPages())
+                    <div class="flex items-center justify-between border-t border-gray-200 px-4 py-3 sm:px-6">
+                      <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+                        <div>
+                          <p class="text-sm text-gray-700">
+                            Showing
+                            <span class="font-medium">{{ $annonces->firstItem() }}</span>
+                            to
+                            <span class="font-medium">{{ $annonces->lastItem() }}</span>
+                            of
+                            <span class="font-medium">{{ $annonces->total() }}</span>
+                            results
+                          </p>
+                        </div>
+                        <div>
+                          <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                            <!-- Previous Page Link -->
+                            @if ($annonces->onFirstPage())
+                              <span class="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:outline-offset-0 cursor-not-allowed">
+                                <span class="sr-only">Previous</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                                </svg>
+                              </span>
+                            @else
+                              <a href="{{ $annonces->previousPageUrl() }}" class="relative inline-flex items-center px-2 py-2 text-gray-500 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <span class="sr-only">Previous</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                                </svg>
+                              </a>
+                            @endif
+                            
+                            <!-- Pagination Elements -->
+                            @foreach ($annonces->getUrlRange(1, $annonces->lastPage()) as $page => $url)
+                              @if ($page == $annonces->currentPage())
+                                <span aria-current="page" class="relative z-10 inline-flex items-center bg-amber-400 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                                  {{ $page }}
+                                </span>
+                              @else
+                                <a href="{{ $url }}" class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                  {{ $page }}
+                                </a>
+                              @endif
+                            @endforeach
+                            
+                            <!-- Next Page Link -->
+                            @if ($annonces->hasMorePages())
+                              <a href="{{ $annonces->nextPageUrl() }}" class="relative inline-flex items-center px-2 py-2 text-gray-500 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                                <span class="sr-only">Next</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                                </svg>
+                              </a>
+                            @else
+                              <span class="relative inline-flex items-center px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:outline-offset-0 cursor-not-allowed">
+                                <span class="sr-only">Next</span>
+                                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                  <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                                </svg>
+                              </span>
+                            @endif
+                          </nav>
+                        </div>
+                      </div>
+                      
+                      <!-- Mobile Pagination (simplified) -->
+                      <div class="flex items-center justify-between sm:hidden">
+                        <div class="flex w-0 flex-1 justify-start">
+                          @if ($annonces->onFirstPage())
+                            <span class="relative inline-flex items-center rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-400 cursor-not-allowed">
+                              Previous
+                            </span>
+                          @else
+                            <a href="{{ $annonces->previousPageUrl() }}" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                              Previous
+                            </a>
+                          @endif
+                        </div>
+                        <div class="flex items-center justify-center">
+                          <p class="text-sm text-gray-700">
+                            <span class="font-medium">{{ $annonces->currentPage() }}</span>
+                            of
+                            <span class="font-medium">{{ $annonces->lastPage() }}</span>
+                          </p>
+                        </div>
+                        <div class="flex w-0 flex-1 justify-end">
+                          @if ($annonces->hasMorePages())
+                            <a href="{{ $annonces->nextPageUrl() }}" class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                              Next
+                            </a>
+                          @else
+                            <span class="relative inline-flex items-center rounded-md border border-gray-300 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-400 cursor-not-allowed">
+                              Next
+                            </span>
+                          @endif
+                        </div>
+                      </div>
+                    </div>
+                  @endif
+                </div>
               </div>
             </div>
           </div>
-          
-          <!-- Activity Timeline -->
-          <div class="bg-white rounded-lg shadow-md mt-6">
-            <div class="border-b border-gray-200 p-4">
-              <h2 class="text-lg font-semibold text-gray-800">Recent Activity</h2>
-            </div>
-            <div class="p-4">
-              <div class="relative">
-                <!-- Timeline Line -->
-                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200"></div>
-                
-                <!-- Timeline Items -->
-                <div class="space-y-6 relative">
-                  <!-- Item -->
-                  <div class="flex">
-                    <div class="flex-shrink-0 z-10">
-                      <div class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500 text-white shadow">
-                        <i class="ti-eye text-sm"></i>
-                      </div>
-                    </div>
-                    <div class="ml-4">
-                      <h4 class="text-sm font-medium text-gray-800">Your listing "iPhone 14 Pro" received 5 new views</h4>
-                      <p class="text-xs text-gray-500 mt-1">Today, 09:41 AM</p>
-                    </div>
-                  </div>
-                  
-                  <!-- Item -->
-                  <div class="flex">
-                    <div class="flex-shrink-0 z-10">
-                      <div class="flex items-center justify-center w-8 h-8 rounded-full bg-green-500 text-white shadow">
-                        <i class="ti-comment text-sm"></i>
-                      </div>
-                    </div>
-                    <div class="ml-4">
-                      <h4 class="text-sm font-medium text-gray-800">New message from Ahmed about "MacBook Pro 16""</h4>
-                      <p class="text-xs text-gray-500 mt-1">Yesterday, 18:22 PM</p>
-                    </div>
-                  </div>
-                  
-                  <!-- Item -->
-                  <div class="flex">
-                    <div class="flex-shrink-0 z-10">
-                      <div class="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500 text-white shadow">
-                        <i class="ti-heart text-sm"></i>
-                      </div>
-                    </div>
-                    <div class="ml-4">
-                      <h4 class="text-sm font-medium text-gray-800">Your listing "Toyota Corolla 2020" was added to favorites</h4>
-                      <p class="text-xs text-gray-500 mt-1">Apr 15, 2025, 14:30 PM</p>
-                    </div>
-                  </div>
-                  
-                  <!-- Item -->
-                  <div class="flex">
-                    <div class="flex-shrink-0 z-10">
-                      <div class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 text-white shadow">
-                        <i class="ti-plus text-sm"></i>
-                      </div>
-                    </div>
-                    <div class="ml-4">
-                      <h4 class="text-sm font-medium text-gray-800">You created a new listing "Gaming PC - RTX 4070"</h4>
-                      <p class="text-xs text-gray-500 mt-1">Apr 14, 2025, 11:15 AM</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
         
-        <!-- Right Column - Profile and Tools -->
+        
         <div>
           <!-- Profile Card -->
           <div class="bg-white rounded-lg shadow-md">
             <div class="p-6 flex flex-col items-center text-center">
               <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden">
-                <img src="/api/placeholder/100/100" alt="Profile" class="w-full h-full object-cover">
+                <img src="{{$user->photo}}" alt="Profile" class="w-full h-full object-cover">
               </div>
-              <h3 class="text-xl font-bold text-gray-800">{{ Auth::user()->name }}</h3>
-              <p class="text-sm text-gray-500">Member since {{ Auth::user()->created_at->format('M Y') }}</p>
+              <h3 class="text-xl font-bold text-gray-800">{{ $user->name }}</h3>
+              <p class="text-sm text-gray-500">Member since {{ $user->created_at->format('M Y') }}</p>
               
               <!-- Profile Progress -->
               <div class="w-full mt-4">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-xs font-semibold text-gray-700">Profile Completion</span>
-                  <span class="text-xs font-medium text-gray-500">75%</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2">
-                  <div class="bg-blue-500 h-2 rounded-full" style="width: 75%"></div>
+                <div class="flex items-center justify-center gap-2 mb-1">
+                  <span class="text-xs font-semibold text-gray-700">Email :</span>
+                  <span class="text-xs font-medium text-gray-500">{{$user->email}}</span>
                 </div>
                 <p class="text-xs text-gray-500 mt-2">Complete your profile to increase visibility</p>
               </div>
@@ -265,18 +286,10 @@
             
             <!-- Quick Stats -->
             <div class="border-t border-gray-200">
-              <div class="grid grid-cols-3 divide-x divide-gray-200">
+              <div class="flex justify-center divide-x divide-gray-200">
                 <div class="p-4 text-center">
-                  <span class="block text-2xl font-bold text-gray-800">12</span>
+                  <span class="block text-2xl font-bold text-gray-800">{{$numberOfAnnonces}}</span>
                   <span class="text-xs text-gray-500">Listings</span>
-                </div>
-                <div class="p-4 text-center">
-                  <span class="block text-2xl font-bold text-gray-800">254</span>
-                  <span class="text-xs text-gray-500">Views</span>
-                </div>
-                <div class="p-4 text-center">
-                  <span class="block text-2xl font-bold text-gray-800">18</span>
-                  <span class="text-xs text-gray-500">Favorites</span>
                 </div>
               </div>
             </div>
@@ -313,63 +326,33 @@
           </div>
           
           <!-- Notifications -->
-          <div class="bg-white rounded-lg shadow-md mt-6">
-            <div class="border-b border-gray-200 p-4 flex items-center justify-between">
-              <h2 class="text-lg font-semibold text-gray-800">Notifications</h2>
-              <span class="px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full">3 New</span>
+            @php
+                $colors = ['bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-pink-500', 'bg-yellow-500', 'bg-indigo-500'];
+            @endphp
+ 
+            <div class="space-y-5 p-4 bg-white rounded-xl shadow-md" id="recent-activity">
+                @foreach ($annonces->take(3) as $annonce)
+                    @php
+                        $color = $colors[array_rand($colors)];
+                    @endphp
+            
+                    <div class="flex items-start gap-4 hover:bg-gray-50 p-3 rounded-lg transition-all">
+                        <!-- Icon Circle -->
+                        <div class="w-10 h-10 rounded-full {{ $color }} flex items-center justify-center shadow text-white text-lg font-bold">
+                            <i class="ti-plus"></i>
+                        </div>
+
+                        <!-- Content -->
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-800 font-medium">
+                                You created a new annonce
+                                <span class="text-orange-600 font-semibold">"{{ $annonce->title }}"</span>
+                            </p>
+                            <p class="text-xs text-gray-500 mt-1">{{ $annonce->created_at->format('F d, Y — H:i A') }}</p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
-            <div class="p-4">
-              <div class="divide-y divide-gray-200">
-                <!-- Notification Item -->
-                <div class="py-3 flex items-start">
-                  <div class="flex-shrink-0 pt-1">
-                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-sm text-gray-800">Ahmed is interested in your "MacBook Pro" listing.</p>
-                    <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
-                  </div>
-                </div>
-                
-                <!-- Notification Item -->
-                <div class="py-3 flex items-start">
-                  <div class="flex-shrink-0 pt-1">
-                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-sm text-gray-800">Your listing "Toyota Corolla" is about to expire.</p>
-                    <p class="text-xs text-gray-500 mt-1">12 hours ago</p>
-                  </div>
-                </div>
-                
-                <!-- Notification Item -->
-                <div class="py-3 flex items-start">
-                  <div class="flex-shrink-0 pt-1">
-                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-sm text-gray-800">JOTEA Monthly Newsletter: Discover April's best deals!</p>
-                    <p class="text-xs text-gray-500 mt-1">1 day ago</p>
-                  </div>
-                </div>
-                
-                <!-- Notification Item -->
-                <div class="py-3 flex items-start">
-                  <div class="flex-shrink-0 pt-1">
-                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
-                  </div>
-                  <div class="ml-3">
-                    <p class="text-sm text-gray-600">Your account has been verified successfully.</p>
-                    <p class="text-xs text-gray-500 mt-1">3 days ago</p>
-                  </div>
-                </div>
-              </div>
-              
-              <button class="w-full mt-3 text-center text-sm text-blue-500 hover:text-blue-700 font-medium">
-                View All Notifications
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>

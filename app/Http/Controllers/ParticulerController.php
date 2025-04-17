@@ -16,11 +16,12 @@ class ParticulerController extends Controller
 public function dashboard()
 {
     $categories = Category::all();
-    // $annonces = annonce::where('user_id', auth()->id())->get();
     $user = Auth::user();
     $annonces = annonce::where('user_id', $user->id)->with('category')->latest()->paginate(10);
-    // dd($annonces);
-    return view('particulier.account', compact('categories', 'annonces', 'user'));
+    $notification = Annonce::where('user_id', auth()->id())->latest()->take(3)->get();
+    $numberOfAnnonces = annonce::where('user_id', $user->id)->count();
+    
+    return view('particulier.account', compact('categories', 'annonces', 'user', 'notification', 'numberOfAnnonces'));
 }
 
 public function profile()
@@ -29,7 +30,7 @@ public function profile()
 }
 public function home()
     {
-        $annonces = annonce::all();
+        $annonces = annonce::all()->where('status', 'published');
         $categories = Category::all();
         // return view('home', compact('annonces', 'categories'));
         return view('particulier.index', compact('annonces', 'categories'));

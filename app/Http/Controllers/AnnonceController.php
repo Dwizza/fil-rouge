@@ -18,13 +18,7 @@ class AnnonceController extends Controller
         return view('dashboard Entreprise.index');
     }
 
-    public function home()
-    {
-        $annonces = annonce::all();
-        $categories = Category::all();
-        // return view('home', compact('annonces', 'categories'));
-        return view('particulier.index', compact('annonces', 'categories'));
-    }
+    
 
     // annonces user
 
@@ -130,6 +124,7 @@ class AnnonceController extends Controller
     $annonce->description = $request->description;
     $annonce->location = $request->location;
     $annonce->category_id = $request->category_id;
+    $annonce->status = 'draft';
     $annonce->save();
 
     return redirect()->route('annonce.show')->with('success', 'annonce updated successfully.');

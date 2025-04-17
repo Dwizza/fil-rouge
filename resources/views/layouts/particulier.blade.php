@@ -44,21 +44,13 @@
 
   <!-- Color CSS -->
   <link rel="stylesheet" href="assets1/css/color/color1.css">
-  <!--<link rel="stylesheet" href="assets1/css/color/color2.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color3.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color4.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color5.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color6.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color7.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color8.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color9.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color10.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color11.css">-->
-  <!--<link rel="stylesheet" href="assets1/css/color/color12.css">-->
 
   <link rel="stylesheet" href="#" id="colors">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  {{-- font-awesome --}}
+  <script src="https://kit.fontawesome.com/e9ee48a8e3.js" crossorigin="anonymous"></script>
 
 
   <style>
@@ -84,7 +76,7 @@
     <div class="bg-gray-100 py-2 text-sm">
       <div class="container mx-auto px-4 flex justify-between">
         <div>
-          <span class="text-gray-600"><i class="ti-email"></i> support@jotea.com</span>
+          <span class="text-gray-600"><i class="ti-email"></i>support@jotea.com</span>
         </div>
         <div>
           @if (Auth::user()->role->name == 'admin')
@@ -111,7 +103,7 @@
 			</div>
           @elseif(Auth::user()->role->name == 'particuler')
             <div class="flex gap-4 items-center">
-				<a href="/user" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Your Annonces</a>
+				<a href="/user/dashboard" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Your Account</a>
 				<form method="POST" action="{{ route('logout') }}">
 					@csrf
 					<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
@@ -131,8 +123,7 @@
 			<img src="assets1/images/JOTEA-logo.png" alt="Logo" class="h-10">
 			</a>
 		</div>
-
-	  	<div class="hidden md:flex w-2/3 justify-center">
+		<div class="hidden md:flex w-2/3 justify-center">
 		<form class="flex w-full max-w-2xl bg-white rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl h-12">
 			<select name="category" class="h-full px-5 bg-white border-r border-gray-200 text-gray-800 focus:ring-2 focus:ring-blue-300 focus:outline-none min-w-[150px] font-semibold rounded-l-full transition-colors duration-200 hover:bg-blue-50">
 				<option value="">All categories</option>

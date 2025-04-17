@@ -1,5 +1,6 @@
 @extends('layouts.particulier')
 @section('content')
+
    <!-- Start Area 2 -->
 	<section class="hero-area2">
 		<div class="home-slider">
@@ -148,7 +149,6 @@
 											</div>
 											
 											@endforeach
-											
 										</div>
 									</div>
 								</div>
@@ -301,7 +301,7 @@
 		</div>
 	</section>
 	<!-- End Midium Banner -->
-	
+					
 	<!-- Start Most Popular -->
 	<div class="product-area most-popular section">
         <div class="container">
@@ -638,4 +638,5 @@
             </div>
     </div>
     <!-- Modal end -->
+
 @endsection

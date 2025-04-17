@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\ParticulerController;
 use App\Http\Controllers\registerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnnonceController;
@@ -18,9 +20,12 @@ use App\Http\Controllers\AnnonceController;
 |
 */
 
-Route::get('/',[AnnonceController::class, 'home'])->name('home');
+Route::get('/',[ParticulerController::class, 'home'])->name('home');
+
+
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
+    
     route::get('/', [AnnonceController::class, 'index']);
     route::get('/profile', [EntrepriseController::class, 'index']);
     route::get('/annonces', [AnnonceController::class, 'annonces']);
@@ -34,13 +39,37 @@ Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function ()
     route::post('/profile', [AuthController::class, 'editProfile'])->name('editprofile');
 })->middleware('checkRole:2');
 
-// Route::resource('annonces', AnnonceController::class)->middleware('auth');
+
 Route::middleware(['auth', 'checkRole:1'])->prefix('admin')->group(function () {
-    Route::view('/', 'admin.index');
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::post('/categories/update', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     Route::get('/annonces', [AdminController::class, 'annonces']);
     Route::get('/users',[ AdminController::class, 'users'])->name('admin.users');
     Route::post('/annonces/{id}', [AdminController::class, 'updateStatus'])->name('updateStatus');
 
+});
+
+//route particuler
+// Routes pour les utilisateurs particuliers
+Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
+    
+    // Dashboard
+    Route::get('/dashboard', [ParticulerController::class, 'dashboard'])->name('user.dashboard');
+    
+    // Profil
+    Route::get('/profile', [ParticulerController::class, 'profile'])->name('user.profile');
+    Route::put('/profile', [ParticulerController::class, 'updateProfile'])->name('user.profile.update');
+    
+    // Annonces
+    // Route::get('/annonces', [ParticulerController::class, 'index'])->name('user.annonces');
+    // Route::get('/annonces/create', [ParticulerController::class, 'create'])->name('user.annonces.store');
+    Route::post('/annonces', [ParticulerController::class, 'store'])->name('user.annonces.store');
+    Route::get('/annonce/{annonce}', [ParticulerController::class, 'edit'])->name('user.annonces.edit');
+    Route::post('/annonce/{annonce}', [ParticulerController::class, 'update'])->name('user.annonces.update');
+    Route::post('/annonce/delete/{annonce}', [ParticulerController::class, 'destroy'])->name('user.annonces.destroy');
 });
 
 

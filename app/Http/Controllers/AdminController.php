@@ -32,6 +32,20 @@ class AdminController extends Controller
         return view('admin.annonces', compact('annonces'));
     }
 
+    public function dashboard()
+    {
+        $totalAnnonces = Annonce::count();
+        $totalEntreprises = User::where('role_id', '=', '2')->count();
+        $totalParticuliers = User::where('role_id', '=', '3')->count();
+        // dd($totalAnnonces, $totalEntreprises, $totalParticuliers);
+
+        // Tqdr tzid plus dyal stats...
+
+        return view('admin.index', compact('totalAnnonces','totalEntreprises','totalParticuliers'));
+        
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */

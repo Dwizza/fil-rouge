@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\annonce;
+use App\Models\Category;
 use App\Models\Entreprise;
 use App\Http\Requests\StoreEntrepriseRequest;
 use App\Http\Requests\UpdateEntrepriseRequest;
@@ -16,6 +17,7 @@ class EntrepriseController extends Controller
     {
         return view('dashboard entreprise.profil');
     }
+    
 
     /**
      * Show the form for creating a new resource.

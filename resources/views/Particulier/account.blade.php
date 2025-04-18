@@ -268,7 +268,7 @@
           <div class="bg-white rounded-lg shadow-md">
             <div class="p-6 flex flex-col items-center text-center">
               <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden">
-                <img src="{{$user->photo}}" alt="Profile" class="w-full h-full object-cover">
+                <img src="{{ $user->photo ? asset('storage/'. $user->photo) : 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&background=random' }}" alt="Profile" class="w-full h-full object-cover">
               </div>
               <h3 class="text-xl font-bold text-gray-800">{{ $user->name }}</h3>
               <p class="text-sm text-gray-500">Member since {{ $user->created_at->format('M Y') }}</p>
@@ -282,9 +282,9 @@
                 <p class="text-xs text-gray-500 mt-2">Complete your profile to increase visibility</p>
               </div>
               
-              <button class="mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg transition">
+              <a href="/user/profile/edit" class="mt-4 w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg transition">
                 Edit Profile
-              </button>
+              </a>
             </div>
             
             <!-- Quick Stats -->

@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\ParticulerController;
 use App\Http\Controllers\registerController;
+use App\Models\annonce;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnnonceController;
 
@@ -63,7 +64,8 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     Route::get('/profile', [ParticulerController::class, 'profile'])->name('user.profile');
     Route::put('/profile', [ParticulerController::class, 'updateProfile'])->name('user.profile.update');
     route::get('/profile/edit', [ParticulerController::class, 'profile'])->name('user.profile.edit');
-    
+    route::post('/profile/edit/{id}', [ParticulerController::class, 'editProfile'])->name('user.profile.update');
+    route::get('/annonce/{id}',[AnnonceController::class, 'annonceDetail'])->name('user.annonceDetail');
     // Annonces
     // Route::get('/annonces', [ParticulerController::class, 'index'])->name('user.annonces');
     // Route::get('/annonces/create', [ParticulerController::class, 'create'])->name('user.annonces.store');

@@ -15,6 +15,12 @@ class AnnonceController extends Controller
         return view('dashboard Entreprise.index');
     }
 
+    public function annonceDetail($id)
+    {
+        $annonce = annonce::findOrFail($id);
+        $categories = Category::all();
+        return view('particulier.annonceDetails', compact('annonce', 'categories'));
+    }
     // crud annonces
 
     public function userAnnonces()

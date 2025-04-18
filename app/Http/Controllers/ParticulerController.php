@@ -33,8 +33,25 @@ public function profile()
     $user = Auth::user();
     return view('particulier.editProfile', compact('categories', 'user'));
 }
-public function editProfile(Request $request){
-    
+public function editProfile(Request $request, $id){
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
+        'phone' => 'nullable|string|max:20',
+        'address' => 'nullable|string|max:100',
+        'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+    $user = Auth::user();
+    if ($request->hasFile('photo')) {
+        $photoPath = $request->file('photo')->store('storage/profile-photos', 'public');
+        $user->photo = $photoPath;
+    }
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->phone = $request->phone;
+    $user->address = $request->address;
+    $user->save();
+    return redirect()->route('user.profile.edit')->with('success', 'Profil mis à jour avec succès');
 
 }
 

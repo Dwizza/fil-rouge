@@ -19,7 +19,8 @@ public function dashboard()
     $user = Auth::user();
     $annonces = annonce::where('user_id', $user->id)->with('category')->latest()->paginate(10);
     $notification = Annonce::where('user_id', auth()->id())->latest()->take(3)->get();
-    $numberOfAnnonces = annonce::where('user_id', $user->id)->count();
+    $numberOfAnnonces = annonce::where('user_id', $user->id);
+    // dd($numberOfAnnonces->count());
     
     return view('particulier.account', compact('categories', 'annonces', 'user', 'notification', 'numberOfAnnonces'));
 }

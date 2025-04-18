@@ -7,7 +7,7 @@
       <!-- Welcome Section -->
       <div class="flex items-center justify-between mb-8">
         <div>
-          <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ Auth::user()->name }}!</h1>
+          <h1 class="text-2xl font-bold text-gray-800">Welcome back, {{ $user->name }}!</h1>
           <p class="text-gray-600">Here's what's happening with your account today.</p>
         </div>
         <div>
@@ -22,8 +22,11 @@
         <div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500 hover:shadow-lg transition-all duration-300">
           <div class="flex items-center justify-between">
             <div>
-              <p class="text-sm text-gray-500 uppercase font-semibold">Active Listings</p>
-              <h3 class="text-3xl font-bold text-gray-800">12</h3>
+              <p class="text-sm text-gray-500 uppercase font-semibold">Total annonces</p>
+              <h3 class="text-3xl font-bold text-gray-800">
+                {{ $numberOfAnnonces->count() }}
+            </h3>
+            
             </div>
             <div class="bg-blue-100 p-3 rounded-full">
               <i class="ti-package text-blue-500 text-xl"></i>
@@ -288,8 +291,8 @@
             <div class="border-t border-gray-200">
               <div class="flex justify-center divide-x divide-gray-200">
                 <div class="p-4 text-center">
-                  <span class="block text-2xl font-bold text-gray-800">{{$numberOfAnnonces}}</span>
-                  <span class="text-xs text-gray-500">Listings</span>
+                  <span class="block text-2xl font-bold text-gray-800">{{$numberOfAnnonces->where('status', 'published')->count()}}</span>
+                  <span class="text-xs text-gray-500">Annonce Active</span>
                 </div>
               </div>
             </div>

@@ -116,39 +116,49 @@
 								</ul>
 								<!--/ End Tab Nav -->
 							</div>
-							<div class="tab-content" id="myTabContent">
+							<div class="tab-content mt-2" id="myTabContent">
 								<!-- Start Single Tab -->
 								<div class="tab-pane fade show active" id="jobs" role="tabpanel">
 									<div class="tab-single">
 										<div class="row">
-											@foreach ($annonces->where('category_id','=', 5) as $annonce)
 
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="{{$annonce->image}}" alt="#">
-															<img class="hover-img" src="{{$annonce->image}}" alt="#">
-														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
-														</div>
-													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">{{$annonce->title}}n</a></h3>
-														<div class="product-price">
-															<span>${{$annonce->price}}</span>
-														</div>
-													</div>
-												</div>
-											</div>
+											<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+												@foreach ($annonces->where('category_id','=', 5) as $annonce)
+													<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
+														<!-- Image container -->
+														<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+															<a href="product-details.html" class="block w-full h-full">
+																<img src="{{ $annonce->image }}" alt="Image"
+																	 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+															</a>
 											
-											@endforeach
+															<!-- Ribbon (optional, like "NEW") -->
+															<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+																NEW
+															</div>
+														</div>
+											
+														<!-- Content -->
+														<div class="flex flex-col justify-between flex-1 p-4">
+															<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
+																<a href="product-details.html">{{ $annonce->title }}</a>
+															</h3>
+											
+															<!-- Price -->
+															<div class="text-xl font-bold text-orange-500 mb-3">
+																${{ number_format($annonce->price, 0, '.', ',') }}
+															</div>
+											
+															<!-- Add to cart -->
+															<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
+																<i class="ti-shopping-cart mr-1"></i> Add to cart
+															</button>
+														</div>
+													</div>
+												@endforeach
+											</div>
+
+											
 										</div>
 									</div>
 								</div>
@@ -156,70 +166,83 @@
 								<!-- Start Single Tab -->
 								<div class="tab-pane fade" id="cars" role="tabpanel">
 									<div class="tab-single">
-										<div class="row">
-											@foreach ($annonces->where('category_id', '=', 2) as $annonce)
-											
-												<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-													<div class="single-product">
-														<div class="product-img">
-															<a href="product-details.html">
-																<img class="default-img" src="{{$annonce->image}}" alt="#">
-																<img class="hover-img" src="{{$annonce->image}}" alt="#">
-															</a>
-															<div class="button-head">
-																<div class="product-action">
-																	<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																</div>
-																<div class="product-action-2">
-																	<a title="Add to cart" href="#">Add to cart</a>
-																</div>
-															</div>
-														</div>
-														<div class="product-content">
-															<h3><a href="product-details.html">{{$annonce->title}}</a></h3>
-															<div class="product-price">
-																<span>${{$annonce->price}}</span>
-															</div>
+
+										<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+											@foreach ($annonces->where('category_id','=', 2) as $annonce)
+												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
+													<!-- Image container -->
+													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+														<a href="product-details.html" class="block w-full h-full">
+															<img src="{{ $annonce->image }}" alt="Image"
+																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+														</a>
+										
+														<!-- Ribbon (optional, like "NEW") -->
+														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+															NEW
 														</div>
 													</div>
+										
+													<!-- Content -->
+													<div class="flex flex-col justify-between flex-1 p-4">
+														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
+															<a href="product-details.html">{{ $annonce->title }}</a>
+														</h3>
+										
+														<!-- Price -->
+														<div class="text-xl font-bold text-orange-500 mb-3">
+															${{ number_format($annonce->price, 0, '.', ',') }}
+														</div>
+										
+														<!-- Add to cart -->
+														<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
+															<i class="ti-shopping-cart mr-1"></i> Add to cart
+														</button>
+													</div>
 												</div>
-											
 											@endforeach
 										</div>
+										
+
 									</div>
 								</div>
 								<!--/ End Single Tab -->
 								<!-- Start Single Tab -->
 								<div class="tab-pane fade" id="clothes" role="tabpanel">
 									<div class="tab-single">
-										<div class="row">
-											@foreach ($annonces->where('category_id', '=', 7) as $annonce)
-											
-												<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-													<div class="single-product">
-														<div class="product-img">
-															<a href="product-details.html">
-																<img class="default-img" src="{{$annonce->image}}" alt="#">
-																<img class="hover-img" src="{{$annonce->image}}" alt="#">
-															</a>
-															<div class="button-head">
-																<div class="product-action">
-																	<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-																</div>
-																<div class="product-action-2">
-																	<a title="Add to cart" href="#">Add to cart</a>
-																</div>
-															</div>
-														</div>
-														<div class="product-content">
-															<h3><a href="product-details.html">{{$annonce->title}}</a></h3>
-															<div class="product-price">
-																<span>${{$annonce->price}}</span>
-															</div>
+										<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+											@foreach ($annonces->where('category_id','=', 7) as $annonce)
+												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
+													<!-- Image container -->
+													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+														<a href="product-details.html" class="block w-full h-full">
+															<img src="{{ $annonce->image }}" alt="Image"
+																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+														</a>
+										
+														<!-- Ribbon (optional, like "NEW") -->
+														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+															NEW
 														</div>
 													</div>
+										
+													<!-- Content -->
+													<div class="flex flex-col justify-between flex-1 p-4">
+														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
+															<a href="product-details.html">{{ $annonce->title }}</a>
+														</h3>
+										
+														<!-- Price -->
+														<div class="text-xl font-bold text-orange-500 mb-3">
+															${{ number_format($annonce->price, 0, '.', ',') }}
+														</div>
+										
+														<!-- Add to cart -->
+														<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
+															<i class="ti-shopping-cart mr-1"></i> Add to cart
+														</button>
+													</div>
 												</div>
-
 											@endforeach
 										</div>
 									</div>
@@ -228,34 +251,39 @@
 								<!-- Start Single Tab -->
 								<div class="tab-pane fade" id="services" role="tabpanel">
 									<div class="tab-single">
-										<div class="row">
-											@foreach($annonces->where('category_id', '=', 6) as $annonce)
-
-											<div class="col-xl-3 col-lg-4 col-md-4 col-12">
-												<div class="single-product">
-													<div class="product-img">
-														<a href="product-details.html">
-															<img class="default-img" src="{{$annonce->image}}" alt="#">
-															<img class="hover-img" src="{{$annonce->image}}" alt="#">
+										<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+											@foreach ($annonces->where('category_id','=', 6) as $annonce)
+												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
+													<!-- Image container -->
+													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+														<a href="product-details.html" class="block w-full h-full">
+															<img src="{{ $annonce->image }}" alt="Image"
+																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
 														</a>
-														<div class="button-head">
-															<div class="product-action">
-																<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-															</div>
-															<div class="product-action-2">
-																<a title="Add to cart" href="#">Add to cart</a>
-															</div>
+										
+														<!-- Ribbon (optional, like "NEW") -->
+														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+															NEW
 														</div>
 													</div>
-													<div class="product-content">
-														<h3><a href="product-details.html">{{$annonce->title}}</a></h3>
-														<div class="product-price">
-															<span>${{$annonce->price}}</span>
+										
+													<!-- Content -->
+													<div class="flex flex-col justify-between flex-1 p-4">
+														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
+															<a href="product-details.html">{{ $annonce->title }}</a>
+														</h3>
+										
+														<!-- Price -->
+														<div class="text-xl font-bold text-orange-500 mb-3">
+															${{ number_format($annonce->price, 0, '.', ',') }}
 														</div>
+										
+														<!-- Add to cart -->
+														<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
+															<i class="ti-shopping-cart mr-1"></i> Add to cart
+														</button>
 													</div>
 												</div>
-											</div>
-
 											@endforeach
 										</div>
 									</div>
@@ -301,7 +329,7 @@
 		</div>
 	</section>
 	<!-- End Midium Banner -->
-					
+
 	<!-- Start Most Popular -->
 	<div class="product-area most-popular section">
         <div class="container">

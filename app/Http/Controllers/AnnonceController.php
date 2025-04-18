@@ -10,17 +10,12 @@ use Illuminate\Http\Request;
 
 class AnnonceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('dashboard Entreprise.index');
     }
 
-    
-
-    // annonces user
+    // crud annonces
 
     public function userAnnonces()
     {
@@ -28,18 +23,12 @@ class AnnonceController extends Controller
         return view('dashboard entreprise.allAnnonces', compact('annonces'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $categories = Category::all();
         return view('dashboard entreprise.AddAnnonce', compact('categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $validate = array_merge(
@@ -78,27 +67,12 @@ class AnnonceController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(annonce $annonce)
-    {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(annonce $annonce)
     {
         $categori = Category::where('id', '=', $annonce->category_id)->get();
         $categories = Category::where('id', '!=', $categori[0]->id)->get();
         return view('dashboard entreprise.editannonce',compact('annonce', 'categories', 'categori'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
 {
     $annonce = Annonce::findOrFail($id);
@@ -128,12 +102,8 @@ class AnnonceController extends Controller
     $annonce->save();
 
     return redirect()->route('annonce.show')->with('success', 'annonce updated successfully.');
-}
+    }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(annonce $annonce)
     {
         $annonce->delete();

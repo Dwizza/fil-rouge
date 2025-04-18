@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ParticulerController extends Controller
 {
-    // UserController.php
+    // statistique
 public function dashboard()
 {
     $categories = Category::all();
@@ -25,10 +25,21 @@ public function dashboard()
     return view('particulier.account', compact('categories', 'annonces', 'user', 'notification', 'numberOfAnnonces'));
 }
 
+
+// edit profile
 public function profile()
 {
-    return view('user.profile');
+    $categories = Category::all();
+    $user = Auth::user();
+    return view('particulier.editProfile', compact('categories', 'user'));
 }
+public function editProfile(Request $request){
+    
+
+}
+
+// Global home
+
 public function home()
     {
         $annonces = annonce::all()->where('status', 'published');
@@ -69,6 +80,8 @@ public function index()
     $annonces = Auth::user()->annonces()->with('category')->latest()->paginate(10);
     return view('user.annonces.index', compact('annonces'));
 }
+
+// crud annonce 
 
 public function create()
 {

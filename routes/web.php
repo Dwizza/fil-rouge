@@ -62,6 +62,7 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     // Profil
     Route::get('/profile', [ParticulerController::class, 'profile'])->name('user.profile');
     Route::put('/profile', [ParticulerController::class, 'updateProfile'])->name('user.profile.update');
+    route::get('/profile/edit', [ParticulerController::class, 'profile'])->name('user.profile.edit');
     
     // Annonces
     // Route::get('/annonces', [ParticulerController::class, 'index'])->name('user.annonces');

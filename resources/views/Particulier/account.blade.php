@@ -109,10 +109,14 @@
                   @endphp
                   <div class="py-3 flex items-center">
                     <div class="w-16 h-16 bg-gray-200 rounded-md flex-shrink-0 overflow-hidden">
-                      <img src="{{ asset($images[0]) }}" alt="Product" class="w-full h-full object-cover">
+                      <a href="/annonceDetails/{{$annonce->id}}">
+                        <img src="{{ asset($images[0]) }}" alt="Product" class="w-full h-full object-cover">
+                      </a>
                     </div>
                     <div class="ml-4 flex-grow">
-                      <h4 class="font-medium text-gray-800">{{$annonce->title}}</h4>
+                      <a href="/annonceDetails/{{$annonce->id}}">
+                        <h4 class="font-medium text-gray-800">{{$annonce->title}}</h4>
+                      </a>
                       <div class="flex items-center text-sm text-gray-500">
                         <span class="flex items-center"><i class="fa-solid fa-location-dot pr-2" style="color: #b5b5b5;"></i>{{$annonce->location}}</span>
                         <span class="mx-2">•</span>

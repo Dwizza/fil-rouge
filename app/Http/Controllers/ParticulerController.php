@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\annonce;
 use App\Models\Category;
 use App\Models\Particuler;
+use App\Models\User;
 use App\Http\Requests\StoreParticulerRequest;
 use App\Http\Requests\UpdateParticulerRequest;
 use Illuminate\Http\Request;
@@ -186,5 +187,16 @@ public function store(Request $request)
         // dd('chi haja');
         return redirect()->route('user.dashboard')->with('success', 'Annonce supprimée avec succès.');
     }
+
+// Affichage du profil d'un vendeur
+public function viewProfile($id)
+{
+    $user = User::findOrFail($id);
+    $annonces = annonce::where('user_id', $id)->where('status', 'published')->get();
+    $totalAnnonces = annonce::where('user_id', $id)->where('status', 'published')->count();
+    $categories = Category::all(); // Pour le layout
+    
+    return view('Particulier.profileCreators', compact('user', 'annonces', 'totalAnnonces', 'categories'));
+}
 
 }

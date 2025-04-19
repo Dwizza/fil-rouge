@@ -127,7 +127,7 @@
 													<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
 														<!-- Image container -->
 														<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
-															<a href="product-details.html" class="block w-full h-full">
+															<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
 																<img src="{{ $annonce->image }}" alt="Image"
 																	 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
 															</a>
@@ -136,12 +136,21 @@
 															<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
 																NEW
 															</div>
+															<!-- Profile link (added) -->
+															<div class="absolute bottom-3 right-3">
+																<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+																	</svg>
+																	Vendeur
+																</a>
+															</div>
 														</div>
 											
 														<!-- Content -->
 														<div class="flex flex-col justify-between flex-1 p-4">
 															<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-																<a href="product-details.html">{{ $annonce->title }}</a>
+																<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
 															</h3>
 											
 															<!-- Price -->
@@ -172,7 +181,7 @@
 												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
 													<!-- Image container -->
 													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
-														<a href="product-details.html" class="block w-full h-full">
+														<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
 															<img src="{{ $annonce->image }}" alt="Image"
 																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
 														</a>
@@ -181,12 +190,21 @@
 														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
 															NEW
 														</div>
+														<!-- Profile link (added) -->
+														<div class="absolute bottom-3 right-3">
+															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
+																<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+																</svg>
+																Vendeur
+															</a>
+														</div>
 													</div>
 										
 													<!-- Content -->
 													<div class="flex flex-col justify-between flex-1 p-4">
 														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-															<a href="product-details.html">{{ $annonce->title }}</a>
+															<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
 														</h3>
 										
 														<!-- Price -->
@@ -215,7 +233,7 @@
 												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
 													<!-- Image container -->
 													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
-														<a href="product-details.html" class="block w-full h-full">
+														<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
 															<img src="{{ $annonce->image }}" alt="Image"
 																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
 														</a>
@@ -224,12 +242,21 @@
 														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
 															NEW
 														</div>
+														<!-- Profile link (added) -->
+														<div class="absolute bottom-3 right-3">
+															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
+																<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+																</svg>
+																Vendeur
+															</a>
+														</div>
 													</div>
 										
 													<!-- Content -->
 													<div class="flex flex-col justify-between flex-1 p-4">
 														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-															<a href="product-details.html">{{ $annonce->title }}</a>
+															<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
 														</h3>
 										
 														<!-- Price -->
@@ -256,7 +283,7 @@
 												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
 													<!-- Image container -->
 													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
-														<a href="product-details.html" class="block w-full h-full">
+														<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
 															<img src="{{ $annonce->image }}" alt="Image"
 																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
 														</a>
@@ -265,12 +292,21 @@
 														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
 															NEW
 														</div>
+														<!-- Profile link (added) -->
+														<div class="absolute bottom-3 right-3">
+															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
+																<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+																</svg>
+																Vendeur
+															</a>
+														</div>
 													</div>
 										
 													<!-- Content -->
 													<div class="flex flex-col justify-between flex-1 p-4">
 														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-															<a href="product-details.html">{{ $annonce->title }}</a>
+															<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
 														</h3>
 										
 														<!-- Price -->

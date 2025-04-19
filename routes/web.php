@@ -22,7 +22,8 @@ use App\Http\Controllers\AnnonceController;
 */
 
 Route::get('/',[ParticulerController::class, 'home'])->name('home')->middleware('auth');
-
+route::get('/annonceDetails/{id}',[AnnonceController::class, 'annonceDetail'])->name('user.annonceDetail')->middleware('auth');
+Route::get('/profile/view/{id}', [ParticulerController::class, 'viewProfile'])->name('user.profile.view')->middleware('auth');
 
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
@@ -65,7 +66,6 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     Route::put('/profile', [ParticulerController::class, 'updateProfile'])->name('user.profile.update');
     route::get('/profile/edit', [ParticulerController::class, 'profile'])->name('user.profile.edit');
     route::post('/profile/edit/{id}', [ParticulerController::class, 'editProfile'])->name('user.profile.update');
-    route::get('/annonce/{id}',[AnnonceController::class, 'annonceDetail'])->name('user.annonceDetail');
     // Annonces
     // Route::get('/annonces', [ParticulerController::class, 'index'])->name('user.annonces');
     // Route::get('/annonces/create', [ParticulerController::class, 'create'])->name('user.annonces.store');
@@ -74,8 +74,6 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     Route::post('/annonce/{annonce}', [ParticulerController::class, 'update'])->name('user.annonces.update');
     Route::post('/annonce/delete/{annonce}', [ParticulerController::class, 'destroy'])->name('user.annonces.destroy');
 });
-
-
 
 
 

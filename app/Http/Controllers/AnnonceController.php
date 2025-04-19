@@ -19,7 +19,20 @@ class AnnonceController extends Controller
     {
         $annonce = annonce::findOrFail($id);
         $categories = Category::all();
-        return view('particulier.annonceDetails', compact('annonce', 'categories'));
+        
+        // Récupérer les informations sur le vendeur
+        $user = $annonce->user;
+        
+        // Récupérer le nombre total d'annonces du vendeur
+        $totalAnnonces = annonce::where('user_id', $user->id)->count();
+        
+        // Récupérer les annonces similaires (même catégorie, mais pas la même annonce)
+        $similarAnnonces = annonce::where('category_id', $annonce->category_id)
+                        ->where('id', '!=', $annonce->id)
+                        ->take(3)
+                        ->get();
+    
+        return view('particulier.annonceDetails', compact('annonce', 'categories', 'user', 'totalAnnonces', 'similarAnnonces'));
     }
     // crud annonces
 

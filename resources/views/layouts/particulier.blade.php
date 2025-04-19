@@ -119,7 +119,7 @@
 
     <div class="container mx-auto px-4 py-4 flex items-center justify-between">
 		<div class="flex items-center gap-4">
-			<a href="index.html">
+			<a href="/">
 			<img src="assets1/images/JOTEA-logo.png" alt="Logo" class="h-10">
 			</a>
 		</div>

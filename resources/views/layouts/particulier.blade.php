@@ -79,40 +79,53 @@
           <span class="text-gray-600"><i class="ti-email"></i>support@jotea.com</span>
         </div>
         <div>
-          @if (Auth::user()->role->name == 'admin')
-			<div class="flex gap-4 items-center">
-				<a href="/admin" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
-				<form method="POST" action="{{ route('logout') }}">
-					@csrf
-					<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
-						<i class="fa-solid fa-right-from-bracket text-base"></i>
-						<span>Logout</span>
-					</button>
-				</form>
-			</div>
-          @elseif(Auth::user()->role->name == 'company')
-			<div class="flex gap-4 items-center">
-				<a href="/company" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
-				<form method="POST" action="{{ route('logout') }}">
-					@csrf
-					<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
-						<i class="fa-solid fa-right-from-bracket text-base"></i>
-						<span>Logout</span>
-					</button>
-				</form>
-			</div>
-          @elseif(Auth::user()->role->name == 'particuler')
-            <div class="flex gap-4 items-center">
-				<a href="/user/dashboard" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Your Account</a>
-				<form method="POST" action="{{ route('logout') }}">
-					@csrf
-					<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
-						<i class="fa-solid fa-right-from-bracket text-base"></i>
-						<span>Logout</span>
-					</button>
-				</form>
-			</div>
-          @endif
+			@auth
+				@php
+					$user = Auth::user();
+				@endphp
+
+				@if($user && $user->role && $user->role->name === 'admin')
+					<div class="flex gap-4 items-center">
+						<a href="/admin" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+						<form method="POST" action="{{ route('logout') }}">
+							@csrf
+							<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
+								<i class="fa-solid fa-right-from-bracket text-base"></i>
+								<span>Logout</span>
+							</button>
+						</form>
+					</div>
+
+				@elseif($user && $user->role && $user->role->name === 'company')
+					<div class="flex gap-4 items-center">
+						<a href="/company" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Dashboard</a>
+						<form method="POST" action="{{ route('logout') }}">
+							@csrf
+							<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
+								<i class="fa-solid fa-right-from-bracket text-base"></i>
+								<span>Logout</span>
+							</button>
+						</form>
+					</div>
+				@elseif($user && $user->role && $user->role->name === 'particuler')
+					<div class="flex gap-4 items-center">
+						<a href="/user/dashboard" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Your Account</a>
+						<form method="POST" action="{{ route('logout') }}">
+							@csrf
+							<button type="submit" class="flex items-center gap-2 px-4 py-1 rounded-full bg-red-100 hover:bg-red-200 text-red-600 font-semibold transition-colors duration-200 shadow-sm border border-red-200 focus:outline-none focus:ring-2 focus:ring-red-400">
+								<i class="fa-solid fa-right-from-bracket text-base"></i>
+								<span>Logout</span>
+							</button>
+						</form>
+					</div>
+				@endif
+			@else
+				<div class="flex gap-4 items-center">
+					<a href="/login" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Login</a>
+					<a href="/register" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Register</a>
+				</div>
+			@endauth
+
         </div>
       </div>
     </div>
@@ -127,9 +140,9 @@
 		<form class="flex w-full max-w-2xl bg-white rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl h-12">
 			<select name="category" class="h-full px-5 bg-white border-r border-gray-200 text-gray-800 focus:ring-2 focus:ring-blue-300 focus:outline-none min-w-[150px] font-semibold rounded-l-full transition-colors duration-200 hover:bg-blue-50">
 				<option value="">All categories</option>
-				@foreach ($categories as $category)
+				{{-- @foreach ($categories as $category)
 					<option value="{{$category->id}}">{{$category->name}}</option>
-				@endforeach
+				@endforeach --}}
 			</select>
 	
 			<input type="text" name="search" placeholder="Search Products Here..." class="h-full flex-grow px-5 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-200" id="search-input">

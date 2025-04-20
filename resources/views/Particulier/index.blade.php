@@ -1,6 +1,19 @@
 @extends('layouts.particulier')
 @section('content')
-
+@if(session('error'))
+	<div id="error-popup" class="fixed top-5 right-5 z-50 bg-red-500 text-white px-6 py-3 rounded shadow-lg transition-opacity duration-500 opacity-100">
+		{{ session('error') }}
+	</div>
+	<script>
+		setTimeout(function() {
+			var popup = document.getElementById('error-popup');
+			if (popup) {
+				popup.style.opacity = '0';
+				setTimeout(function() { popup.remove(); }, 500);
+			}
+		}, 20000);
+	</script>
+@endif
    <!-- Start Area 2 -->
 	<section class="hero-area2">
 		<div class="home-slider">

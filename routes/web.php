@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ParticulerController;
 use App\Http\Controllers\registerController;
 use App\Models\annonce;
@@ -20,10 +21,9 @@ use App\Http\Controllers\AnnonceController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/',[ParticulerController::class, 'home'])->name('home')->middleware('auth');
-route::get('/annonceDetails/{id}',[AnnonceController::class, 'annonceDetail'])->name('user.annonceDetail')->middleware('auth');
-Route::get('/profile/view/{id}', [ParticulerController::class, 'viewProfile'])->name('user.profile.view')->middleware('auth');
+Route::get('/',[ParticulerController::class, 'home'])->name('home');
+route::get('/annonceDetails/{id}',[AnnonceController::class, 'annonceDetail'])->name('user.annonceDetail');
+Route::get('/profile/view/{id}', [ParticulerController::class, 'viewProfile'])->name('user.profile.view');
 
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
@@ -39,6 +39,10 @@ Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function ()
     route::post('/deleteannonce/{annonce}', [AnnonceController::class, 'destroy'])->name('deleteannonce');
     route::get('/profile', [AuthController::class, 'profile'])->name('profile');
     route::post('/profile', [AuthController::class, 'editProfile'])->name('editprofile');
+    // messages
+    route::get('/conversation',[EntrepriseController::class, 'conversations'])->name('entreprise.conversation');
+    route::get('/chat/{user}', [MessageController::class, 'show'])->name('company.chat');
+    route::post('/chat/send', [MessageController::class, 'store'])->name('chat.send_company');
 })->middleware('checkRole:2');
 
 
@@ -73,9 +77,13 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     Route::get('/annonce/{annonce}', [ParticulerController::class, 'edit'])->name('user.annonces.edit');
     Route::post('/annonce/{annonce}', [ParticulerController::class, 'update'])->name('user.annonces.update');
     Route::post('/annonce/delete/{annonce}', [ParticulerController::class, 'destroy'])->name('user.annonces.destroy');
+
+    // Messages
+    Route::get('/chat/{user}', [MessageController::class, 'index'])->name('chat');
+    Route::post('/chat/send', [MessageController::class, 'store'])->name('chat.send');
+    Route::get('/inbox', [MessageController::class, 'conversations'])->name('chat.inbox');
+
 });
-
-
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');

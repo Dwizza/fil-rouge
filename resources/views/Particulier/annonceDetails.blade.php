@@ -1,8 +1,6 @@
 @extends('layouts.particulier')
 
 @section('content')
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Custom Styles -->
 <style>
@@ -373,12 +371,23 @@
 
                     <!-- Call to action button -->
                     <div class="space-y-4">
-                        <a href="mailto:{{ $annonce->user->email }}" class="group w-full flex items-center justify-center px-6 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-amber-400 to-amber-700 hover:from-amber-500 hover:to-amber-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transform transition-all hover:scale-[1.01] active:scale-[0.99] shadow-lg hover:shadow-xl">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                            </svg>
-                            Contacter le vendeur
-                        </a>
+                        @auth
+                            @if($annonce->user->id !== auth()->id())
+                                <a href="" class="group w-full flex items-center justify-center px-6 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-amber-400 to-amber-700 hover:from-amber-500 hover:to-amber-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transform transition-all hover:scale-[1.01] active:scale-[0.99] shadow-lg hover:shadow-xl">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                    </svg>
+                                    Contacter le vendeur
+                                </a>
+                            @endif
+                        @else
+                            <a href="{{ route('login') }}" class="group w-full flex items-center justify-center px-6 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-amber-400 to-amber-700 hover:from-amber-500 hover:to-amber-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transform transition-all hover:scale-[1.01] active:scale-[0.99] shadow-lg hover:shadow-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                </svg>
+                                Se connecter pour contacter
+                            </a>
+                        @endauth
                         
                         @if($annonce->user->id === auth()->id())
                             <div class="grid grid-cols-2 gap-4 mt-4">
@@ -482,6 +491,12 @@
                             Voir le profil
                         </a>
                     </div>
+                    <a href="{{ route('chat', $annonce->user_id) }}" class="inline-flex items-center px-4 py-2 border border-green-600 shadow-sm text-sm font-medium rounded-md text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ml-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                        </svg>
+                        Envoyer un message
+                    </a>
                 </div>
 
                 <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

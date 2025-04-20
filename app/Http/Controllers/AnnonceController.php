@@ -31,6 +31,10 @@ class AnnonceController extends Controller
                         ->where('id', '!=', $annonce->id)
                         ->take(3)
                         ->get();
+        
+        if($annonce->status == 'draft') {
+            return redirect()->route('home')->with('error', 'Cette annonce n\'est pas encore publiée.');
+        }
     
         return view('particulier.annonceDetails', compact('annonce', 'categories', 'user', 'totalAnnonces', 'similarAnnonces'));
     }

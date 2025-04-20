@@ -314,10 +314,10 @@
                   <span class="text-sm font-medium text-gray-700">Add Annonce</span>
                 </button>
                 
-                <button class="p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors flex flex-col items-center justify-center">
+                <a href="inbox" class="p-3 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors flex flex-col items-center justify-center">
                   <i class="ti-comment-alt text-purple-500 mb-1 text-xl"></i>
                   <span class="text-sm font-medium text-gray-700">Messages</span>
-                </button>
+                </a>
                 
                 <button class="p-3 bg-green-50 hover:bg-green-100 rounded-lg transition-colors flex flex-col items-center justify-center">
                   <i class="ti-heart text-green-500 mb-1 text-xl"></i>

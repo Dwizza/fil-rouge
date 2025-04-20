@@ -62,8 +62,10 @@ public function home()
     {
         $annonces = annonce::all()->where('status', 'published');
         $categories = Category::all();
+        $randomAnnonces = Annonce::inRandomOrder()->take(8)->get();
+
         // return view('home', compact('annonces', 'categories'));
-        return view('particulier.index', compact('annonces', 'categories'));
+        return view('particulier.index', compact('annonces', 'categories', 'randomAnnonces'));
     }
 
 public function updateProfile(Request $request)

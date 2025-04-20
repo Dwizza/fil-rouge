@@ -123,44 +123,102 @@
 										<div class="row">
 
 											<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-												@foreach ($annonces->where('category_id','=', 5) as $annonce)
-													<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
-														<!-- Image container -->
-														<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+												@foreach ($annonces->where('category_id','=', 5)->take(4) as $annonce)
+													<div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-[460px] group relative border border-gray-100">
+														<!-- Wishlist button -->
+														<button class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-200">
+															<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 hover:text-orange-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+															</svg>
+														</button>
+														
+														<!-- Image container with overlay effect -->
+														<div class="relative w-full h-[240px] overflow-hidden">
 															<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
-																<img src="{{ $annonce->image }}" alt="Image"
-																	 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+																<div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-10"></div>
+																<img src="{{ $annonce->image }}" alt="{{ $annonce->title }}"
+																	 class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
 															</a>
-											
-															<!-- Ribbon (optional, like "NEW") -->
-															<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+															
+															<!-- Status badge -->
+															<div class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center">
+																<span class="w-2 h-2 bg-white rounded-full mr-1.5 animate-pulse"></span>
 																NEW
 															</div>
-															<!-- Profile link (added) -->
-															<div class="absolute bottom-3 right-3">
-																<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
-																	<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															
+															<!-- Quick actions bar -->
+															<div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-between items-center">
+																<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="text-white text-xs font-medium flex items-center hover:text-orange-300 transition-colors duration-200">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 																	</svg>
-																	Vendeur
+																	View Seller
 																</a>
+																<div class="flex space-x-2">
+																	<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+																			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+																		</svg>
+																	</button>
+																	<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																			<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+																		</svg>
+																	</button>
+																</div>
 															</div>
 														</div>
-											
-														<!-- Content -->
-														<div class="flex flex-col justify-between flex-1 p-4">
-															<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-																<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
-															</h3>
-											
-															<!-- Price -->
-															<div class="text-xl font-bold text-orange-500 mb-3">
-																${{ number_format($annonce->price, 0, '.', ',') }}
+														
+														<!-- Content with enhanced styling -->
+														<div class="flex flex-col justify-between flex-1 p-5">
+															<div>
+																<!-- Category tag -->
+																<div class="mb-2 text-xs font-medium">
+																	<span class="text-blue-600">{{$annonce->category->name}}</span>
+																</div>
+																
+																<!-- Title -->
+																<h3 class="text-lg font-semibold text-gray-800 leading-tight mb-2 hover:text-orange-500 transition-colors duration-200 line-clamp-2">
+																	<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
+																</h3>
+																
+																<!-- Rating -->
+																<div class="flex items-center mb-3">
+																	<div class="flex text-orange-400">
+																		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																			<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																		</svg>
+																		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																			<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																		</svg>
+																		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																			<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																		</svg>
+																		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																			<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																		</svg>
+																		<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																			<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																		</svg>
+																	</div>
+																	<span class="text-xs text-gray-500 ml-1">(24 reviews)</span>
+																</div>
+																
+																<!-- Price with previous price -->
+																<div class="flex items-center space-x-2">
+																	<span class="text-2xl font-bold text-orange-500">${{ number_format($annonce->price, 0, '.', ',') }}</span>
+																	<span class="text-sm text-gray-400 line-through">${{ number_format($annonce->price * 1.2, 0, '.', ',') }}</span>
+																	<span class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-0.5">-20%</span>
+																</div>
 															</div>
-											
-															<!-- Add to cart -->
-															<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
-																<i class="ti-shopping-cart mr-1"></i> Add to cart
+															
+															<!-- Call to action button -->
+															<button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center space-x-2 transition-all duration-300 transform hover:-translate-y-0.5 group focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2">
+																<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+																</svg>
+																<span>Show Annonce</span>
 															</button>
 														</div>
 													</div>
@@ -177,44 +235,102 @@
 									<div class="tab-single">
 
 										<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-											@foreach ($annonces->where('category_id','=', 2) as $annonce)
-												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
-													<!-- Image container -->
-													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+											@foreach ($annonces->where('category_id','=', 2)->take(4) as $annonce)
+												<div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-[460px] group relative border border-gray-100">
+													<!-- Wishlist button -->
+													<button class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-200">
+														<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 hover:text-orange-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+														</svg>
+													</button>
+													
+													<!-- Image container with overlay effect -->
+													<div class="relative w-full h-[240px] overflow-hidden">
 														<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
-															<img src="{{ $annonce->image }}" alt="Image"
-																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+															<div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-10"></div>
+															<img src="{{ $annonce->image }}" alt="{{ $annonce->title }}"
+																 class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
 														</a>
-										
-														<!-- Ribbon (optional, like "NEW") -->
-														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+														
+														<!-- Status badge -->
+														<div class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center">
+															<span class="w-2 h-2 bg-white rounded-full mr-1.5 animate-pulse"></span>
 															NEW
 														</div>
-														<!-- Profile link (added) -->
-														<div class="absolute bottom-3 right-3">
-															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
-																<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+														
+														<!-- Quick actions bar -->
+														<div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-between items-center">
+															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="text-white text-xs font-medium flex items-center hover:text-orange-300 transition-colors duration-200">
+																<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 																	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 																</svg>
-																Vendeur
+																View Seller
 															</a>
+															<div class="flex space-x-2">
+																<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+																	</svg>
+																</button>
+																<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+																	</svg>
+																</button>
+															</div>
 														</div>
 													</div>
-										
-													<!-- Content -->
-													<div class="flex flex-col justify-between flex-1 p-4">
-														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-															<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
-														</h3>
-										
-														<!-- Price -->
-														<div class="text-xl font-bold text-orange-500 mb-3">
-															${{ number_format($annonce->price, 0, '.', ',') }}
+													
+													<!-- Content with enhanced styling -->
+													<div class="flex flex-col justify-between flex-1 p-5">
+														<div>
+															<!-- Category tag -->
+															<div class="mb-2 text-xs font-medium">
+																<span class="text-blue-600">{{$annonce->category->name}}</span>
+															</div>
+															
+															<!-- Title -->
+															<h3 class="text-lg font-semibold text-gray-800 leading-tight mb-2 hover:text-orange-500 transition-colors duration-200 line-clamp-2">
+																<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
+															</h3>
+															
+															<!-- Rating -->
+															<div class="flex items-center mb-3">
+																<div class="flex text-orange-400">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																</div>
+																<span class="text-xs text-gray-500 ml-1">(24 reviews)</span>
+															</div>
+															
+															<!-- Price with previous price -->
+															<div class="flex items-center space-x-2">
+																<span class="text-2xl font-bold text-orange-500">${{ number_format($annonce->price, 0, '.', ',') }}</span>
+																<span class="text-sm text-gray-400 line-through">${{ number_format($annonce->price * 1.2, 0, '.', ',') }}</span>
+																<span class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-0.5">-20%</span>
+															</div>
 														</div>
-										
-														<!-- Add to cart -->
-														<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
-															<i class="ti-shopping-cart mr-1"></i> Add to cart
+														
+														<!-- Call to action button -->
+														<button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center space-x-2 transition-all duration-300 transform hover:-translate-y-0.5 group focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2">
+															<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+															</svg>
+															<span>Show Annonce</span>
 														</button>
 													</div>
 												</div>
@@ -229,44 +345,102 @@
 								<div class="tab-pane fade" id="clothes" role="tabpanel">
 									<div class="tab-single">
 										<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-											@foreach ($annonces->where('category_id','=', 7) as $annonce)
-												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
-													<!-- Image container -->
-													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+											@foreach ($annonces->where('category_id','=', 7)->take(4) as $annonce)
+												<div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-[460px] group relative border border-gray-100">
+													<!-- Wishlist button -->
+													<button class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-200">
+														<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 hover:text-orange-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+														</svg>
+													</button>
+													
+													<!-- Image container with overlay effect -->
+													<div class="relative w-full h-[240px] overflow-hidden">
 														<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
-															<img src="{{ $annonce->image }}" alt="Image"
-																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+															<div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-10"></div>
+															<img src="{{ $annonce->image }}" alt="{{ $annonce->title }}"
+																 class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
 														</a>
-										
-														<!-- Ribbon (optional, like "NEW") -->
-														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+														
+														<!-- Status badge -->
+														<div class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center">
+															<span class="w-2 h-2 bg-white rounded-full mr-1.5 animate-pulse"></span>
 															NEW
 														</div>
-														<!-- Profile link (added) -->
-														<div class="absolute bottom-3 right-3">
-															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
-																<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+														
+														<!-- Quick actions bar -->
+														<div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-between items-center">
+															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="text-white text-xs font-medium flex items-center hover:text-orange-300 transition-colors duration-200">
+																<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 																	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 																</svg>
-																Vendeur
+																View Seller
 															</a>
+															<div class="flex space-x-2">
+																<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+																	</svg>
+																</button>
+																<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+																	</svg>
+																</button>
+															</div>
 														</div>
 													</div>
-										
-													<!-- Content -->
-													<div class="flex flex-col justify-between flex-1 p-4">
-														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-															<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
-														</h3>
-										
-														<!-- Price -->
-														<div class="text-xl font-bold text-orange-500 mb-3">
-															${{ number_format($annonce->price, 0, '.', ',') }}
+													
+													<!-- Content with enhanced styling -->
+													<div class="flex flex-col justify-between flex-1 p-5">
+														<div>
+															<!-- Category tag -->
+															<div class="mb-2 text-xs font-medium">
+																<span class="text-blue-600">{{$annonce->category->name}}</span>
+															</div>
+															
+															<!-- Title -->
+															<h3 class="text-lg font-semibold text-gray-800 leading-tight mb-2 hover:text-orange-500 transition-colors duration-200 line-clamp-2">
+																<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
+															</h3>
+															
+															<!-- Rating -->
+															<div class="flex items-center mb-3">
+																<div class="flex text-orange-400">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																</div>
+																<span class="text-xs text-gray-500 ml-1">(24 reviews)</span>
+															</div>
+															
+															<!-- Price with previous price -->
+															<div class="flex items-center space-x-2">
+																<span class="text-2xl font-bold text-orange-500">${{ number_format($annonce->price, 0, '.', ',') }}</span>
+																<span class="text-sm text-gray-400 line-through">${{ number_format($annonce->price * 1.2, 0, '.', ',') }}</span>
+																<span class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-0.5">-20%</span>
+															</div>
 														</div>
-										
-														<!-- Add to cart -->
-														<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
-															<i class="ti-shopping-cart mr-1"></i> Add to cart
+														
+														<!-- Call to action button -->
+														<button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center space-x-2 transition-all duration-300 transform hover:-translate-y-0.5 group focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2">
+															<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+															</svg>
+															<span>Show Annonce</span>
 														</button>
 													</div>
 												</div>
@@ -279,44 +453,102 @@
 								<div class="tab-pane fade" id="services" role="tabpanel">
 									<div class="tab-single">
 										<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-											@foreach ($annonces->where('category_id','=', 6) as $annonce)
-												<div class="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-[440px] group">
-													<!-- Image container -->
-													<div class="relative w-full h-[220px] bg-gray-200 overflow-hidden">
+											@foreach ($annonces->where('category_id','=', 6)->take(4) as $annonce)
+												<div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col h-[460px] group relative border border-gray-100">
+													<!-- Wishlist button -->
+													<button class="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-200">
+														<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600 hover:text-orange-500 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+															<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+														</svg>
+													</button>
+													
+													<!-- Image container with overlay effect -->
+													<div class="relative w-full h-[240px] overflow-hidden">
 														<a href="annonceDetails/{{$annonce->id}}" class="block w-full h-full">
-															<img src="{{ $annonce->image }}" alt="Image"
-																 class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500">
+															<div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300 z-10"></div>
+															<img src="{{ $annonce->image }}" alt="{{ $annonce->title }}"
+																 class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
 														</a>
-										
-														<!-- Ribbon (optional, like "NEW") -->
-														<div class="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded">
+														
+														<!-- Status badge -->
+														<div class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center">
+															<span class="w-2 h-2 bg-white rounded-full mr-1.5 animate-pulse"></span>
 															NEW
 														</div>
-														<!-- Profile link (added) -->
-														<div class="absolute bottom-3 right-3">
-															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-2 py-1 rounded flex items-center">
-																<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+														
+														<!-- Quick actions bar -->
+														<div class="absolute left-0 right-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-between items-center">
+															<a href="{{ route('user.profile.view', $annonce->user->id) }}" class="text-white text-xs font-medium flex items-center hover:text-orange-300 transition-colors duration-200">
+																<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 																	<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
 																</svg>
-																Vendeur
+																View Seller
 															</a>
+															<div class="flex space-x-2">
+																<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+																	</svg>
+																</button>
+																<button class="bg-white/20 backdrop-blur-sm hover:bg-white/30 p-1.5 rounded-full transition-colors duration-200">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																		<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+																	</svg>
+																</button>
+															</div>
 														</div>
 													</div>
-										
-													<!-- Content -->
-													<div class="flex flex-col justify-between flex-1 p-4">
-														<h3 class="text-base font-semibold text-gray-800 capitalize mb-1 truncate">
-															<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
-														</h3>
-										
-														<!-- Price -->
-														<div class="text-xl font-bold text-orange-500 mb-3">
-															${{ number_format($annonce->price, 0, '.', ',') }}
+													
+													<!-- Content with enhanced styling -->
+													<div class="flex flex-col justify-between flex-1 p-5">
+														<div>
+															<!-- Category tag -->
+															<div class="mb-2 text-xs font-medium">
+																<span class="text-blue-600">{{$annonce->category->name}}</span>
+															</div>
+															
+															<!-- Title -->
+															<h3 class="text-lg font-semibold text-gray-800 leading-tight mb-2 hover:text-orange-500 transition-colors duration-200 line-clamp-2">
+																<a href="annonceDetails/{{$annonce->id}}">{{ $annonce->title }}</a>
+															</h3>
+															
+															<!-- Rating -->
+															<div class="flex items-center mb-3">
+																<div class="flex text-orange-400">
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																	<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+																		<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+																	</svg>
+																</div>
+																<span class="text-xs text-gray-500 ml-1">(24 reviews)</span>
+															</div>
+															
+															<!-- Price with previous price -->
+															<div class="flex items-center space-x-2">
+																<span class="text-2xl font-bold text-orange-500">${{ number_format($annonce->price, 0, '.', ',') }}</span>
+																<span class="text-sm text-gray-400 line-through">${{ number_format($annonce->price * 1.2, 0, '.', ',') }}</span>
+																<span class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-0.5">-20%</span>
+															</div>
 														</div>
-										
-														<!-- Add to cart -->
-														<button class="mt-auto bg-orange-500 text-white w-full py-2 rounded-xl font-medium text-sm tracking-wide hover:bg-orange-600 transition duration-200">
-															<i class="ti-shopping-cart mr-1"></i> Add to cart
+														
+														<!-- Call to action button -->
+														<button class="mt-4 bg-orange-500 hover:bg-orange-600 text-white w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center space-x-2 transition-all duration-300 transform hover:-translate-y-0.5 group focus:outline-none focus:ring-2 focus:ring-orange-300 focus:ring-offset-2">
+															<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+																<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+															</svg>
+															<span>Show Annonce</span>
 														</button>
 													</div>
 												</div>
@@ -368,129 +600,66 @@
 
 	<!-- Start Most Popular -->
 	<div class="product-area most-popular section">
-        <div class="container">
-            <div class="row">
+		<div class="container">
+			<div class="row">
 				<div class="col-12">
 					<div class="section-title">
 						<h2>Hot Item</h2>
 					</div>
 				</div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="owl-carousel popular-slider">
-						<!-- Start Single Product -->
-						<div class="single-product">
-							<div class="product-img">
-								<a href="product-details.html">
-									<img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-									<img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-									<span class="out-of-stock">Hot</span>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<!-- Owl Carousel Container -->
+					<div class="owl-carousel popular-slider">
+						@foreach ($randomAnnonces as $annonce)
+						<div class="bg-white rounded-lg shadow-md overflow-hidden mx-2 flex flex-col justify-between h-[400px] min-w-[250px] max-w-[270px]">
+							
+							<!-- Image -->
+							<div class="h-[180px] relative overflow-hidden">
+								<a href="product-details.html" class="block w-full h-full">
+									<img class="object-cover w-full h-full transition-transform duration-300 hover:scale-105" src="{{ asset($annonce->image) }}" alt="Annonce Image">
+									<span class="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">Hot</span>
 								</a>
-								<div class="button-head">
-									<div class="product-action">
-										<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-										<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-										<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+							</div>
+					
+							<!-- Content -->
+							<div class="flex flex-col justify-between flex-grow p-4">
+								<div>
+									<h3 class="text-sm font-semibold text-gray-800 truncate mb-1">
+										<a href="product-details.html">{{ $annonce->title }}</a>
+									</h3>
+									<div class="text-lg font-bold text-green-600">{{ $annonce->price }} $</div>
+								</div>
+					
+								<!-- Actions -->
+								<div class="mt-4">
+									<div class="flex items-center justify-between text-gray-500 text-xs mb-3">
+										<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#" class="hover:text-blue-500 flex items-center gap-1">
+											<i class="ti-eye"></i><span>View</span>
+										</a>
+										<a title="Wishlist" href="#" class="hover:text-pink-500 flex items-center gap-1">
+											<i class="ti-heart"></i><span>Wish</span>
+										</a>
+										<a title="Compare" href="#" class="hover:text-purple-500 flex items-center gap-1">
+											<i class="ti-bar-chart-alt"></i><span>Compare</span>
+										</a>
 									</div>
-									<div class="product-action-2">
-										<a title="Add to cart" href="#">Add to cart</a>
-									</div>
+									<a href="/annonceDetails/{{$annonce->id}}" class="block text-center bg-orange-500 text-white text-sm py-2 rounded hover:bg-orange-600 transition">
+										Show Annonce
+									</a>
 								</div>
 							</div>
-							<div class="product-content">
-								<h3><a href="product-details.html">Black Sunglass For Women</a></h3>
-								<div class="product-price">
-									<span class="old">$60.00</span>
-									<span>$50.00</span>
-								</div>
-							</div>
+					
 						</div>
-						<!-- End Single Product -->
-						<!-- Start Single Product -->
-						<div class="single-product">
-                            <div class="product-img">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-                                    <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-                                </a>
-								<div class="button-head">
-									<div class="product-action">
-										<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-										<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-										<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-									</div>
-									<div class="product-action-2">
-										<a title="Add to cart" href="#">Add to cart</a>
-									</div>
-								</div>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">Women Hot Collection</a></h3>
-                                <div class="product-price">
-                                    <span>$50.00</span>
-                                </div>
-                            </div>
-                        </div>
-						<!-- End Single Product -->
-						<!-- Start Single Product -->
-						<div class="single-product">
-                            <div class="product-img">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-                                    <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-									<span class="new">New</span>
-                                </a>
-								<div class="button-head">
-									<div class="product-action">
-										<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-										<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-										<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-									</div>
-									<div class="product-action-2">
-										<a title="Add to cart" href="#">Add to cart</a>
-									</div>
-								</div>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">Awesome Pink Show</a></h3>
-                                <div class="product-price">
-                                    <span>$50.00</span>
-                                </div>
-                            </div>
-                        </div>
-						<!-- End Single Product -->
-						<!-- Start Single Product -->
-						<div class="single-product">
-                            <div class="product-img">
-                                <a href="product-details.html">
-                                    <img class="default-img" src="https://via.placeholder.com/550x750" alt="#">
-                                    <img class="hover-img" src="https://via.placeholder.com/550x750" alt="#">
-                                </a>
-								<div class="button-head">
-									<div class="product-action">
-										<a data-toggle="modal" data-target="#exampleModal" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-										<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
-										<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
-									</div>
-									<div class="product-action-2">
-										<a title="Add to cart" href="#">Add to cart</a>
-									</div>
-								</div>
-                            </div>
-                            <div class="product-content">
-                                <h3><a href="product-details.html">Awesome Bags Collection</a></h3>
-                                <div class="product-price">
-                                    <span>$50.00</span>
-                                </div>
-                            </div>
-                        </div>
-						<!-- End Single Product -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+						@endforeach
+					</div>
+									
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- End Most Popular Area -->
 	
 	<!-- Start Cowndown Area -->

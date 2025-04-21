@@ -57,7 +57,7 @@
                                                     <div class="flex-shrink-0">
                                                         <div class="relative">
                                                             @if($user->photo)
-                                                                <img class="h-12 w-12 rounded-full object-cover" src="{{ asset($user->photo) }}" alt="{{ $user->name }}">
+                                                                <img class="h-12 w-12 rounded-full object-cover" src="{{ asset('storage/',$user->photo) }}" alt="{{ $user->name }}">
                                                             @else
                                                                 <div class="h-12 w-12 rounded-full bg-gradient-to-r from-amber-400 to-amber-700 flex items-center justify-center text-white font-bold text-xl">
                                                                     {{ substr($user->name, 0, 2) }}
@@ -206,7 +206,7 @@
 
                             <!-- Message Input -->
                             <div class="border-t border-gray-700 p-4">
-                                <form id="message-form" action="{{ route('chat.send') }}" method="POST">
+                                <form id="message-form" action="{{ route('chat.send_company') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="receiver_id" value="{{ $activeUser->id }}">
                                     <div class="flex items-center space-x-2">
@@ -259,7 +259,7 @@
             </button>
         </div>
         <div class="p-4">
-            <form action="{{ route('chat.send') }}" method="POST" id="new-message-form">
+            <form action="{{ route('chat.send_company') }}" method="POST" id="new-message-form">
                 @csrf
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-300 mb-1">Destinataire</label>

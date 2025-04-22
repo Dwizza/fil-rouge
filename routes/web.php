@@ -7,6 +7,7 @@ use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ParticulerController;
 use App\Http\Controllers\registerController;
+use App\Http\Controllers\ReportController;
 use App\Models\annonce;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnnonceController;
@@ -82,6 +83,11 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     Route::get('/chat/{user}', [MessageController::class, 'index'])->name('chat');
     Route::post('/chat/send', [MessageController::class, 'store'])->name('chat.send');
     Route::get('/inbox', [MessageController::class, 'conversations'])->name('chat.inbox');
+
+    //report
+    
+    Route::post('/report', [ReportController::class, 'create'])->name('user.report.create');
+    
 
 });
 

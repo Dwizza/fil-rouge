@@ -313,6 +313,11 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                             </button>
+                            <button type="button" id="reportButton" class="group p-2 rounded-full bg-gray-100 hover:bg-orange-100 transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500 group-hover:text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
 
@@ -604,6 +609,91 @@
     </div>
 </div>
 
+<!-- Modal de signalement -->
+<div id="reportModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full transform transition-all">
+        <!-- En-tête du modal -->
+        <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-900 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                Signaler cette annonce
+            </h3>
+            <button id="closeReportModal" class="text-gray-400 hover:text-gray-500">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Corps du modal -->
+        <div class="px-6 py-4">
+            <p class="text-sm text-gray-600 mb-4">Veuillez sélectionner la raison pour laquelle vous souhaitez signaler cette annonce. Votre signalement sera examiné par notre équipe.</p>
+            
+            <form id="reportForm" action="{{ route('user.report.create', $annonce->id) }}" method="POST">
+                @csrf
+                <div class="space-y-3">
+                    <div class="flex items-center">
+                        <input id="reason_scam" name="message" type="radio" value="scam" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300">
+                        <label for="reason_scam" class="ml-3 block text-sm font-medium text-gray-700">
+                            Arnaque ou tentative de fraude
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input id="reason_fake" name="message" type="radio" value="fake" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300">
+                        <label for="reason_fake" class="ml-3 block text-sm font-medium text-gray-700">
+                            Fausse annonce ou produit contrefait
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input id="reason_offensive" name="message" type="radio" value="offensive" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300">
+                        <label for="reason_offensive" class="ml-3 block text-sm font-medium text-gray-700">
+                            Contenu offensant ou inapproprié
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input id="reason_rules" name="message" type="radio" value="rules" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300">
+                        <label for="reason_rules" class="ml-3 block text-sm font-medium text-gray-700">
+                            Ne respecte pas les règles du site
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-center">
+                        <input id="reason_other" name="message" type="radio" value="other" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300">
+                        <label for="reason_other" class="ml-3 block text-sm font-medium text-gray-700">
+                            Autre raison
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="otherReasonContainer" class="mt-4 hidden">
+                    <label for="other_reason" class="block text-sm font-medium text-gray-700 mb-1">
+                        Veuillez préciser
+                    </label>
+                    <textarea id="other_reason" name="other_reason" rows="3" class="shadow-sm focus:ring-orange-500 focus:border-orange-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Décrivez la raison de votre signalement..."></textarea>
+                </div>
+                
+                <div class="mt-6">
+                    <p class="text-xs text-gray-500 mb-4">En signalant cette annonce, vous acceptez que notre équipe puisse vous contacter pour plus d'informations si nécessaire.</p>
+                    
+                    <div class="flex justify-end space-x-3">
+                        <button type="button" id="cancelReport" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                            Annuler
+                        </button>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
+                            Envoyer le signalement
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Scripts pour la galerie d'images - Placé directement dans la page -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -802,8 +892,189 @@
                 window.closeZoom();
             });
         }
+
+        // Gestion du modal de signalement
+        const reportModal = document.getElementById('reportModal');
+        const reportButton = document.getElementById('reportButton');
+        const closeReportModal = document.getElementById('closeReportModal');
+        const cancelReport = document.getElementById('cancelReport');
+        const reasonOther = document.getElementById('reason_other');
+        const otherReasonContainer = document.getElementById('otherReasonContainer');
+        
+        // Ouvrir le modal
+        if (reportButton) {
+            reportButton.addEventListener('click', function() {
+                reportModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Empêcher le défilement
+            });
+        }
+        
+        // Fermer le modal
+        function closeModal() {
+            reportModal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restaurer le défilement
+        }
+        
+        if (closeReportModal) closeReportModal.addEventListener('click', closeModal);
+        if (cancelReport) cancelReport.addEventListener('click', closeModal);
+        
+        // Échap pour fermer le modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !reportModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+        
+        // Cliquer en dehors pour fermer
+        reportModal.addEventListener('click', function(e) {
+            if (e.target === reportModal) {
+                closeModal();
+            }
+        });
+        
+        // Afficher le champ de texte lorsque "Autre raison" est sélectionné
+        if (reasonOther) {
+            reasonOther.addEventListener('change', function() {
+                otherReasonContainer.classList.toggle('hidden', !this.checked);
+            });
+        }
+        
+        // Écouter tous les boutons radio pour la raison
+        document.querySelectorAll('input[name="reason"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                otherReasonContainer.classList.toggle('hidden', this.id !== 'reason_other');
+            });
+        });
+        
+        // Validation du formulaire avant soumission
+        const reportForm = document.getElementById('reportForm');
+        if (reportForm) {
+            reportForm.addEventListener('submit', function(e) {
+                const selectedReason = document.querySelector('input[name="message"]:checked');
+                
+                if (!selectedReason) {
+                    e.preventDefault();
+                    alert('Veuillez sélectionner une raison pour votre signalement.');
+                    return false;
+                }
+                
+                if (selectedReason.value === 'other') {
+                    const otherReasonText = document.getElementById('other_reason').value.trim();
+                    if (!otherReasonText) {
+                        e.preventDefault();
+                        alert('Veuillez préciser la raison de votre signalement.');
+                        return false;
+                    }
+                }
+                
+                // Soumission du formulaire avec feedback
+                e.preventDefault();
+                
+                // Simuler une soumission avec feedback
+                const submitButton = reportForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                
+                submitButton.disabled = true;
+                submitButton.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Traitement en cours...
+                `;
+                
+                setTimeout(function() {
+                    closeModal();
+                    
+                    // Afficher un message de confirmation
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'fixed bottom-5 right-5 bg-green-50 p-4 rounded-lg shadow-lg border border-green-200 max-w-md animate-fade-in-up z-50';
+                    alertDiv.innerHTML = `
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-green-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-green-800">Signalement envoyé</h3>
+                                <div class="mt-1 text-xs text-green-700">
+                                    <p>Merci pour votre signalement. Notre équipe l'examinera dans les plus brefs délais.</p>
+                                </div>
+                            </div>
+                            <div class="ml-auto pl-3">
+                                <div class="-mx-1.5 -my-1.5">
+                                    <button class="close-alert inline-flex bg-green-50 rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none">
+                                        <span class="sr-only">Fermer</span>
+                                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.body.appendChild(alertDiv);
+                    
+                    // Ajouter des gestionnaires d'événements pour le bouton de fermeture
+                    alertDiv.querySelector('.close-alert').addEventListener('click', function() {
+                        alertDiv.remove();
+                    });
+                    
+                    // Supprimer automatiquement après 5 secondes
+                    setTimeout(function() {
+                        if (document.body.contains(alertDiv)) {
+                            alertDiv.classList.add('animate-fade-out-down');
+                            setTimeout(function() {
+                                if (document.body.contains(alertDiv)) {
+                                    alertDiv.remove();
+                                }
+                            }, 500);
+                        }
+                    }, 5000);
+                    
+                    // Réinitialiser le bouton et le formulaire
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                    reportForm.reset();
+                }, 1500);
+            });
+        }
     });
 </script>
+
+<style>
+    /* Ajout des animations pour les notifications */
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fade-out-down {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+    }
+    
+    .animate-fade-in-up {
+        animation: fade-in-up 0.3s ease-out forwards;
+    }
+    
+    .animate-fade-out-down {
+        animation: fade-out-down 0.3s ease-out forwards;
+    }
+</style>
 @endsection
 
 

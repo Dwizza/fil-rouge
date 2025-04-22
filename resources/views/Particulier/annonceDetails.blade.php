@@ -631,8 +631,10 @@
         <div class="px-6 py-4">
             <p class="text-sm text-gray-600 mb-4">Veuillez sélectionner la raison pour laquelle vous souhaitez signaler cette annonce. Votre signalement sera examiné par notre équipe.</p>
             
-            <form id="reportForm" action="{{ route('user.report.create', $annonce->id) }}" method="POST">
+            <form id="reportForm" action="/user/report/{{  $annonce->id   }}" method="POST">
                 @csrf
+                <input type="text" class="hidden" name="annonce_id" value="{{ $annonce->id }}">
+                <input type="text" class="hidden" name="user_id" value="{{ $annonce->user_id }}">
                 <div class="space-y-3">
                     <div class="flex items-center">
                         <input id="reason_scam" name="message" type="radio" value="scam" class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300">
@@ -918,14 +920,8 @@
         if (closeReportModal) closeReportModal.addEventListener('click', closeModal);
         if (cancelReport) cancelReport.addEventListener('click', closeModal);
         
-        // Échap pour fermer le modal
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && !reportModal.classList.contains('hidden')) {
-                closeModal();
-            }
-        });
         
-        // Cliquer en dehors pour fermer
+        
         reportModal.addEventListener('click', function(e) {
             if (e.target === reportModal) {
                 closeModal();
@@ -967,8 +963,6 @@
                     }
                 }
                 
-                // Soumission du formulaire avec feedback
-                e.preventDefault();
                 
                 // Simuler une soumission avec feedback
                 const submitButton = reportForm.querySelector('button[type="submit"]');

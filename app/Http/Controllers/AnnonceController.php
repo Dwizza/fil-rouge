@@ -40,18 +40,6 @@ class AnnonceController extends Controller
     }
     // crud annonces
 
-    public function userAnnonces()
-    {
-        $annonces = annonce::where('user_id', auth()->id())->get();
-        return view('dashboard entreprise.allAnnonces', compact('annonces'));
-    }
-
-    public function create()
-    {
-        $categories = Category::all();
-        return view('dashboard entreprise.AddAnnonce', compact('categories'));
-    }
-
     public function store(Request $request)
     {
         $validate = array_merge(
@@ -112,19 +100,19 @@ class AnnonceController extends Controller
         }
     }
     
-    $finalImages = array_merge($remaining, $newImages);
+        $finalImages = array_merge($remaining, $newImages);
 
-    $annonce->image = implode(',', $finalImages);
+        $annonce->image = implode(',', $finalImages);
 
-    $annonce->title = $request->title;
-    $annonce->price = $request->price;
-    $annonce->description = $request->description;
-    $annonce->location = $request->location;
-    $annonce->category_id = $request->category_id;
-    $annonce->status = 'draft';
-    $annonce->save();
+        $annonce->title = $request->title;
+        $annonce->price = $request->price;
+        $annonce->description = $request->description;
+        $annonce->location = $request->location;
+        $annonce->category_id = $request->category_id;
+        $annonce->status = 'draft';
+        $annonce->save();
 
-    return redirect()->route('annonce.show')->with('success', 'annonce updated successfully.');
+        return redirect()->route('annonce.show')->with('success', 'annonce updated successfully.');
     }
 
     public function destroy(annonce $annonce)

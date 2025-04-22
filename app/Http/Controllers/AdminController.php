@@ -11,9 +11,7 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function users()
     {
         $users = User::with('role')->where('role_id', '!=', '1')->get();
@@ -21,10 +19,6 @@ class AdminController extends Controller
     
         return view('admin.users', compact('users'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function annonces(Request $request)
     {
         $search = $request->input('search');
@@ -61,58 +55,17 @@ class AdminController extends Controller
         return view('admin.index', compact('totalAnnonces','totalEntreprises','totalParticuliers'));
         
     }
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreadminRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateadminRequest $request, admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(admin $admin)
-    {
-        //
-    }
     public function updateStatus(Request $request, $id)
-{
-    $request->validate([
-        'status' => 'required|in:draft,published,archived'
-    ]);
+    {
+        $request->validate([
+            'status' => 'required|in:draft,published,archived'
+        ]);
 
-    $annonce = Annonce::findOrFail($id);
-    $annonce->status = $request->status;
-    $annonce->save();
+        $annonce = Annonce::findOrFail($id);
+        $annonce->status = $request->status;
+        $annonce->save();
 
-    return redirect()->back()->with('success', 'Status updated!');
-}
+        return redirect()->back()->with('success', 'Status updated!');
+    }
 
 }

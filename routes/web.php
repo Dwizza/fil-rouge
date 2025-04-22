@@ -25,6 +25,7 @@ use App\Http\Controllers\AnnonceController;
 Route::get('/',[ParticulerController::class, 'home'])->name('home');
 route::get('/annonceDetails/{id}',[AnnonceController::class, 'annonceDetail'])->name('user.annonceDetail');
 Route::get('/profile/view/{id}', [ParticulerController::class, 'viewProfile'])->name('user.profile.view');
+route::get('/annoncesBy/{id}', [ParticulerController::class, 'annoncesByCategories'])->name('user.annoncesBy');
 
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
@@ -57,6 +58,9 @@ Route::middleware(['auth', 'checkRole:1'])->prefix('admin')->group(function () {
     Route::get('/users',[ AdminController::class, 'users'])->name('admin.users');
     Route::post('/annonces/{id}', [AdminController::class, 'updateStatus'])->name('updateStatus');
 
+    //reports
+    route::get('/reports', [ReportController::class, 'showReports'])->name('admin.reports');
+
 });
 
 //route particuler
@@ -86,7 +90,7 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
 
     //report
     
-    Route::post('/report', [ReportController::class, 'create'])->name('user.report.create');
+    Route::post('/report/{id}', [ReportController::class, 'create'])->name('user.report.create');
     
 
 });

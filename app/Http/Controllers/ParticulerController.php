@@ -201,4 +201,11 @@ public function viewProfile($id)
     return view('Particulier.profileCreators', compact('user', 'annonces', 'totalAnnonces', 'categories'));
 }
 
+//annonces by category
+    public function annoncesByCategories($categoryId)
+    {
+        $categories = Category::all();
+        $annonces = annonce::where('category_id', $categoryId)->where('status', '=', 'published')->get();
+        return view('particulier.annoncesByCategory', compact('annonces', 'categories'));
+    }
 }

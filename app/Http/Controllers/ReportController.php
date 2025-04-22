@@ -10,13 +10,13 @@ class ReportController extends Controller
     
     public function create(Request $request)
     {
-        dd('chi haja');
         // Validate the request data
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
             'annonce_id' => 'required|exists:annonces,id',
             'message' => 'required|string|max:255',
         ]);
+            // dd('chi haja');
 
         // Create a new report
         $report = new report();
@@ -26,5 +26,9 @@ class ReportController extends Controller
         $report->save();
 
         return redirect()->back()->with('success', 'Report created successfully.');
+    }
+    public function showReports(){
+        $reports = report::with(['user', 'annonce'])->get();
+        return view('admin.reports', compact('reports'));
     }
 }

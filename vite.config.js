@@ -9,5 +9,12 @@ export default defineConfig({
             refresh: true,
         }),
         tailwindcss(),
+        
     ],
+    define: {
+        'process.env': {}
+    }
+    
 });
+// VITE_PUSHER_APP_KEY="412d1ea885eb51fc2cee"
+// VITE_PUSHER_APP_CLUSTER="eu"

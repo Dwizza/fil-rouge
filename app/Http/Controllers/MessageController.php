@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Events\MessageSent;
 
 class MessageController extends Controller
 {
@@ -28,39 +29,30 @@ class MessageController extends Controller
             'content' => 'required|string',
         ]);
 
-        Message::create([
+        $message = Message::create([
             'sender_id' => auth()->id(),
             'receiver_id' => $request->receiver_id,
             'content' => $request->content,
         ]);
-
-        // Si la requête est AJAX, retourner une réponse JSON
-        if ($request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Message envoyé avec succès'
-            ]);
-        }
-
-        return back();
+        // dd($request->all());
+    
+        broadcast(new MessageSent($message, auth()->user()))->toOthers();
+    
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
     
     public function show(User $user)
     {
         // Récupère les messages entre l'utilisateur connecté et l'utilisateur sélectionné
-        $messages = Message::where(function ($query) use ($user) {
-            $query->where('sender_id', auth()->id())
-                  ->where('receiver_id', $user->id);
-        })->orWhere(function ($query) use ($user) {
-            $query->where('sender_id', $user->id)
-                  ->where('receiver_id', auth()->id());
-        })->orderBy('created_at')->get();
+        $messages = Message::where(function ($query) use ($user) {$query->where('sender_id', auth()->id())->where('receiver_id', $user->id);})
+            ->orWhere(function ($query) use ($user) {$query->where('sender_id', $user->id)->where('receiver_id', auth()->id());})
+            ->orderBy('created_at')->get();
 
         // Marquer les messages reçus comme lus
         Message::where('sender_id', $user->id)
-               ->where('receiver_id', auth()->id())
-               ->where('is_read', false)
-               ->update(['is_read' => true]);
+                ->where('receiver_id', auth()->id())
+                ->where('is_read', false)
+                ->update(['is_read' => true]);
 
         // Récupérer toutes les conversations pour la sidebar
         $userId = auth()->id();

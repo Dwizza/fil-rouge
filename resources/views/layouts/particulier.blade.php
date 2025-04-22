@@ -7,6 +7,11 @@
   <meta name='copyright' content=''>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="user-id" content="{{ auth()->id() }}">
+  
+
   <!-- Title Tag  -->
   <title>Jotea</title>
   <!-- Favicon -->
@@ -52,11 +57,18 @@
   {{-- font-awesome --}}
   <script src="https://kit.fontawesome.com/e9ee48a8e3.js" crossorigin="anonymous"></script>
 
+  {{-- cdn pusher --}}
+  <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
+  {{-- cdn jquery --}}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
   <style>
     body { font-family: 'Poppins', sans-serif; }
   </style>
-  
+  @vite(['resources/js/app.js'])
+
 </head>
 <body class="bg-white">
 

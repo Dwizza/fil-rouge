@@ -42,7 +42,7 @@ Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function ()
     // messages
     route::get('/conversation',[EntrepriseController::class, 'conversations'])->name('entreprise.conversation');
     route::get('/chat/{user}', [MessageController::class, 'show'])->name('company.chat');
-    route::post('/chat/send', [MessageController::class, 'store'])->name('chat.send_company');
+    route::post('/chat/send', [MessageController::class, 'store'])->name('chat.send_company');  
 })->middleware('checkRole:2');
 
 

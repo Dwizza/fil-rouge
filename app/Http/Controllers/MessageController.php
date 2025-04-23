@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,11 +20,14 @@ class MessageController extends Controller
                   ->where('receiver_id', auth()->id());
         })->orderBy('created_at')->get();
 
-        return view('particulier.message', compact('messages', 'user'));
+        $categories = Category::all();
+
+        return view('particulier.message', compact('messages', 'user', 'categories'));
     }
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'receiver_id' => 'required|exists:users,id',
             'content' => 'required|string',
@@ -34,7 +38,6 @@ class MessageController extends Controller
             'receiver_id' => $request->receiver_id,
             'content' => $request->content,
         ]);
-        // dd($request->all());
     
         broadcast(new MessageSent($message, auth()->user()))->toOthers();
     
@@ -97,13 +100,15 @@ class MessageController extends Controller
             'messages' => $messages,
             'unread_count' => 0,
         ];
+        $categories = Category::all();
 
-        return view('dashboard entreprise.message', compact('chatData', 'activeChat'));
+        return view('dashboard entreprise.message', compact('chatData', 'activeChat', 'categories'));
     }
     
     public function conversations()
     {
         $userId = auth()->id();
+        $categories = Category::all();
 
         $userConversations = Message::where('sender_id', $userId)
             ->orWhere('receiver_id', $userId)
@@ -114,6 +119,6 @@ class MessageController extends Controller
 
         $users = User::whereIn('id', $userConversations->keys())->get();
 
-        return view('particulier.inbox', compact('users'));
+        return view('particulier.inbox', compact('users', 'userConversations', 'categories'));
     }
 }

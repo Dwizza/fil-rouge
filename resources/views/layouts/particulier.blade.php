@@ -89,8 +89,35 @@
       <div class="container mx-auto px-4 flex justify-between">
         <div>
           <span class="text-gray-600"><i class="ti-email"></i>support@jotea.com</span>
-        </div>
-        <div>
+		</div>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+		<div class="flex items-center gap-4">
+			<a href="/">
+			<img src="{{ asset('assets1/images/JOTEA-logo.png') }}" alt="Logo" class="h-10">
+			</a>
+		</div>
+		<div class="hidden md:flex w-2/3 justify-center">
+			<form action="{{route('user.annoncesBy')}}" method="POST" class="flex w-full max-w-2xl bg-white rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl h-12">
+				@csrf
+				<select name="category" class="flex justify-center items-center h-full px-5 bg-white border-r border-gray-200 text-gray-800 focus:ring-2 focus:ring-blue-300 focus:outline-none min-w-[150px] font-semibold rounded-l-full transition-colors duration-200 hover:bg-blue-50">
+					<option class="" value="">All categories</option>
+					@foreach ($categories as $category)
+						<option value="{{$category->id}}">{{$category->name}}</option>
+					@endforeach
+				</select>
+		
+				<input type="text" name="search" placeholder="Search Products Here..." class="h-full flex-grow px-5 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-200" id="search-input">
+		
+				<button class="h-full bg-gradient-to-r from-amber-300 to-amber-700 hover:from-amber-400 hover:to-amber-800 px-7 text-white font-bold transition rounded-r-full border-l border-gray-200 flex items-center shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300">
+					<i class="ti-search text-xl"></i>
+					<span class="ml-2 hidden lg:inline">Search</span>
+				</button>
+			</form>
+		</div>
+		<div>
 			@auth
 				@php
 					$user = Auth::user();
@@ -137,50 +164,8 @@
 					<a href="/register" class="text-gray-600 hover:text-blue-500"><i class="ti-power-off"></i> Register</a>
 				</div>
 			@endauth
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-		<div class="flex items-center gap-4">
-			<a href="/">
-			<img src="{{ asset('assets1/images/JOTEA-logo.png') }}" alt="Logo" class="h-10">
-			</a>
-		</div>
-		<div class="hidden md:flex w-2/3 justify-center">
-		<form class="flex w-full max-w-2xl bg-white rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl h-12">
-			<select name="category" class="h-full px-5 bg-white border-r border-gray-200 text-gray-800 focus:ring-2 focus:ring-blue-300 focus:outline-none min-w-[150px] font-semibold rounded-l-full transition-colors duration-200 hover:bg-blue-50">
-				<option value="">All categories</option>
-				@foreach ($categories as $category)
-					<option value="{{$category->id}}">{{$category->name}}</option>
-				@endforeach
-			</select>
-	
-			<input type="text" name="search" placeholder="Search Products Here..." class="h-full flex-grow px-5 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-colors duration-200" id="search-input">
-	
-			<button class="h-full bg-gradient-to-r from-amber-300 to-amber-700 hover:from-amber-400 hover:to-amber-800 px-7 text-white font-bold transition rounded-r-full border-l border-gray-200 flex items-center shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300">
-				<i class="ti-search text-xl"></i>
-				<span class="ml-2 hidden lg:inline">Search</span>
-			</button>
-		</form>
-		</div>
-		<div class="flex items-center space-x-4">
-			<a href="#" class="text-gray-700"><i class="fa fa-heart-o"></i></a>
-			<a href="#" class="text-gray-700"><i class="fa fa-user-circle-o"></i></a>
 		</div>
     </div>
-    <nav class="bg-gray-50 shadow-sm">
-      <div class="container mx-auto px-4">
-        <ul class="flex space-x-6 py-3 text-gray-700">
-          <li><a href="/" class="hover:text-blue-500">Home</a></li>
-          <li><a href="/voiture" class="hover:text-blue-500">Cars</a></li>
-          <li><a href="/electroniques" class="hover:text-blue-500">Electronics</a></li>
-          <li><a href="/emploi" class="hover:text-blue-500">Jobs <span class="text-xs text-red-500">New</span></a></li>
-          <li><a href="/contact" class="hover:text-blue-500">Contact Us</a></li>
-        </ul>
-      </div>
-    </nav>
   </header>
 
   <main class="container mx-auto px-4 py-10">

@@ -9,12 +9,6 @@
                 </div>
                 <div class="flex items-center space-x-2 text-sm text-gray-600">
                     <a href="{{ route('home') }}" class="hover:text-amber-600 transition">Accueil</a>
-                    <span class="text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                    <span>{{ $category->name ?? 'Toutes les annonces' }}</span>
                 </div>
             </div>
 
@@ -35,13 +29,8 @@
                     </a>
                 </div>
             @else
-                <div class="mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                {{-- <div class="mb-6 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
                     <div class="flex flex-wrap items-center justify-between">
-                        <div class="w-full md:w-auto mb-4 md:mb-0">
-                            <p class="text-gray-600">
-                                <span class="font-semibold text-amber-600">{{ $annonces->total() }}</span> annonce(s) trouvée(s)
-                            </p>
-                        </div>
                         <div class="w-full md:w-auto flex flex-wrap gap-4 items-center">
                             <div class="relative">
                                 <select class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-amber-500 text-sm">
@@ -69,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($annonces as $annonce)
@@ -136,10 +125,6 @@
                             </div>
                         </div>
                     @endforeach
-                </div>
-
-                <div class="mt-10">
-                    {{ $annonces->links() }}
                 </div>
             @endif
         </div>

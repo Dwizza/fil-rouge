@@ -26,7 +26,7 @@ use App\Http\Controllers\AnnonceController;
 Route::get('/',[ParticulerController::class, 'home'])->name('home');
 route::get('/annonceDetails/{id}',[AnnonceController::class, 'annonceDetail'])->name('user.annonceDetail');
 Route::get('/profile/view/{id}', [ParticulerController::class, 'viewProfile'])->name('user.profile.view');
-route::get('/annoncesBy/{id}', [ParticulerController::class, 'annoncesByCategories'])->name('user.annoncesBy');
+route::post('/annoncesBy', [AnnonceController::class, 'annoncesByCategories'])->name('user.annoncesBy');
 
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {

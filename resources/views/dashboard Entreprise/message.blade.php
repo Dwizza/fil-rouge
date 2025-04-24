@@ -8,11 +8,6 @@
                 <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6">
                     <div class="flex justify-between items-center">
                         <h5 class="mb-0 text-white font-bold">Messages</h5>
-                        <div>
-                            <button type="button" class="new-message-btn bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white font-bold py-2 px-4 rounded-lg flex items-center transition-all shadow-md">
-                                <i class="fa fa-plus mr-2"></i> Nouveau Message
-                            </button>
-                        </div>
                     </div>
                 </div>
 
@@ -87,9 +82,6 @@
                                 @else
                                     <div class="p-6 text-center">
                                         <p class="text-gray-400">Pas de conversations.</p>
-                                        <button class="mt-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-violet-500 text-white rounded-lg hover:from-blue-600 hover:to-violet-600 transition-colors shadow-md">
-                                            Démarrer une conversation
-                                        </button>
                                     </div>
                                 @endif
                             </div>
@@ -97,14 +89,14 @@
                     </div>
 
                     <!-- Message Content -->
-                    <div class="w-full md:w-2/3 flex flex-col">
+                    <div class="w-full md:w-2/3 flex flex-col h-[600px]">
                         @if($activeChat)
                             @php
                                 $activeUser = $activeChat['user'];
                                 $activeMessages = $activeChat['messages'] ?? [];
                             @endphp
                             <!-- Chat Header -->
-                            <div class="border-b border-gray-700 p-4">
+                            <div class="border-b border-gray-700 p-4 flex-shrink-0">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0">
@@ -138,8 +130,8 @@
                             </div>
 
                             <!-- Message Area -->
-                            <div class="flex-1 p-4 overflow-y-auto bg-slate-900" id="message-container">
-                                <div class="space-y-4">
+                            <div class="flex-1 overflow-y-auto bg-slate-900 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-900" id="message-container" style="max-height: calc(600px - 132px);">
+                                <div class="space-y-4 p-4">
                                     @php
                                         $currentDate = null;
                                     @endphp
@@ -205,7 +197,7 @@
                             </div>
 
                             <!-- Message Input -->
-                            <div class="border-t border-gray-700 p-4">
+                            <div class="border-t border-gray-700 p-4 flex-shrink-0">
                                 <form id="message-form" action="{{ route('chat.send_company') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="receiver_id" value="{{ $activeUser->id }}">
@@ -235,10 +227,6 @@
                                         <i class="fa fa-comments text-4xl text-gray-400"></i>
                                     </div>
                                     <h3 class="text-xl font-medium text-white mb-2">Pas de conversation sélectionnée</h3>
-                                    <p class="text-gray-400 mb-4">Sélectionnez une conversation ou commencez-en une nouvelle.</p>
-                                    <button type="button" class="new-message-btn bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white font-bold py-2 px-4 rounded-lg flex items-center transition-all mx-auto">
-                                        <i class="fa fa-plus mr-2"></i> Nouveau Message
-                                    </button>
                                 </div>
                             </div>
                         @endif
@@ -249,75 +237,44 @@
     </div>
 </div>
 
-<!-- New Message Modal -->
-<div id="newMessageModal" class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
-    <div class="bg-slate-800 rounded-xl shadow-xl w-full max-w-md transform transition-all">
-        <div class="flex items-center justify-between p-4 border-b border-gray-700">
-            <h3 class="text-lg font-medium text-white">Nouveau Message</h3>
-            <button id="closeNewMessageModal" class="text-gray-400 hover:text-gray-200 transition-colors">
-                <i class="fa fa-times"></i>
-            </button>
-        </div>
-        <div class="p-4">
-            <form action="{{ route('chat.send_company') }}" method="POST" id="new-message-form">
-                @csrf
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Destinataire</label>
-                    <select name="receiver_id" class="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-700 text-white">
-                        <option value="" selected disabled>Sélectionnez un utilisateur</option>
-                        @foreach(\App\Models\User::where('id', '!=', auth()->id())->get() as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block text-sm font-medium text-gray-300 mb-1">Message</label>
-                    <textarea name="content" class="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-700 text-white" rows="4" placeholder="Écrivez votre message ici..."></textarea>
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" class="bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded-lg mr-2 transition-all close-modal-btn">
-                        Annuler
-                    </button>
-                    <button type="submit" class="bg-gradient-to-r from-blue-500 to-violet-500 hover:from-blue-600 hover:to-violet-600 text-white font-bold py-2 px-4 rounded-lg transition-all">
-                        Envoyer
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<style>
+    /* Custom scrollbar styling */
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: #1e293b; /* slate-800 */
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: #475569; /* slate-600 */
+        border-radius: 20px;
+    }
+
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: #475569 #1e293b;
+    }
+</style>
 
 <script>
     // JavaScript pour gestion des interactions
     document.addEventListener('DOMContentLoaded', function() {
-        // Gestion du modal
-        const newMessageBtn = document.querySelectorAll('.new-message-btn');
-        const newMessageModal = document.getElementById('newMessageModal');
-        const closeModalBtns = document.querySelectorAll('#closeNewMessageModal, .close-modal-btn');
-        
-        newMessageBtn.forEach(btn => {
-            btn.addEventListener('click', function() {
-                newMessageModal.classList.remove('hidden');
-            });
-        });
-        
-        closeModalBtns.forEach(btn => {
-            btn.addEventListener('click', function() {
-                newMessageModal.classList.add('hidden');
-            });
-        });
-        
-        // Fermer modal quand on clique en dehors
-        newMessageModal.addEventListener('click', function(event) {
-            if (event.target === newMessageModal) {
-                newMessageModal.classList.add('hidden');
-            }
-        });
-        
         // Scroll to bottom des messages
         const messageContainer = document.getElementById('message-container');
         if (messageContainer) {
             messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+        
+        // Auto-scroll on new messages
+        const form = document.getElementById('message-form');
+        if (form) {
+            form.addEventListener('submit', function() {
+                setTimeout(function() {
+                    messageContainer.scrollTop = messageContainer.scrollHeight;
+                }, 100);
+            });
         }
     });
 </script>

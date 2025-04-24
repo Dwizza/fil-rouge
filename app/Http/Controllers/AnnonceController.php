@@ -40,6 +40,10 @@ class AnnonceController extends Controller
     }
     // crud annonces
 
+    public function create(){
+        $categories = Category::all();
+        return view('dashboard entreprise.addannonce', compact('categories'));
+    }
     public function store(Request $request)
     {
         $validate = array_merge(

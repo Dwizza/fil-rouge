@@ -129,7 +129,7 @@
 								</ul>
 								<!--/ End Tab Nav -->
 							</div>
-							<div class="tab-content mt-2" id="myTabContent">
+							<div class="tab-content mt-6" id="myTabContent">
 								<!-- Start Single Tab -->
 								<div class="tab-pane fade show active" id="jobs" role="tabpanel">
 									<div class="tab-single">

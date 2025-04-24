@@ -8,6 +8,7 @@ use App\Models\Entreprise;
 use App\Http\Requests\StoreEntrepriseRequest;
 use App\Http\Requests\UpdateEntrepriseRequest;
 use App\Models\Message;
+use App\Models\payments;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -73,5 +74,23 @@ class EntrepriseController extends Controller
         }
         
         return view('dashboard entreprise.message', compact('chatData', 'activeChat'));
+    }
+    public function billing(){
+        $user = auth()->user();
+        // $annonce = annonce::where('user_id', $user->id)->get();
+        $annonces = DB::table('paiements')
+            ->join('annonces', 'paiements.annonce_id', '=', 'annonces.id')
+            ->select('paiements.*', 'annonces.title', 'annonces.price')
+            ->get();
+
+        return view('dashboard entreprise.billing', compact('annonces'));
+    }
+    public function changeStatusPayment($id)
+    {
+        $payment = payments::findOrFail($id);
+        $payment->status = 'succeeded'; 
+        $payment->paid_at = now(); 
+        $payment->save();
+        return redirect()->back()->with('success', 'Statut de paiement mis à jour avec succès.');
     }
 }

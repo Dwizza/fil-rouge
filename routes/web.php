@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ParticulerController;
+use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\registerController;
 use App\Http\Controllers\ReportController;
 use App\Models\annonce;
@@ -30,21 +31,25 @@ route::get('/annoncesBy/{id}', [ParticulerController::class, 'annoncesByCategori
 
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
     
-    route::get('/', [AnnonceController::class, 'index']);
-    route::get('/profile', [EntrepriseController::class, 'index']);
+    route::get('/', [AnnonceController::class, 'index'])->name('company.dashboard');
+    // route::get('/profile', [EntrepriseController::class, 'index']);
     route::get('/annonces', [AnnonceController::class, 'annonces']);
     route::get('/allannonces', [entrepriseController::class, 'show'])->name('annonce.show');
     route::get('/addannonce', [AnnonceController::class, 'create'])->name('addannonce');
-    route::post('/addannonce', [AnnonceController::class, 'store'])->name('addannonce');
+    route::post('/addannonce', [AnnonceController::class, 'store'])->name('addannoncepost');
     route::get('/editannonce/{annonce}', [AnnonceController::class, 'edit'])->name('editannonce');
     route::post('/editannonce/{annonce}', [AnnonceController::class, 'update'])->name('editannonce');
     route::post('/deleteannonce/{annonce}', [AnnonceController::class, 'destroy'])->name('deleteannonce');
-    route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    route::get('/profile', [AuthController::class, 'profile'])->name('company.profile');
     route::post('/profile', [AuthController::class, 'editProfile'])->name('editprofile');
     // messages
     route::get('/conversation',[EntrepriseController::class, 'conversations'])->name('entreprise.conversation');
     route::get('/chat/{user}', [MessageController::class, 'show'])->name('company.chat');
-    route::post('/chat/send', [MessageController::class, 'store'])->name('chat.send_company');  
+    route::post('/chat/send', [MessageController::class, 'store'])->name('chat.send_company');
+    
+    // billing
+    route::get('/billing', [EntrepriseController::class, 'billing'])->name('company.billing');
+    route::get('/billing/{id}', [EntrepriseController::class, 'changeStatusPayment'])->name('change.status.payment');
 })->middleware('checkRole:2');
 
 
@@ -64,7 +69,6 @@ Route::middleware(['auth', 'checkRole:1'])->prefix('admin')->group(function () {
 });
 
 //route particuler
-// Routes pour les utilisateurs particuliers
 Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     
     // Dashboard
@@ -75,9 +79,8 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     Route::put('/profile', [ParticulerController::class, 'updateProfile'])->name('user.profile.update');
     route::get('/profile/edit', [ParticulerController::class, 'profile'])->name('user.profile.edit');
     route::post('/profile/edit/{id}', [ParticulerController::class, 'editProfile'])->name('user.profile.update');
+
     // Annonces
-    // Route::get('/annonces', [ParticulerController::class, 'index'])->name('user.annonces');
-    // Route::get('/annonces/create', [ParticulerController::class, 'create'])->name('user.annonces.store');
     Route::post('/annonces', [ParticulerController::class, 'store'])->name('user.annonces.store');
     Route::get('/annonce/{annonce}', [ParticulerController::class, 'edit'])->name('user.annonces.edit');
     Route::post('/annonce/{annonce}', [ParticulerController::class, 'update'])->name('user.annonces.update');
@@ -89,8 +92,11 @@ Route::prefix('user')->middleware(['auth', 'checkRole:3'])->group(function() {
     Route::get('/inbox', [MessageController::class, 'conversations'])->name('chat.inbox');
 
     //report
-    
     Route::post('/report/{id}', [ReportController::class, 'create'])->name('user.report.create');
+
+    //payment
+    route::get('/checkout/{id}', [PaymentsController::class, 'payment'])->name('user.checkout');
+    route::post('/payment/{id}', [PaymentsController::class, 'payment'])->name('user.payment');
     
 
 });

@@ -131,9 +131,12 @@
                           <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
                               <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
                           </a>
-                          <a href="/user/annonce/delete/{{$annonce->id}}" class="p-2 ">
+                          <form action="{{route('user.annonces.destroy', $annonce->id)}}" method="POST">
+                            @csrf
+                            <button type="submit"  class="p-2 ">
                               <i class="fa-solid fa-trash" style="color: #d81103;"></i>
-                          </a>
+                          </button>
+                          </form>
                       @elseif ($annonce->status == 'draft')
                           <span class="text-yellow-500 text-xs font-semibold bg-yellow-100 px-2 py-1 rounded-full">Draft</span>
                           <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
@@ -150,9 +153,12 @@
                           <a href="/user/annonce/{{$annonce->id}}" class="p-2 ">
                               <i class="fa-solid fa-pen-to-square" style="color: #000000;"></i>
                           </a>
-                          <a href="/user/annonce/delete/{{$annonce->id}}" class="p-2 ">
+                          <form action="{{route('user.annonces.destroy', $annonce->id)}}" method="POST">
+                            @csrf
+                            <button type="submit"  class="p-2 ">
                               <i class="fa-solid fa-trash" style="color: #d81103;"></i>
-                          </a>
+                          </button>
+                          </form>
                       @endif
                     </div>
                   </div>

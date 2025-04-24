@@ -31,4 +31,8 @@ class annonce extends Model
     {
         return $this->hasMany(report::class);
     }
+    public function paiements()
+    {
+        return $this->hasMany(payments::class);
+    }
 }

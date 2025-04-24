@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/img/apple-icon.png') }}" />
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" />
-    <title>Dashboard</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets1/images/JOTEA-logo.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('assets1/images/JOTEA-logo.png') }}" />
+    <title>JOTEA - Company Dashboard</title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Font Awesome Icons -->
@@ -18,22 +18,23 @@
     <!-- Main Styling -->
     <link href="{{ asset('assets/css/argon-dashboard-tailwind.css?v=1.0.1') }}" rel="stylesheet" />
 
+    {{-- flowbite --}}
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    
+
     <script src="https://kit.fontawesome.com/e9ee48a8e3.js" crossorigin="anonymous"></script>
     {{-- tailwind cdn --}}
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
   <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-    <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
+    <div class="absolute w-full bg-amber-500 dark:hidden min-h-75"></div>
     <!-- sidenav  -->
     <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 transition-transform duration-200 -translate-x-full bg-gray-800 border-0 shadow-xl dark:shadow-none max-w-64 ease-nav-brand z-990 xl:ml-6 xl:left-0 xl:translate-x-0 rounded-2xl" aria-expanded="false">
-      <div class="h-19">
-      <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-white xl:hidden" sidenav-close></i>
-      <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-white" href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html" target="_blank">
-        <img src="{{ asset('assets/img/logo-ct.png') }}" class="hidden h-full max-w-full transition-all duration-200 light:inline ease-nav-brand max-h-8" alt="main_logo" />
-        <img src="{{ asset('assets/img/logo-ct.png') }}" class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
-        <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">Dashboard</span>
-      </a>
+      <div class="h-19 flex justify-center items-center">
+        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-white" href="{{ route('company.dashboard') }}">
+          <img src="{{ asset('assets1/images/JOTEA-logo.png') }}" class="inline h-12 max-w-full transition-all duration-200 ease-nav-brand" alt="JOTEA Logo" />
+        </a>
       </div>
 
       <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white/40 to-transparent" />
@@ -41,46 +42,54 @@
       <div class="items-center block w-auto h-auto basis-full">
           <ul class="flex flex-col pl-0 mb-0">
               <li class="mt-0.5 w-full">
-                  <a class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="/company">
+                  <a class="py-2.7 bg-amber-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="{{ route('company.dashboard') }}">
                       <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                          <i class="relative top-0 text-sm leading-normal text-blue-500 ni ni-tv-2"></i>
+                          <i class="relative top-0 text-sm leading-normal text-amber-500 ni ni-tv-2"></i>
                       </div>
                       <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
                   </a>
               </li>
 
               <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-blue-500/20 rounded-lg" href="/company/allannonces">
+                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('annonce.show') }}">
                       <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                           <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
                       </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">My annonces</span>
+                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">My Annonces</span>
                   </a>
               </li>
 
               <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-blue-500/20 rounded-lg" href="/company/addannonce">
+                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('addannonce') }}">
                       <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
                           <i class="fa-solid fa-plus text-emerald-400"></i>
                       </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Add annonce</span>
+                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Add Annonce</span>
                   </a>
               </li>
               <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-blue-500/20 rounded-lg" href="/company/conversation">
+                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('entreprise.conversation') }}">
                       <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                        <i class="fa-solid fa-inbox" style="color: #ffa200;"></i>
+                        <i class="fa-solid fa-inbox" style="color: #d904c0;"></i>
                       </div>
                       <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Messages</span>
                   </a>
               </li>
+              <li class="mt-0.5 w-full">
+                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('company.billing') }}">
+                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
+                        <i class="fa-solid fa-credit-card" style="color: #16bd00;"></i>
+                      </div>
+                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Billing</span>
+                  </a>
+              </li>
 
               <li class="w-full mt-4">
-                  <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account pages</h6>
+                  <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account Pages</h6>
               </li>
 
               <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-blue-500/20 rounded-lg" href="/company/profile">
+                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('company.profile') }}">
                       <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                           <i class="relative top-0 text-sm leading-normal text-slate-700 ni ni-single-02"></i>
                       </div>
@@ -91,7 +100,7 @@
               <li class="mt-0.5 w-full">
                   <form method="POST" action="{{ route('logout') }}">
                       @csrf
-                      <button type="submit" class="w-full text-left dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-blue-500/20 rounded-lg">
+                      <button type="submit" class="w-full text-left dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg">
                       <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
                           <i class="fa-solid fa-right-from-bracket relative top-0 text-sm leading-normal text-red-500"></i>
                       </div>
@@ -109,16 +118,8 @@
       <!-- Navbar -->
       <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
         <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
-          <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-            <div class="flex items-center md:ml-auto md:pr-4">
-              <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease">
-                <span class="text-sm ease leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
-                  <i class="fas fa-search"></i>
-                </span>
-                <input type="text" class="pl-9 text-sm focus:shadow-primary-outline ease w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 dark:bg-slate-850 dark:text-white bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none focus:transition-shadow" placeholder="Type here..." />
-              </div>
-            </div>
-            <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
+          <div class="flex items-center justify-end mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
+            <ul class="flex  justify-end pl-0 mb-0 list-none md-max:w-full">
               
               <li class="flex items-center pl-4 xl:hidden">
                 <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
@@ -129,45 +130,21 @@
                   </div>
                 </a>
               </li>
+
+              <!-- Home button -->
               <li class="flex items-center px-4">
-                <a href="javascript:;" class="p-0 text-sm text-white transition-all ease-nav-brand">
-                  <i fixed-plugin-button-nav class="cursor-pointer fa fa-cog"></i>
-                  <!-- fixed-plugin-button-nav  -->
+                <a href="{{ route('home') }}" class="p-0 text-sm text-white transition-all ease-nav-brand flex items-center" title="Go to Homepage">
+                  <i class="fa-solid fa-house mr-1"></i>
+                  <span class="hidden sm:inline-block">Home</span>
                 </a>
               </li>
-  
-              <!-- notifications -->
-  
-              <li class="relative flex items-center pr-2">
-                <p class="hidden transform-dropdown-show"></p>
-                <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" dropdown-trigger aria-expanded="false">
-                  <i class="cursor-pointer fa fa-bell"></i>
+
+              <!-- User profile -->
+              <li class="relative flex items-center pl-4">
+                <a href="{{ route('company.profile') }}" class="p-0 text-sm text-white transition-all ease-nav-brand flex items-center">
+                  <img src="{{ asset('assets/img/team-3.jpg') }}" class="rounded-full h-8 w-8 mr-1" alt="User Profile">
+                  <span class="hidden sm:inline-block">{{ Auth::user()->name ?? 'My Profile' }}</span>
                 </a>
-  
-                <ul dropdown-menu class="text-sm transform-dropdown before:font-awesome before:leading-default before:duration-350 before:ease lg:shadow-3xl duration-250 min-w-44 before:sm:right-8 before:text-5.5 pointer-events-none absolute right-0 top-0 z-50 origin-top list-none rounded-lg border-0 border-solid border-transparent dark:shadow-dark-xl dark:bg-slate-850 bg-white bg-clip-padding px-2 py-4 text-left text-slate-500 opacity-0 transition-all before:absolute before:right-2 before:left-auto before:top-0 before:z-50 before:inline-block before:font-normal before:text-white before:antialiased before:transition-all before:content-['\f0d8'] sm:-mr-6 lg:absolute lg:right-0 lg:left-auto lg:mt-2 lg:block lg:cursor-pointer">
-  
-                  <li class="relative">
-                    <a class="dark:hover:bg-slate-900 ease py-1.2 clear-both block w-full whitespace-nowrap rounded-lg px-4 transition-colors duration-300 hover:bg-gray-200 hover:text-slate-700" href="javascript:;">
-                      <div class="flex py-1">
-                        <div class="inline-flex items-center justify-center my-auto mr-4 text-sm text-white transition-all duration-200 ease-nav-brand bg-gradient-to-tl from-slate-600 to-slate-300 h-9 w-9 rounded-xl">
-                          <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <title>credit-card</title>
-                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                              <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                <g transform="translate(1716.000000, 291.000000)">
-                                  <g transform="translate(453.000000, 454.000000)">
-                                    <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                    <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                  </g>
-                                </g>
-                              </g>
-                            </g>
-                          </svg>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
               </li>
             </ul>
           </div>
@@ -177,23 +154,52 @@
       @yield('dashboard.company')
       
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
   </body>
   <!-- plugin for charts  -->
-  <script src="{{ asset('assets/js/argon-dashboard-tailwind.min.js') }}" async></script>
-  <script src="{{ asset('assets/js/argon-dashboard-tailwind.js?v=1.0.1') }}" async></script>
-  <script src="{{ asset('assets/js/carousel.js') }}" async></script>
-  <script src="{{ asset('assets/js/charts.js') }}" async></script>
-  <script src="{{ asset('assets/js/dropdown.js') }}" async></script>
-  <script src="{{ asset('assets/js/fixed-plugin.js') }}" async></script>
-  <script src="{{ asset('assets/js/nav-pills.js') }}" async></script>
-  <script src="{{ asset('assets/js/navbar-collapse.js') }}" async></script>
-  <script src="{{ asset('assets/js/navbar-sticky.js') }}" async></script>
-  <script src="{{ asset('assets/js/perfect-scrollbar.js') }}" async></script>
-  <script src="{{ asset('assets/js/sidenav-burger.js') }}" async></script>
-  <script src="{{ asset('assets/js/tooltips.js') }}" async></script>
-  <!-- plugin for scrollbar  -->
-  <script src="{{ asset('assets/js/plugins/Chart.extension.js') }}" async></script>
-  <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}" async></script>
-  <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}" async></script>
-  <!-- main script file  -->
+  <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
+  <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
+  <script src="{{ asset('assets/js/argon-dashboard-tailwind.js?v=1.0.1') }}"></script>
+  <script src="{{ asset('assets/js/sidenav-burger.js') }}"></script>
+  <script src="{{ asset('assets/js/dropdown.js') }}"></script>
+  <script src="{{ asset('assets/js/fixed-plugin.js') }}"></script>
+  <script src="{{ asset('assets/js/navbar-collapse.js') }}"></script>
+  <script src="{{ asset('assets/js/navbar-sticky.js') }}"></script>
+
+  <script>
+    // Initialize dropdowns
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile sidenav toggler
+      var sidenavTrigger = document.querySelector('[sidenav-trigger]');
+      var sidenav = document.querySelector('aside');
+      
+      if (sidenavTrigger) {
+        sidenavTrigger.addEventListener('click', function() {
+          sidenav.classList.toggle('-translate-x-full');
+        });
+      }
+      
+      // Close sidenav when clicking outside
+      var sidenavClose = document.querySelector('[sidenav-close]');
+      if (sidenavClose) {
+        sidenavClose.addEventListener('click', function() {
+          sidenav.classList.add('-translate-x-full');
+        });
+      }
+      
+      // Dropdown functionality
+      var dropdownTriggers = document.querySelectorAll('[dropdown-trigger]');
+      dropdownTriggers.forEach(function(trigger) {
+        trigger.addEventListener('click', function() {
+          var dropdownMenu = this.nextElementSibling;
+          if (dropdownMenu) {
+            dropdownMenu.classList.toggle('opacity-0');
+            dropdownMenu.classList.toggle('pointer-events-none');
+          }
+        });
+      });
+    });
+  </script>
 </html>

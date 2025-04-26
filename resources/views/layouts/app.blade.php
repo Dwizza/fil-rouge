@@ -231,7 +231,7 @@
         </div>
       </nav>
   
-      <div class="w-full p-6 mx-auto">
+      <div class="w-full pl-12 pr-6 mx-auto">
         <!-- Flash messages -->
         @if(session('success'))
           <div class="mb-6 flex items-center py-3 px-4 rounded-lg bg-green-500/10 border border-green-500/30">

@@ -10,29 +10,25 @@ use Illuminate\Http\Request;
 
 class AnnonceController extends Controller
 {
-    public function index()
-    {
-        return view('dashboard Entreprise.index');
-    }
+    
 
+    //annonce details
     public function annonceDetail($id)
     {
         $annonce = annonce::findOrFail($id);
         $categories = Category::all();
         
-        // Récupérer les informations sur le vendeur
         $user = $annonce->user;
         
-        // Récupérer le nombre total d'annonces du vendeur
         $totalAnnonces = annonce::where('user_id', $user->id)->count();
         
-        // Récupérer les annonces similaires (même catégorie, mais pas la même annonce)
         $similarAnnonces = annonce::where('category_id', $annonce->category_id)
                         ->where('id', '!=', $annonce->id)
+                        ->where('status', '=','published')
                         ->take(3)
                         ->get();
         
-        if($annonce->status == 'draft') {
+        if($annonce->status == 'draft' || $annonce->status == 'archived') {
             return redirect()->route('home')->with('error', 'Cette annonce n\'est pas encore publiée.');
         }
     
@@ -89,13 +85,13 @@ class AnnonceController extends Controller
         return view('dashboard entreprise.editannonce',compact('annonce', 'categories', 'categori'));
     }
     public function update(Request $request, $id)
-{
+    {
     $annonce = Annonce::findOrFail($id);
 
-    // 1. Get remaining old images
+    
     $remaining = $request->input('remaining_images', []); // array
 
-    // 2. Handle new images
+    
     $newImages = [];
     if ($request->hasFile('image')) {
         foreach ($request->file('image') as $file) {

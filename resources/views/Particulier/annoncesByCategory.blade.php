@@ -124,8 +124,6 @@
         });
     </script>
     
-        
-
     <style>
         .line-clamp-1 {
             display: -webkit-box;

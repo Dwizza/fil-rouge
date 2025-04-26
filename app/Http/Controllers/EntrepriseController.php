@@ -10,16 +10,24 @@ use App\Http\Requests\UpdateEntrepriseRequest;
 use App\Models\Message;
 use App\Models\payments;
 use App\Models\User;
+use App\Services\DashboardService;
 use Illuminate\Support\Facades\DB;
 
 class EntrepriseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
+    protected $dashboardService;
+
+    public function __construct(DashboardService $dashboardService)
+    {
+        $this->dashboardService = $dashboardService;
+    }
     public function index()
     {
-        return view('dashboard entreprise.profil');
+        $userId = auth()->id();
+        $stats = $this->dashboardService->getDashboardStats($userId);
+        // dd($stats);
+        return view('dashboard entreprise.profil', compact('stats'));
     }
     public function show(Entreprise $entreprise)
     {
@@ -31,28 +39,24 @@ class EntrepriseController extends Controller
     {
         $userId = auth()->id();
         
-        // Récupère toutes les conversations de l'utilisateur actuel (envoyées ou reçues)
         $conversations = Message::where('sender_id', $userId)
             ->orWhere('receiver_id', $userId)
             ->orderBy('created_at', 'DESC')
             ->get();
         
-        // Grouper par conversation
         $groupedConversations = $conversations->groupBy(function ($message) use ($userId) {
             return $message->sender_id == $userId ? $message->receiver_id : $message->sender_id;
         });
         
-        // Récupérer les informations des utilisateurs concernés
         $users = User::whereIn('id', $groupedConversations->keys())->get()->keyBy('id');
         
-        // Préparer les données pour l'affichage
         $chatData = [];
         foreach ($groupedConversations as $otherUserId => $messages) {
             if (isset($users[$otherUserId])) {
                 $otherUser = $users[$otherUserId];
-                $lastMessage = $messages->first(); // Les messages sont déjà triés par date
+                $lastMessage = $messages->first();
                 
-                // Calculer les messages non lus
+                
                 $unreadCount = $messages
                     ->where('sender_id', $otherUserId)
                     ->where('read', false)

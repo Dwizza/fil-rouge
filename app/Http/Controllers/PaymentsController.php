@@ -26,6 +26,7 @@ class PaymentsController extends Controller
     $user = auth()->user(); 
 
     $session = $this->stripe->checkout->sessions->create([
+        'payment_method_types' => ['card'],
         'line_items' => [[
             'price_data' => [
                 'currency' => 'USD',

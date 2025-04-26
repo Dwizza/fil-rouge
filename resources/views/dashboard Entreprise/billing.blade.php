@@ -23,6 +23,18 @@
                         {{ $annonces->where('status', 'succeeded')->count() }}
                     </p>
                 </div>
+                <div class="bg-gradient-to-br from-amber-900/40 to-yellow-900/40 border border-amber-800/50 rounded-lg shadow-lg px-4 py-3">
+                    <p class="text-xs text-amber-300 mb-1">Paiements en attente</p>
+                    <p class="text-xl font-bold text-white">
+                        {{ $annonces->where('status', 'pending')->count() }}
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-red-900/40 to-pink-900/40 border border-red-800/50 rounded-lg shadow-lg px-4 py-3">
+                    <p class="text-xs text-red-300 mb-1">Paiements échoués</p>
+                    <p class="text-xl font-bold text-white">
+                        {{ $annonces->where('status', 'failed')->count() }}
+                    </p>
+                </div>
             </div>
         </div>
         
@@ -74,7 +86,7 @@
                                         <span class="font-medium text-gray-200">{{ $annonce->title }}</span>
                                     </td>
                                     <td class="py-4 px-6 whitespace-nowrap text-sm">
-                                        <span class="font-semibold text-amber-400">{{ number_format($annonce->price, 2) }} USD</span>
+                                        <span class="font-semibold text-amber-400">{{ number_format($annonce->amount, 2) }} USD</span>
                                     </td>
                                     <td class="py-4 px-6 whitespace-nowrap text-sm">
                                         <div class="flex items-center">

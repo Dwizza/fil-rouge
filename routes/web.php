@@ -32,7 +32,7 @@ route::post('/annoncesBy', [AnnonceController::class, 'annoncesByCategories'])->
 Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
     
     route::get('/', [EntrepriseController::class, 'index'])->name('company.dashboard');
-    // route::get('/profile', [EntrepriseController::class, 'index']);
+    
     route::get('/annonces', [AnnonceController::class, 'annonces']);
     route::get('/allannonces', [entrepriseController::class, 'show'])->name('annonce.show');
     route::get('/addannonce', [AnnonceController::class, 'create'])->name('addannonce');

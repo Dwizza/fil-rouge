@@ -82,12 +82,14 @@ class EntrepriseController extends Controller
     public function billing(){
         $user = auth()->user();
         // $annonce = annonce::where('user_id', $user->id)->get();
-        $annonces = DB::table('paiements')
-            ->join('annonces', 'paiements.annonce_id', '=', 'annonces.id')
-            ->select('paiements.*', 'annonces.title', 'annonces.price')
+        $annonces = DB::table('annonces')
+            ->join('paiements', 'paiements.annonce_id', '=', 'annonces.id')
+            ->join('users', 'annonces.user_id', '=', 'users.id')
+            ->select('paiements.*', 'annonces.title')->where('annonces.user_id', $user->id)
             ->get();
         $annonce = Annonce::where('user_id', $user->id)->pluck('id');
         $totalRevenue = payments::whereIn('annonce_id', $annonce)->where('status','succeeded')->sum('amount');
+        // dd($totalRevenue);
         
 
         return view('dashboard entreprise.billing', compact('annonces', 'totalRevenue'));

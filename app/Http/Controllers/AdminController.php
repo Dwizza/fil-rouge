@@ -6,6 +6,7 @@ use App\Models\admin;
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
 use App\Models\annonce;
+use App\Models\payments;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -48,11 +49,27 @@ class AdminController extends Controller
         $totalAnnonces = Annonce::count();
         $totalEntreprises = User::where('role_id', '=', '2')->count();
         $totalParticuliers = User::where('role_id', '=', '3')->count();
-        // dd($totalAnnonces, $totalEntreprises, $totalParticuliers);
+        $totalRevenues = payments::where('status', '=', 'succeeded')->sum('amount');
 
-        // Tqdr tzid plus dyal stats...
+        $latestUsers = User::where('role_id', '!=', '1')
+                            ->orderBy('created_at', 'desc')
+                            ->take(2)
+                            ->get();
 
-        return view('admin.index', compact('totalAnnonces','totalEntreprises','totalParticuliers'));
+        
+        $latestAnnonces = Annonce::with('category')
+                                ->orderBy('created_at', 'desc')
+                                ->take(2)
+                                ->get();
+
+        return view('admin.index', compact(
+            'totalAnnonces',
+            'totalEntreprises',
+            'totalParticuliers',
+            'latestUsers',
+            'latestAnnonces',
+            'totalRevenues',
+        ));
         
     }
     public function updateStatus(Request $request, $id)

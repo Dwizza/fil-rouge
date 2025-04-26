@@ -134,19 +134,6 @@
             </a>
           </li>
           
-          <li class="px-4 text-xs font-semibold text-gray-400 uppercase mb-2 mt-6">
-            Account
-          </li>
-          
-          <li class="px-4">
-            <a class="flex items-center gap-4 px-4 py-3 mb-1 text-sm font-medium transition-colors rounded-lg hover:bg-gray-800 group active:bg-gray-800 hover:text-amber-400 text-gray-300" href="/admin/profile">
-              <div class="flex items-center justify-center w-8 h-8 text-center xl:pl-0">
-                <i class="text-base relative top-0 leading-normal fa-solid fa-user-shield text-gray-400 group-hover:text-amber-400"></i>
-              </div>
-              <span class="transition-opacity">Profile</span>
-            </a>
-          </li>
-          
           <li class="px-4">
             <form method="POST" action="{{ route('logout') }}">
               @csrf
@@ -159,27 +146,6 @@
             </form>
           </li>
         </ul>
-      </div>
-
-      <div class="mx-4 mt-2 mb-4">
-        <p class="px-4 pt-4 pb-1 text-xs font-semibold text-gray-400 uppercase">System Status</p>
-        <div class="p-4 mt-2 bg-gray-800 rounded-xl border border-gray-700/50">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-medium text-gray-400">Memory</span>
-            <span class="text-xs font-medium text-green-400">78%</span>
-          </div>
-          <div class="w-full bg-gray-700 rounded-full h-1">
-            <div class="bg-gradient-to-r from-green-400 to-green-500 h-1 rounded-full" style="width: 78%"></div>
-          </div>
-          
-          <div class="flex items-center justify-between mt-4 mb-2">
-            <span class="text-xs font-medium text-gray-400">CPU Usage</span>
-            <span class="text-xs font-medium text-amber-400">45%</span>
-          </div>
-          <div class="w-full bg-gray-700 rounded-full h-1">
-            <div class="bg-gradient-to-r from-amber-400 to-amber-500 h-1 rounded-full" style="width: 45%"></div>
-          </div>
-        </div>
       </div>
     </aside>
     <!-- end sidenav -->
@@ -256,70 +222,6 @@
     </main>
   </body>
 
-  <!-- plugin for charts  -->
-  <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-  <script>
-    // Check if chart element exists to avoid errors
-    const chartElement = document.getElementById('chart-line');
-    
-    if (chartElement) {
-      const ctx = chartElement.getContext('2d');
-      
-      const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-          datasets: [{
-            label: 'Sales',
-            data: [120, 150, 180, 210, 190, 220],
-            borderColor: '#f59e0b',
-            backgroundColor: 'rgba(245, 158, 11, 0.2)',
-            tension: 0.4,
-            fill: true,
-            pointRadius: 4,
-            pointHoverRadius: 6,
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              labels: {
-                color: '#fff'
-              }
-            },
-            tooltip: {
-              mode: 'index',
-              intersect: false,
-            }
-          },
-          interaction: {
-            mode: 'nearest',
-            axis: 'x',
-            intersect: false
-          },
-          scales: {
-            x: {
-              ticks: {
-                color: '#ccc'
-              },
-              grid: {
-                color: '#444',
-              }
-            },
-            y: {
-              ticks: {
-                color: '#ccc'
-              },
-              grid: {
-                color: '#444',
-              }
-            }
-          }
-        }
-      });
-    }
-  </script>
 
   <!-- Main scripts -->
   <script src="{{ asset('assets/js/argon-dashboard-tailwind.min.js') }}"></script>

@@ -379,7 +379,7 @@
                         @auth
                             @if($annonce->user->id !== auth()->id())
                                 <!-- Bouton Checkout pour les annonces d'entreprises -->
-                                @if(isset($annonce->user->role) && $annonce->user->role_id == '2')
+                                @if(isset($annonce->user->role) && $annonce->user->role_id == '2' && $annonce->category->name !== 'Jobs')
                                     <a href="{{ route('user.checkout', $annonce->id) }}" class="group w-full flex items-center justify-center px-6 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-green-400 to-green-700 hover:from-green-500 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transform transition-all hover:scale-[1.01] active:scale-[0.99] shadow-lg hover:shadow-xl">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -388,11 +388,15 @@
                                     </a>
                                 @endif
                                 
-                                <a href="" class="group w-full flex items-center justify-center px-6 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-amber-400 to-amber-700 hover:from-amber-500 hover:to-amber-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transform transition-all hover:scale-[1.01] active:scale-[0.99] shadow-lg hover:shadow-xl">
+                                <a href="mailto:{{ $user->email }}" class="group w-full flex items-center justify-center px-6 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-amber-400 to-amber-700 hover:from-amber-500 hover:to-amber-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transform transition-all hover:scale-[1.01] active:scale-[0.99] shadow-lg hover:shadow-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                                     </svg>
+                                    @if($annonce->category->name === 'Jobs')
+                                        Postuler
+                                    @else
                                     Contacter le vendeur
+                                    @endif
                                 </a>
                             @endif
                         @else
@@ -468,7 +472,7 @@
                     À propos du vendeur
                 </h2>
 
-                <div class="flex flex-col sm:flex-row sm:items-center">
+                <div class="flex flex-col items-center sm:flex-row sm:items-center">
                     <div class="flex-shrink-0 h-24 w-24 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-2xl font-bold border-4 border-white shadow-lg">
                         {{ substr($annonce->user->name, 0, 1) }}
                     </div>
@@ -709,11 +713,9 @@
 <!-- Scripts pour la galerie d'images - Placé directement dans la page -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Variables globales pour la galerie d'images
         let currentImageIndex = 0;
         let totalImages = {{ isset($images) ? count($images) : 0 }};
         
-        // Définir les fonctions globalement pour qu'elles soient accessibles depuis les événements onClick
         window.changeImage = function(direction) {
             // Cacher l'image actuelle
             let images = document.querySelectorAll('#mainImageContainer img');
@@ -729,19 +731,18 @@
                 currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
             }
             
-            // Afficher la nouvelle image
             images[currentImageIndex].style.opacity = 1;
             images[currentImageIndex].style.pointerEvents = 'auto';
             
-            // Mettre à jour le compteur
+            
             const counterElement = document.getElementById('currentImageIndex');
             if (counterElement) {
                 counterElement.textContent = currentImageIndex + 1;
             }
             
-            // Mettre à jour la bordure des miniatures
+            
             updateThumbnailSelection();
-        };
+            };
         
         // Sélection d'une image spécifique via les miniatures
         window.selectImage = function(index) {
@@ -768,8 +769,8 @@
                 
                 // Mettre à jour la bordure des miniatures
                 updateThumbnailSelection();
-            }
-        };
+                }
+                };
         
         // Mettre à jour la bordure des miniatures
         function updateThumbnailSelection() {
@@ -780,7 +781,7 @@
                     thumb.classList.remove('border-amber-500');
                     thumb.classList.add('border-transparent');
                 }
-            });
+                });
             
             // Ajouter la bordure ambrée à la miniature active
             const activeThumb = document.getElementById('thumb-' + currentImageIndex);

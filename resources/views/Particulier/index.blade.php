@@ -26,7 +26,11 @@
 								<h4 class="title">Animals</h4>
 								<p class="des">Giordanr Shirt is the best design of Artist Alex Goot. You should got it for your style</p>
 								<div class="button">
-									<a href="/clothes" class="btn">Discover Now</a>
+									<form action="{{route('user.annoncesBy')}}" method="POST">
+										@csrf
+										<input type="hidden" name="category" value="8">
+										<button type="submit" class="btn">Discover Now</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -43,7 +47,11 @@
 								<h4 class="title">Clothes</h4>
 								<p class="des">Giordanr Shirt is the best design of Artist Alex Goot. You should got it for your style</p>
 								<div class="button">
-									<a href="#" class="btn">Discover Now</a>
+									<form action="{{route('user.annoncesBy')}}" method="POST">
+										@csrf
+										<input type="hidden" name="category" value="7">
+										<button type="submit" class="btn">Discover Now</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -60,7 +68,11 @@
 								<h4 class="title">Real estate</h4>
 								<p class="des">Giordanr Shirt is the best design of Artist Alex Goot. You should got it for your style</p>
 								<div class="button">
-									<a href="#" class="btn">Discover Now</a>
+									<form action="{{route('user.annoncesBy')}}" method="POST">
+										@csrf
+										<input type="hidden" name="category" value="1">
+										<button type="submit" class="btn">Discover Now</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -77,7 +89,11 @@
 								<h4 class="title">Maison & jardin</h4>
 								<p class="des">Giordanr Shirt is the best design of Artist Alex Goot. You should got it for your style</p>
 								<div class="button">
-									<a href="#" class="btn">Discover Now</a>
+									<form action="{{route('user.annoncesBy')}}" method="POST">
+										@csrf
+										<input type="hidden" name="category" value="4">
+										<button type="submit" class="btn">Discover Now</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -94,7 +110,11 @@
 								<h4 class="title">Sports & loisirs</h4>
 								<p class="des">Giordanr Shirt is the best design of Artist Alex Goot. You should got it for your style</p>
 								<div class="button">
-									<a href="#" class="btn">Discover Now</a>
+									<form action="{{route('user.annoncesBy')}}" method="POST">
+										@csrf
+										<input type="hidden" name="category" value="10">
+										<button type="submit" class="btn">Discover Now</button>
+									</form>
 								</div>
 							</div>
 						</div>

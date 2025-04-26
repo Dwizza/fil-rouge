@@ -26,11 +26,9 @@
                 <th class="py-2 px-4 border-b border-gray-600">Prix</th>
                 <th class="py-2 px-4 border-b border-gray-600">Client</th>
                 <th class="py-2 px-4 border-b border-gray-600">Status</th>
-                <th class="py-2 px-4 border-b border-gray-600">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @php $total = 0; @endphp
             @foreach($annonces as $annonce)
                 @php
                 $user = \App\Models\User::find($annonce->user_id);
@@ -49,20 +47,9 @@
                                 <span class="text-red-400">Failed</span>
                             @endif
                         </td>
-                        <td class="py-2 px-4"><a href="" class="text-blue-400 hover:text-blue-300">Edit</a></td>
                     </tr>
-                    @if ($annonce->status == 'succeeded')
-                        @php $total += $annonce->price; @endphp
-                    @endif
             @endforeach 
         </tbody>
-        <tfoot>
-            <tr class="bg-gray-700 font-bold">
-                <td colspan="3" class="py-2 px-4 text-right">Total</td>
-                <td class="py-2 px-4">{{ number_format($total, 2) }} USD</td>
-                <td colspan="3"></td>
-            </tr>
-        </tfoot>
     </table>
 </div>
 

@@ -126,13 +126,26 @@ class AnnonceController extends Controller
         return redirect()->route('annonce.show')
             ->with('success', 'annonce deleted successfully.');
     }
+    
     //annonces by category
     public function annoncesByCategories(Request $request)
     {
-        // dd($request->category);
         $categories = Category::all();
-        $annonces = annonce::where('category_id', $request->category)->where('status', '=', 'published')->get();
-        // dd($annonces);
+
+        
+        $query = annonce::where('status', '=', 'published');
+        
+        if ($request->has('category') && !empty($request->category)) {
+            $query->where('category_id', $request->category);
+        }
+        
+        if ($request->has('search') && !empty($request->search)) {
+            $query->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+        $annonces = $query->get();
+        
         return view('particulier.annoncesByCategory', compact('annonces', 'categories'));
     }
+
 }

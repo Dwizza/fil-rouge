@@ -4,241 +4,350 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png" />
-    <link rel="icon" type="image/png" href="../assets/img/favicon.png" />
-    <title>Argon Dashboard 2 Tailwind by Creative Tim</title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}" />
+    <title>JOTEA - Register</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- Nucleo Icons -->
-    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
-    <!-- Main Styling -->
-    <link href="../assets/css/argon-dashboard-tailwind.css?v=1.0.1" rel="stylesheet" />
-    {{-- tailwind cdn --}}
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
-    @vite('resources/css/app.css')
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              poppins: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                50: '#fff8f1',
+                100: '#feecdc',
+                200: '#fcd9bd',
+                300: '#fdba8c',
+                400: '#ff8a4c',
+                500: '#ff5a1f',
+                600: '#d03801',
+                700: '#b43403',
+                800: '#8a2c0d',
+                900: '#771d1d',
+              },
+              secondary: {
+                50: '#f9fafb',
+                100: '#f3f4f6',
+                200: '#e5e7eb',
+                300: '#d1d5db',
+                400: '#9ca3af',
+                500: '#6b7280',
+                600: '#4b5563',
+                700: '#374151',
+                800: '#1f2937',
+                900: '#111827',
+              },
+            },
+            keyframes: {
+              bounceIn: {
+                '0%': { opacity: '0', transform: 'scale(0.3)' },
+                '50%': { opacity: '1', transform: 'scale(1.05)' },
+                '70%': { transform: 'scale(0.9)' },
+                '100%': { transform: 'scale(1)' }
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              },
+              pulse: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0.5' }
+              }
+            },
+            animation: {
+              'bounce-in': 'bounceIn 0.6s ease',
+              'fade-in-up': 'fadeInUp 0.5s ease-out',
+              'pulse-slow': 'pulse 3s infinite'
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+      .glass-effect {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 8px 32px 0 rgba(255, 120, 50, 0.15);
+      }
+      .animated-gradient {
+        background: linear-gradient(-45deg, #ff5a1f, #d03801, #f97316, #ea580c);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+      }
+      @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    </style>
   </head>
 
-  <body class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
-    <!-- Navbar -->
-    {{-- <nav class="absolute top-0 z-30 flex flex-wrap items-center justify-between w-full px-4 py-2 mt-6 mb-4 shadow-none lg:flex-nowrap lg:justify-start">
-      <div class="container flex items-center justify-between py-0 flex-wrap-inherit">
-        <a class="py-1.75 ml-4 mr-4 font-bold text-white text-sm whitespace-nowrap lg:ml-0" href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html" target="_blank"> Argon Dashboard 2 </a>
-        <button navbar-trigger class="px-3 py-1 ml-2 leading-none transition-all ease-in-out bg-transparent border border-transparent border-solid rounded-lg shadow-none cursor-pointer text-lg lg:hidden" type="button" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="inline-block mt-2 align-middle bg-center bg-no-repeat bg-cover w-6 h-6 bg-none">
-            <span bar1 class="w-5.5 rounded-xs duration-350 relative my-0 mx-auto block h-px bg-white transition-all"></span>
-            <span bar2 class="w-5.5 rounded-xs mt-1.75 duration-350 relative my-0 mx-auto block h-px bg-white transition-all"></span>
-            <span bar3 class="w-5.5 rounded-xs mt-1.75 duration-350 relative my-0 mx-auto block h-px bg-white transition-all"></span>
-          </span>
+  <body class="m-0 font-poppins antialiased font-normal bg-gradient-to-br from-orange-50 to-white text-start text-base leading-normal text-gray-700">
+    <!-- Error Alert Popup -->
+    <div id="errorAlert" class="fixed top-4 right-4 z-50 hidden">
+      <div class="flex items-center p-4 mb-4 text-sm rounded-lg bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 shadow-lg dark:bg-gray-800 dark:text-red-400" role="alert">
+        <div class="flex items-center">
+          <svg class="w-6 h-6 mr-3 text-red-600 animate-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zm-1 9a1 1 0 01-1-1v-4a1 1 0 112 0v4a1 1 0 01-1 1z" clip-rule="evenodd"></path>
+          </svg>
+          <div>
+            <span class="font-medium text-red-700 dark:text-red-400">Alert!</span>
+            <p id="errorMessage" class="text-red-600 dark:text-red-400"></p>
+          </div>
+        </div>
+        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-red-100 text-red-700 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex h-8 w-8 transition-all duration-300 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" onclick="closeErrorAlert()">
+          <span class="sr-only">Close</span>
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 011.414 1.414L11.414 10l4.293 4.293a1 1 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
         </button>
-        <div navbar-menu class="items-center flex-grow transition-all ease duration-350 lg-max:bg-white lg-max:max-h-0 lg-max:overflow-hidden basis-full rounded-2xl lg:flex lg:basis-auto">
-          <ul class="flex flex-col pl-0 mx-auto mb-0 list-none lg-max:py-2 lg:flex-row xl:ml-auto">
-            <li>
-              <a class="flex items-center px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75" aria-current="page" href="../pages/dashboard.html">
-                <i class="mr-1 text-white lg-max:text-slate-700 fa fa-chart-pie opacity-60"></i>
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75" href="../pages/profile.html">
-                <i class="mr-1 text-white lg-max:text-slate-700 fa fa-user opacity-60"></i>
-                Profile
-              </a>
-            </li>
-            <li>
-              <a class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75" href="../pages/sign-up.html">
-                <i class="mr-1 text-white lg-max:text-slate-700 fas fa-user-circle opacity-60"></i>
-                Sign Up
-              </a>
-            </li>
-            <li>
-              <a class="block px-4 py-2 mr-2 font-normal text-white transition-all ease-in-out duration-250 lg-max:opacity-0 lg-max:text-slate-700 text-sm lg:px-2 lg:hover:text-white/75" href="../pages/sign-in.html">
-                <i class="mr-1 text-white lg-max:text-slate-700 fas fa-key opacity-60"></i>
-                Sign In
-              </a>
-            </li>
-          </ul>
-          <!-- online builder btn  -->
-          <!-- <li class="flex items-center">
-            <a
-              class="leading-pro ease-in border-white/75 text-xs tracking-tight-rem rounded-3.5xl hover:border-white/75 hover:-translate-y-px active:hover:border-white/75 active:hover:-translate-y-px active:opacity-85 active:shadow-xs active:border-white/75 bg-white/10 hover:bg-white/10 active:hover:bg-white/10 mr-2 mb-0 inline-block cursor-pointer border border-solid py-2 px-8 text-center align-middle font-bold uppercase text-white shadow-none transition-all hover:text-white hover:opacity-75 hover:shadow-none active:scale-100 active:bg-white active:text-black active:hover:text-white active:hover:opacity-75 active:hover:shadow-none"
-              target="_blank"
-              href="https://www.creative-tim.com/builder/soft-ui?ref=navbar-dashboard&amp;_ga=2.76518741.1192788655.1647724933-1242940210.1644448053"
-              >Online Builder</a
-            >
-          </li> -->
-          <ul class="hidden pl-0 mb-0 list-none lg:block lg:flex-row">
-            <li>
-              <a href="https://www.creative-tim.com/product/argon-dashboard-tailwind" target="_blank" class="inline-block px-8 py-2 mb-0 mr-1 font-bold leading-normal text-center align-middle transition-all ease-in bg-transparent border-0 rounded-lg shadow-md cursor-pointer hover:-translate-y-px hover:shadow-xs active:opacity-85 text-xs tracking-tight-rem bg-gradient-to-tl from-gray-400 to-gray-100 text-slate-800">Free Download</a>
-            </li>
-          </ul>
+      </div>
+    </div>
+
+    <script>
+      // Check for error messages from session
+      document.addEventListener('DOMContentLoaded', function() {
+        @if(session('error'))
+          showErrorAlert("{{ session('error') }}");
+        @endif
+        
+        @if($errors->any())
+          @foreach($errors->all() as $error)
+          showErrorAlert("{{ $error }}");
+          @break
+          @endforeach
+        @endif
+        
+        @if(session('status'))
+          showErrorAlert("{{ session('status') }}");
+        @endif
+      });
+
+      function showErrorAlert(message) {
+        const alert = document.getElementById('errorAlert');
+        const messageElement = document.getElementById('errorMessage');
+        messageElement.textContent = message;
+        alert.classList.remove('hidden');
+        alert.classList.add('animate-bounce-in');
+        
+        // Auto-hide after 20 seconds
+        setTimeout(closeErrorAlert, 20000);
+      }
+
+      function closeErrorAlert() {
+        const alert = document.getElementById('errorAlert');
+        alert.classList.add('hidden');
+      }
+    </script>
+
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-7xl w-full flex flex-row rounded-3xl overflow-hidden shadow-2xl animate-fade-in-up">
+        <!-- Image & Brand Column -->
+        <div class="hidden lg:block w-5/12 animated-gradient rounded-l-3xl relative">
+          <div class="absolute inset-0 flex flex-col justify-center px-12 text-white">
+            <div class="max-w-lg">
+              <h1 class="text-4xl font-bold mb-6">Join our community today</h1>
+              <p class="text-lg mb-8 opacity-90">Create an account and start exploring all the opportunities waiting for you.</p>
+              
+              <div class="space-y-6">
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 bg-white bg-opacity-20 p-2 rounded-full">
+                    <i class="fas fa-shield-alt text-white"></i>
+                  </div>
+                  <p class="ml-4 text-sm opacity-90">Your data is secured with enterprise-grade encryption</p>
+                </div>
+                
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 bg-white bg-opacity-20 p-2 rounded-full">
+                    <i class="fas fa-users text-white"></i>
+                  </div>
+                  <p class="ml-4 text-sm opacity-90">Connect with thousands of users and businesses</p>
+                </div>
+                
+                <div class="flex items-center">
+                  <div class="flex-shrink-0 bg-white bg-opacity-20 p-2 rounded-full">
+                    <i class="fas fa-bolt text-white"></i>
+                  </div>
+                  <p class="ml-4 text-sm opacity-90">Quick and easy registration process</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="absolute bottom-8 left-12 right-12 flex justify-between items-center">
+              <p class="text-sm opacity-80">© 2025 JOTEA. All rights reserved.</p>
+              <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-white/80"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white hover:text-white/80"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white hover:text-white/80"><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Registration Form Column -->
+        <div class="w-full lg:w-7/12 glass-effect p-8 md:p-10">
+          <div class="flex justify-start mb-8">
+            <a href="/" class="flex items-center space-x-2">
+              <img src="{{ asset('assets/img/JOTEA-logo.png') }}" class="h-10" alt="JOTEA Logo" />
+              <span class="text-2xl font-bold text-primary-600"></span>
+            </a>
+          </div>
+          
+          <div class="mb-6">
+            <h2 class="text-3xl font-extrabold text-gray-800">Create an account</h2>
+            <p class="mt-2 text-sm text-gray-600">Join our platform to start exploring opportunities</p>
+          </div>
+          
+          <form class="mt-8 space-y-5" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-user text-primary-500"></i>
+                  </div>
+                  <input id="name" name="name" type="text" required 
+                    class="pl-10 block w-full pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                    placeholder="Your name" />
+                </div>
+              </div>
+              
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-envelope text-primary-500"></i>
+                  </div>
+                  <input id="email" name="email" type="email" autocomplete="email" required 
+                    class="pl-10 block w-full pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                    placeholder="Your email" />
+                </div>
+              </div>
+              
+              <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-lock text-primary-500"></i>
+                  </div>
+                  <input id="password" name="password" type="password" required 
+                    class="pl-10 block w-full pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                    placeholder="Create a strong password" />
+                </div>
+              </div>
+              
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-phone text-primary-500"></i>
+                  </div>
+                  <input id="phone" name="phone" type="text" required 
+                    class="pl-10 block w-full pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                    placeholder="Your phone number" />
+                </div>
+              </div>
+              
+              <div>
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-map-marker-alt text-primary-500"></i>
+                  </div>
+                  <input id="address" name="address" type="text" required 
+                    class="pl-10 block w-full pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500" 
+                    placeholder="Your address" />
+                </div>
+              </div>
+              
+              <div>
+                <label for="photo" class="block text-sm font-medium text-gray-700">Profile Photo</label>
+                <div class="mt-1 relative rounded-md shadow-sm">
+                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-image text-primary-500"></i>
+                  </div>
+                  <input id="photo" name="photo" type="file" accept="image/*"
+                    class="pl-10 block w-full pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100" />
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6">
+              <label class="block text-sm font-medium text-gray-700 mb-2">Account Type</label>
+              <div class="flex flex-wrap gap-4">
+                <label class="relative flex items-center p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-primary-500 transition-all duration-200 group">
+                  <input type="radio" name="role_id" value="3" class="peer hidden" required>
+                  <div class="absolute right-3 top-3 transition-opacity opacity-0 peer-checked:opacity-100 text-primary-500">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mr-3 group-hover:bg-primary-200 transition-all duration-200">
+                      <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                      <span class="text-gray-900 font-medium">Individual</span>
+                      <p class="text-xs text-gray-500">Personal account</p>
+                    </div>
+                  </div>
+                </label>
+                
+                <label class="relative flex items-center p-3 rounded-lg border border-gray-200 cursor-pointer hover:border-primary-500 transition-all duration-200 group">
+                  <input type="radio" name="role_id" value="2" class="peer hidden" required>
+                  <div class="absolute right-3 top-3 transition-opacity opacity-0 peer-checked:opacity-100 text-primary-500">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="flex items-center">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-100 text-primary-600 mr-3 group-hover:bg-primary-200 transition-all duration-200">
+                      <i class="fas fa-building"></i>
+                    </div>
+                    <div>
+                      <span class="text-gray-900 font-medium">Company</span>
+                      <p class="text-xs text-gray-500">Business account</p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div class="flex items-center mt-6">
+              <input id="terms" name="terms" type="checkbox" required
+                class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded cursor-pointer" />
+              <label for="terms" class="ml-2 block text-sm text-gray-700">
+                I agree to the <a href="#" class="font-medium text-primary-600 hover:text-primary-500">Terms and Conditions</a> and <a href="#" class="font-medium text-primary-600 hover:text-primary-500">Privacy Policy</a>
+              </label>
+            </div>
+
+            <div>
+              <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent rounded-lg text-white bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 shadow-lg transform transition duration-200 hover:-translate-y-1">
+                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <i class="fas fa-user-plus"></i>
+                </span>
+                Create Account
+              </button>
+            </div>
+          </form>
+          
+          <p class="mt-8 text-center text-sm text-gray-600">
+            Already have an account?
+            <a href="/login" class="font-medium text-primary-600 hover:text-primary-500 hover:underline">
+              Sign in
+            </a>
+          </p>
         </div>
       </div>
-    </nav> --}}
-
-    <main class="mt-0 transition-all duration-200 ease-in-out">
-      <section class="min-h-screen">
-        <div class="bg-top relative flex items-start pt-12 pb-56 m-4 overflow-hidden bg-cover min-h-50-screen rounded-xl bg-[url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-cover.jpg')]">
-          <span class="absolute top-0 left-0 w-full h-full bg-center bg-cover bg-gradient-to-tl from-zinc-800 to-zinc-700 opacity-60"></span>
-          <div class="container z-10">
-            <div class="flex flex-wrap justify-center -mx-3">
-              <div class="w-full max-w-full px-3 mx-auto mt-0 text-center lg:flex-0 shrink-0 lg:w-5/12">
-                <h1 class="mt-12 mb-2 text-white">Welcome!</h1>
-                <p class="text-white">Use these awesome forms to login or create new account in your project for free.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="container">
-          <div class="flex flex-wrap -mx-3 -mt-48 md:-mt-56 lg:-mt-48">
-            <div class="w-full max-w-full px-3 mx-auto mt-0 md:flex-0 shrink-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
-              <div class="relative z-0 flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
-                <div class="p-6 mb-0 text-center bg-white border-b-0 rounded-t-2xl">
-                  <h5>Register with</h5>
-                </div>
-                <div class="flex flex-wrap px-3 -mx-3 sm:px-6 xl:px-12">
-                  <div class="w-3/12 max-w-full px-1 ml-auto flex-0">
-                    <a class="inline-block w-full px-5 py-2.5 mb-4 font-bold text-center text-gray-200 uppercase align-middle transition-all bg-transparent border border-gray-200 border-solid rounded-lg shadow-none cursor-pointer hover:-translate-y-px leading-pro text-xs ease-in tracking-tight-rem bg-150 bg-x-25 hover:bg-transparent hover:opacity-75" href="javascript:;">
-                      <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink32">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <g transform="translate(3.000000, 3.000000)" fill-rule="nonzero">
-                            <circle fill="#3C5A9A" cx="29.5091719" cy="29.4927506" r="29.4882047"></circle>
-                            <path d="M39.0974944,9.05587273 L32.5651312,9.05587273 C28.6886088,9.05587273 24.3768224,10.6862851 24.3768224,16.3054653 C24.395747,18.2634019 24.3768224,20.1385313 24.3768224,22.2488655 L19.8922122,22.2488655 L19.8922122,29.3852113 L24.5156022,29.3852113 L24.5156022,49.9295284 L33.0113092,49.9295284 L33.0113092,29.2496356 L38.6187742,29.2496356 L39.1261316,22.2288395 L32.8649196,22.2288395 C32.8649196,22.2288395 32.8789377,19.1056932 32.8649196,18.1987181 C32.8649196,15.9781412 35.1755132,16.1053059 35.3144932,16.1053059 C36.4140178,16.1053059 38.5518876,16.1085101 39.1006986,16.1053059 L39.1006986,9.05587273 L39.0974944,9.05587273 L39.0974944,9.05587273 Z" fill="#FFFFFF"></path>
-                          </g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="w-3/12 max-w-full px-1 flex-0">
-                    <a class="inline-block w-full px-5 py-2.5 mb-4 font-bold text-center text-gray-200 uppercase align-middle transition-all bg-transparent border border-gray-200 border-solid rounded-lg shadow-none cursor-pointer hover:-translate-y-px leading-pro text-xs ease-in tracking-tight-rem bg-150 bg-x-25 hover:bg-transparent hover:opacity-75" href="javascript:;">
-                      <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <g transform="translate(7.000000, 0.564551)" fill="#000000" fill-rule="nonzero">
-                            <path
-                              d="M40.9233048,32.8428307 C41.0078713,42.0741676 48.9124247,45.146088 49,45.1851909 C48.9331634,45.4017274 47.7369821,49.5628653 44.835501,53.8610269 C42.3271952,57.5771105 39.7241148,61.2793611 35.6233362,61.356042 C31.5939073,61.431307 30.2982233,58.9340578 25.6914424,58.9340578 C21.0860585,58.9340578 19.6464932,61.27947 15.8321878,61.4314159 C11.8738936,61.5833617 8.85958554,57.4131833 6.33064852,53.7107148 C1.16284874,46.1373849 -2.78641926,32.3103122 2.51645059,22.9768066 C5.15080028,18.3417501 9.85858819,15.4066355 14.9684701,15.3313705 C18.8554146,15.2562145 22.5241194,17.9820905 24.9003639,17.9820905 C27.275104,17.9820905 31.733383,14.7039812 36.4203248,15.1854154 C38.3824403,15.2681959 43.8902255,15.9888223 47.4267616,21.2362369 C47.1417927,21.4153043 40.8549638,25.1251794 40.9233048,32.8428307 M33.3504628,10.1750144 C35.4519466,7.59650964 36.8663676,4.00699306 36.4804992,0.435448578 C33.4513624,0.558856931 29.7884601,2.48154382 27.6157341,5.05863265 C25.6685547,7.34076135 23.9632549,10.9934525 24.4233742,14.4943068 C27.7996959,14.7590956 31.2488715,12.7551531 33.3504628,10.1750144"
-                            ></path>
-                          </g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="w-3/12 max-w-full px-1 mr-auto flex-0">
-                    <a class="inline-block w-full px-5 py-2.5 mb-4 font-bold text-center text-gray-200 uppercase align-middle transition-all bg-transparent border border-gray-200 border-solid rounded-lg shadow-none cursor-pointer hover:-translate-y-px leading-pro text-xs ease-in tracking-tight-rem bg-150 bg-x-25 hover:bg-transparent hover:opacity-75" href="javascript:;">
-                      <svg width="24px" height="32px" viewBox="0 0 64 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <g transform="translate(3.000000, 2.000000)" fill-rule="nonzero">
-                            <path d="M57.8123233,30.1515267 C57.8123233,27.7263183 57.6155321,25.9565533 57.1896408,24.1212666 L29.4960833,24.1212666 L29.4960833,35.0674653 L45.7515771,35.0674653 C45.4239683,37.7877475 43.6542033,41.8844383 39.7213169,44.6372555 L39.6661883,45.0037254 L48.4223791,51.7870338 L49.0290201,51.8475849 C54.6004021,46.7020943 57.8123233,39.1313952 57.8123233,30.1515267" fill="#4285F4"></path>
-                            <path d="M29.4960833,58.9921667 C37.4599129,58.9921667 44.1456164,56.3701671 49.0290201,51.8475849 L39.7213169,44.6372555 C37.2305867,46.3742596 33.887622,47.5868638 29.4960833,47.5868638 C21.6960582,47.5868638 15.0758763,42.4415991 12.7159637,35.3297782 L12.3700541,35.3591501 L3.26524241,42.4054492 L3.14617358,42.736447 C7.9965904,52.3717589 17.959737,58.9921667 29.4960833,58.9921667" fill="#34A853"></path>
-                            <path d="M12.7159637,35.3297782 C12.0932812,33.4944915 11.7329116,31.5279353 11.7329116,29.4960833 C11.7329116,27.4640054 12.0932812,25.4976752 12.6832029,23.6623884 L12.6667095,23.2715173 L3.44779955,16.1120237 L3.14617358,16.2554937 C1.14708246,20.2539019 0,24.7439491 0,29.4960833 C0,34.2482175 1.14708246,38.7380388 3.14617358,42.736447 L12.7159637,35.3297782" fill="#FBBC05"></path>
-                            <path d="M29.4960833,11.4050769 C35.0347044,11.4050769 38.7707997,13.7975244 40.9011602,15.7968415 L49.2255853,7.66898166 C44.1130815,2.91684746 37.4599129,0 29.4960833,0 C17.959737,0 7.9965904,6.62018183 3.14617358,16.2554937 L12.6832029,23.6623884 C15.0758763,16.5505675 21.6960582,11.4050769 29.4960833,11.4050769" fill="#EB4335"></path>
-                          </g>
-                        </g>
-                      </svg>
-                    </a>
-                  </div>
-                  <div class="relative w-full max-w-full px-3 mt-2 text-center shrink-0">
-                    <p class="z-20 inline px-4 mb-2 font-semibold leading-normal bg-white text-sm text-slate-400">or</p>
-                  </div>
-                </div>
-                <div class="flex-auto p-6">
-                  <form role="form text-left" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-4">
-                      <input type="text" name="name" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" placeholder="Name" aria-label="Name" aria-describedby="email-addon" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="email" name="email" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" placeholder="Email" aria-label="Email" aria-describedby="email-addon" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="password" name="password" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" placeholder="Password" aria-label="Password" aria-describedby="password-addon" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="file" name="photo" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" placeholder="photo" aria-label="photo" aria-describedby="password-addon" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="text" name="phone" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" placeholder="phone" aria-label="phone" aria-describedby="password-addon" />
-                    </div>
-                    <div class="mb-4">
-                      <input type="text" name="address" class="placeholder:text-gray-500 text-sm focus:shadow-primary-outline leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-blue-500 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow" placeholder="Address" aria-label="address" aria-describedby="password-addon" />
-                    </div>
-                    <div class="flex mt-3 mr-8 space-x-3 select-none">
-                        <label class="flex items-center justify-center flex-grow cursor-pointer radio">
-                            <input class="hidden peer" value="3" name="role_id" type="radio" />
-                            <span class="relative text-md text-purple-400 text-shadow-sm transition-all duration-300 after:opacity-0 peer-checked:after:opacity-100 peer-checked:after:transition-all peer-checked:after:duration-300 peer-checked:text-purple-500 peer-checked:after:content-[''] peer-checked:after:block peer-checked:after:w-1/2 peer-checked:after:h-0.5 peer-checked:after:bg-purple-400 peer-checked:after:rounded-md peer-checked:after:absolute peer-checked:after:right-0 peer-checked:after:-bottom-1 peer-checked:before:content-[''] peer-checked:before:block peer-checked:before:w-full peer-checked:before:h-0.5 peer-checked:before:bg-purple-500 before:opacity-0 peer-checked:before:opacity-100 peer-checked:before:transition-all peer-checked:before:duration-300 peer-checked:before:rounded-md peer-checked:before:absolute peer-checked:before:right-0 peer-checked:before:bottom-0">Particuler</span>
-                        </label>
-                        <label class="flex items-center justify-center flex-grow cursor-pointer radio">
-                            <input class="hidden peer" value="2" name="role_id" type="radio" />
-                            <span class="relative text-md text-purple-400 text-shadow-sm transition-all duration-300 after:opacity-0 peer-checked:after:opacity-100 peer-checked:after:transition-all peer-checked:after:duration-300 peer-checked:text-purple-500 peer-checked:after:content-[''] peer-checked:after:block peer-checked:after:w-1/2 peer-checked:after:h-0.5 peer-checked:after:bg-purple-400 peer-checked:after:rounded-md peer-checked:after:absolute peer-checked:after:right-0 peer-checked:after:-bottom-1 peer-checked:before:content-[''] peer-checked:before:block peer-checked:before:w-full peer-checked:before:h-0.5 peer-checked:before:bg-purple-500 before:opacity-0 peer-checked:before:opacity-100 peer-checked:before:transition-all peer-checked:before:duration-300 peer-checked:before:rounded-md peer-checked:before:absolute peer-checked:before:right-0 peer-checked:before:bottom-0">Company</span>
-                        </label>
-                    </div>
-
-                    <div class="min-h-6 pl-7 mb-0.5 block mt-5">
-                      <input class="w-4.8 h-4.8 ease -ml-7 rounded-1.4 checked:bg-gradient-to-tl checked:from-blue-500 checked:to-violet-500 after:text-xxs after:font-awesome after:duration-250 after:ease-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-200 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" value="" checked />
-                      <label class="mb-2 ml-1 font-normal cursor-pointer text-sm text-slate-700" for="flexCheckDefault"> I agree the <a href="javascript:;" class="font-bold text-slate-700">Terms and Conditions</a> </label>
-                    </div>
-                    <div class="text-center">
-                      <button type="submit" class="inline-block w-full px-5 py-2.5 mt-6 mb-2 font-bold text-center text-white align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:-translate-y-px hover:shadow-xs leading-normal text-sm ease-in tracking-tight-rem shadow-md bg-150 bg-x-25 bg-gradient-to-tl from-zinc-800 to-zinc-700 hover:border-slate-700 hover:bg-slate-700 hover:text-white">Sign up</button>
-                    </div>
-                    <p class="mt-4 mb-0 leading-normal text-sm">Already have an account? <a href="/login" class="font-bold text-slate-700">Sign in</a></p>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-      <footer class="py-12">
-        <div class="container">
-          <div class="flex flex-wrap -mx-3">
-            <div class="flex-shrink-0 w-full max-w-full mx-auto mb-6 text-center lg:flex-0 lg:w-8/12">
-              <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Company </a>
-              <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> About Us </a>
-              <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Team </a>
-              <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Products </a>
-              <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Blog </a>
-              <a href="javascript:;" target="_blank" class="mb-2 mr-4 text-slate-400 sm:mb-0 xl:mr-12"> Pricing </a>
-            </div>
-            <div class="flex-shrink-0 w-full max-w-full mx-auto mt-2 mb-6 text-center lg:flex-0 lg:w-8/12">
-              <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-dribbble"></span>
-              </a>
-              <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-twitter"></span>
-              </a>
-              <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-instagram"></span>
-              </a>
-              <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-pinterest"></span>
-              </a>
-              <a href="javascript:;" target="_blank" class="mr-6 text-slate-400">
-                <span class="text-lg fab fa-github"></span>
-              </a>
-            </div>
-          </div>
-          <div class="flex flex-wrap -mx-3">
-            <div class="w-8/12 max-w-full px-3 mx-auto mt-1 text-center flex-0">
-              <p class="mb-0 text-slate-400">
-                Copyright ©
-                <script>
-                  document.write(new Date().getFullYear());
-                </script>
-                Argon Dashboard 2 by Creative Tim.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-      <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-    </main>
+    </div>
   </body>
-  <!-- plugin for scrollbar  -->
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js" async></script>
-  <!-- main script file  -->
-  <script src="../assets/js/argon-dashboard-tailwind.js?v=1.0.1" async></script>
 </html>
 
 

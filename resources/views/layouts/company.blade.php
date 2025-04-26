@@ -1,205 +1,271 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en" class="dark">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets1/images/JOTEA-logo.png') }}" />
     <link rel="icon" type="image/png" href="{{ asset('assets1/images/JOTEA-logo.png') }}" />
     <title>JOTEA - Company Dashboard</title>
-    <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Inter font for clean modern look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-    <!-- Nucleo Icons -->
-    <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <!-- Popper -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <!-- Main Styling -->
-    <link href="{{ asset('assets/css/argon-dashboard-tailwind.css?v=1.0.1') }}" rel="stylesheet" />
-
-    {{-- flowbite --}}
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
-    
-
     <script src="https://kit.fontawesome.com/e9ee48a8e3.js" crossorigin="anonymous"></script>
-    {{-- tailwind cdn --}}
+    <!-- Tailwind CSS with dark mode support -->
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                            950: '#450a0a',
+                        },
+                        brand: {
+                            amber: '#f59e0b',
+                            'amber-light': '#fbbf24',
+                            'amber-dark': '#d97706',
+                        },
+                        'dark-bg': '#0f172a',
+                        'dark-card': '#1e293b',
+                        'dark-border': '#334155',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            },
+        }
+    </script>
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #f59e0b;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d97706;
+        }
+        
+        /* Smooth transitions */
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
 
-  <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-    <div class="absolute w-full bg-amber-500 dark:hidden min-h-75"></div>
-    <!-- sidenav  -->
-    <aside class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 transition-transform duration-200 -translate-x-full bg-gray-800 border-0 shadow-xl dark:shadow-none max-w-64 ease-nav-brand z-990 xl:ml-6 xl:left-0 xl:translate-x-0 rounded-2xl" aria-expanded="false">
-      <div class="h-19 flex justify-center items-center">
-        <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-white" href="{{ route('company.dashboard') }}">
-          <img src="{{ asset('assets1/images/JOTEA-logo.png') }}" class="inline h-12 max-w-full transition-all duration-200 ease-nav-brand" alt="JOTEA Logo" />
-        </a>
-      </div>
+        /* Glassmorphism effects */
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
 
-      <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+        /* Custom animations */
+        @keyframes pulse-gentle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .animate-pulse-gentle {
+            animation: pulse-gentle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
 
-      <div class="items-center block w-auto h-auto basis-full">
-          <ul class="flex flex-col pl-0 mb-0">
-              <li class="mt-0.5 w-full">
-                  <a class="py-2.7 bg-amber-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors" href="{{ route('company.dashboard') }}">
-                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                          <i class="relative top-0 text-sm leading-normal text-amber-500 ni ni-tv-2"></i>
-                      </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Dashboard</span>
-                  </a>
-              </li>
-
-              <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('annonce.show') }}">
-                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                          <i class="relative top-0 text-sm leading-normal text-orange-500 ni ni-calendar-grid-58"></i>
-                      </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">My Annonces</span>
-                  </a>
-              </li>
-
-              <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('addannonce') }}">
-                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                          <i class="fa-solid fa-plus text-emerald-400"></i>
-                      </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Add Annonce</span>
-                  </a>
-              </li>
-              <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('entreprise.conversation') }}">
-                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                        <i class="fa-solid fa-inbox" style="color: #d904c0;"></i>
-                      </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Messages</span>
-                  </a>
-              </li>
-              <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('company.billing') }}">
-                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center fill-current stroke-0 text-center xl:p-2.5">
-                        <i class="fa-solid fa-credit-card" style="color: #16bd00;"></i>
-                      </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Billing</span>
-                  </a>
-              </li>
-
-              <li class="w-full mt-4">
-                  <h6 class="pl-6 ml-2 text-xs font-bold leading-tight uppercase dark:text-white opacity-60">Account Pages</h6>
-              </li>
-
-              <li class="mt-0.5 w-full">
-                  <a class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg" href="{{ route('company.profile') }}">
-                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                          <i class="relative top-0 text-sm leading-normal text-slate-700 ni ni-single-02"></i>
-                      </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Edit Profile</span>
-                  </a>
-              </li>
-
-              <li class="mt-0.5 w-full">
-                  <form method="POST" action="{{ route('logout') }}">
-                      @csrf
-                      <button type="submit" class="w-full text-left dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors hover:bg-gray-100 dark:hover:bg-amber-500/20 rounded-lg">
-                      <div class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5">
-                          <i class="fa-solid fa-right-from-bracket relative top-0 text-sm leading-normal text-red-500"></i>
-                      </div>
-                      <span class="ml-1 duration-300 opacity-100 pointer-events-none ease">Logout</span>
-                      </button>
-                  </form>
-              </li>
-          </ul>
-      </div>
-    </aside>
-
-    <!-- end sidenav -->
-
-    <main class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl">
-      <!-- Navbar -->
-      <nav class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start" navbar-main navbar-scroll="false">
-        <div class="flex items-center justify-between w-full px-4 py-1 mx-auto flex-wrap-inherit">
-          <div class="flex items-center justify-end mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
-            <ul class="flex  justify-end pl-0 mb-0 list-none md-max:w-full">
-              
-              <li class="flex items-center pl-4 xl:hidden">
-                <a href="javascript:;" class="block p-0 text-sm text-white transition-all ease-nav-brand" sidenav-trigger>
-                  <div class="w-4.5 overflow-hidden">
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                    <i class="ease relative block h-0.5 rounded-sm bg-white transition-all"></i>
-                  </div>
+<body class="font-sans antialiased text-gray-200 bg-dark-bg min-h-screen">
+    <!-- Page wrapper -->
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 transition-transform duration-300 transform md:translate-x-0 -translate-x-full bg-dark-card border-r border-dark-border h-full">
+            <!-- Logo -->
+            <div class="flex items-center justify-center h-16 px-6 py-4">
+                <a href="{{ route('company.dashboard') }}" class="flex items-center space-x-3">
+                    <img src="{{ asset('assets1/images/JOTEA-logo.png') }}" class="h-10" alt="JOTEA Logo" />
+                    <span class="text-xl font-semibold text-brand-amber">JOTEA</span>
                 </a>
-              </li>
+            </div>
 
-              <!-- Home button -->
-              <li class="flex items-center px-4">
-                <a href="{{ route('home') }}" class="p-0 text-sm text-white transition-all ease-nav-brand flex items-center" title="Go to Homepage">
-                  <i class="fa-solid fa-house mr-1"></i>
-                  <span class="hidden sm:inline-block">Home</span>
-                </a>
-              </li>
+            <!-- Divider -->
+            <hr class="border-dark-border opacity-50" />
 
-              <!-- User profile -->
-              <li class="relative flex items-center pl-4">
-                <a href="{{ route('company.profile') }}" class="p-0 text-sm text-white transition-all ease-nav-brand flex items-center">
-                  <img src="{{ asset('assets/img/team-3.jpg') }}" class="rounded-full h-8 w-8 mr-1" alt="User Profile">
-                  <span class="hidden sm:inline-block">{{ Auth::user()->name ?? 'My Profile' }}</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+            <!-- Navigation -->
+            <div class="flex flex-col justify-between flex-1 px-3 py-4 overflow-y-auto">
+                <ul class="space-y-2">
+                    <!-- Dashboard -->
+                    <li>
+                        <a href="{{ route('company.dashboard') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('company.dashboard') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
+                            <i class="flex items-center justify-center w-5 h-5 text-brand-amber transition duration-75 fa-solid fa-chart-line"></i>
+                            <span class="ml-3">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <!-- My Annonces -->
+                    <li>
+                        <a href="{{ route('annonce.show') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('annonce.show') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
+                            <i class="flex items-center justify-center w-5 h-5 text-orange-400 transition duration-75 fa-solid fa-list"></i>
+                            <span class="ml-3">My Annonces</span>
+                        </a>
+                    </li>
+
+                    <!-- Add Annonce -->
+                    <li>
+                        <a href="{{ route('addannonce') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('addannonce') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
+                            <i class="flex items-center justify-center w-5 h-5 text-emerald-400 transition duration-75 fa-solid fa-plus"></i>
+                            <span class="ml-3">Add Annonce</span>
+                        </a>
+                    </li>
+
+                    <!-- Messages -->
+                    <li>
+                        <a href="{{ route('entreprise.conversation') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('entreprise.conversation') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
+                            <i class="flex items-center justify-center w-5 h-5 text-purple-400 transition duration-75 fa-solid fa-inbox"></i>
+                            <span class="ml-3">Messages</span>
+                        </a>
+                    </li>
+
+                    <!-- Billing -->
+                    <li>
+                        <a href="{{ route('company.billing') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('company.billing') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
+                            <i class="flex items-center justify-center w-5 h-5 text-green-400 transition duration-75 fa-solid fa-credit-card"></i>
+                            <span class="ml-3">Billing</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="pt-4 mt-6 space-y-2 border-t border-dark-border">
+                    <p class="px-4 text-xs font-medium uppercase text-gray-500">Account</p>
+                    
+                    <!-- Edit Profile -->
+                    <a href="{{ route('company.profile') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('company.profile') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
+                        <i class="flex items-center justify-center w-5 h-5 text-gray-400 transition duration-75 fa-solid fa-user"></i>
+                        <span class="ml-3">Edit Profile</span>
+                    </a>
+                    
+                    <!-- Logout -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="flex items-center w-full px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group">
+                            <i class="flex items-center justify-center w-5 h-5 text-red-400 transition duration-75 fa-solid fa-sign-out-alt"></i>
+                            <span class="ml-3">Logout</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1 w-full md:pl-64">
+            <!-- Top Navigation -->
+            <header class="sticky top-0 z-30 flex items-center justify-between w-full h-16 px-4 bg-dark-card border-b border-dark-border shadow-md">
+                <!-- Mobile Sidebar Toggle -->
+                <button id="sidebar-toggle" class="p-2 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-brand-amber text-gray-400 hover:bg-gray-700">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+
+                <!-- Theme Toggle -->
+                <div class="mx-auto">
+                    <button id="theme-toggle" type="button" class="text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-amber rounded-lg text-sm p-2">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                        </svg>
+                        <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="flex items-center">
+                    <!-- Home link -->
+                    <a href="{{ route('home') }}" class="flex items-center p-2 mr-4 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-gray-200">
+                        <i class="fa-solid fa-home"></i>
+                        <span class="ml-2 text-sm font-medium hidden sm:inline-block">Home</span>
+                    </a>
+                    
+                    <!-- User Profile -->
+                    <div class="relative">
+                        <button type="button" class="flex items-center text-sm bg-gray-800 rounded-full focus:ring-2 focus:ring-brand-amber p-1" id="user-menu-button" aria-expanded="false">
+                            <img class="w-8 h-8 rounded-full" src="{{ asset('assets/img/team-3.jpg') }}" alt="user photo">
+                            <span class="hidden mx-2 text-gray-200 sm:inline-block">{{ Auth::user()->name ?? 'My Profile' }}</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 p-4 overflow-y-auto sm:p-6">
+                @yield('dashboard.company')
+            </main>
         </div>
-      </nav>
-  
-      @yield('dashboard.company')
-      
-  </main>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <!-- Core Scripts -->
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-  </body>
-  <!-- plugin for charts  -->
-  <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-  <script src="{{ asset('assets/js/plugins/chartjs.min.js') }}"></script>
-  <script src="{{ asset('assets/js/argon-dashboard-tailwind.js?v=1.0.1') }}"></script>
-  <script src="{{ asset('assets/js/sidenav-burger.js') }}"></script>
-  <script src="{{ asset('assets/js/dropdown.js') }}"></script>
-  <script src="{{ asset('assets/js/fixed-plugin.js') }}"></script>
-  <script src="{{ asset('assets/js/navbar-collapse.js') }}"></script>
-  <script src="{{ asset('assets/js/navbar-sticky.js') }}"></script>
+            // Mobile sidebar toggle
+            const sidebarToggle = document.getElementById('sidebar-toggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (sidebarToggle) {
+                sidebarToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('-translate-x-full');
+                });
+            }
 
-  <script>
-    // Initialize dropdowns
-    document.addEventListener('DOMContentLoaded', function() {
-      // Mobile sidenav toggler
-      var sidenavTrigger = document.querySelector('[sidenav-trigger]');
-      var sidenav = document.querySelector('aside');
-      
-      if (sidenavTrigger) {
-        sidenavTrigger.addEventListener('click', function() {
-          sidenav.classList.toggle('-translate-x-full');
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', function(event) {
+                const isClickInsideSidebar = sidebar.contains(event.target);
+                const isClickOnToggle = sidebarToggle && sidebarToggle.contains(event.target);
+                
+                if (!isClickInsideSidebar && !isClickOnToggle && !sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
+                    sidebar.classList.add('-translate-x-full');
+                }
+            });
+
+            // Handle theme toggle
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', function() {
+                    document.documentElement.classList.toggle('dark');
+                    
+                    // Toggle icons
+                    themeToggleDarkIcon.classList.toggle('hidden');
+                    themeToggleLightIcon.classList.toggle('hidden');
+
+                    // Save preference to local storage
+                    if (document.documentElement.classList.contains('dark')) {
+                        localStorage.setItem('color-theme', 'dark');
+                    } else {
+                        localStorage.setItem('color-theme', 'light');
+                    }
+                });
+            }
         });
-      }
-      
-      // Close sidenav when clicking outside
-      var sidenavClose = document.querySelector('[sidenav-close]');
-      if (sidenavClose) {
-        sidenavClose.addEventListener('click', function() {
-          sidenav.classList.add('-translate-x-full');
-        });
-      }
-      
-      // Dropdown functionality
-      var dropdownTriggers = document.querySelectorAll('[dropdown-trigger]');
-      dropdownTriggers.forEach(function(trigger) {
-        trigger.addEventListener('click', function() {
-          var dropdownMenu = this.nextElementSibling;
-          if (dropdownMenu) {
-            dropdownMenu.classList.toggle('opacity-0');
-            dropdownMenu.classList.toggle('pointer-events-none');
-          }
-        });
-      });
-    });
-  </script>
+    </script>
+    
+    
+</body>
 </html>

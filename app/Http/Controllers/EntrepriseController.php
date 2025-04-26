@@ -27,7 +27,7 @@ class EntrepriseController extends Controller
         $userId = auth()->id();
         $stats = $this->dashboardService->getDashboardStats($userId);
         // dd($stats);
-        return view('dashboard entreprise.profil', compact('stats'));
+        return view('dashboard entreprise.index', compact('stats'));
     }
     public function show(Entreprise $entreprise)
     {

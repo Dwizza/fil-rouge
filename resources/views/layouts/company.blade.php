@@ -98,7 +98,7 @@
             <div class="flex items-center justify-center h-16 px-6 py-4">
                 <a href="{{ route('company.dashboard') }}" class="flex items-center space-x-3">
                     <img src="{{ asset('assets1/images/JOTEA-logo.png') }}" class="h-10" alt="JOTEA Logo" />
-                    <span class="text-xl font-semibold text-brand-amber">JOTEA</span>
+                    
                 </a>
             </div>
 

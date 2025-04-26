@@ -38,7 +38,7 @@
     <div class="relative flex flex-col min-w-0 break-words bg-slate-900 shadow-xl rounded-2xl bg-clip-border border border-slate-800 hover:shadow-slate-700/50 transition-all duration-300">
     <div class="flex-auto p-5">
       <div class="flex flex-row -mx-3">
-      <div class="flex-none w-2/3 max-w-full px-3">
+      <div class="flex-none w-2/3 max-w-full px-2">
         <div>
         <p class="mb-1 font-sans text-sm font-semibold leading-normal uppercase text-white opacity-70">Published Annonces</p>
         <h5 class="mb-2 font-bold text-white text-xl">{{$stats['published_annonces']}}</h5>
@@ -47,7 +47,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
           </svg>
-          <span class="font-bold text-green-400 mr-1">Visible</span> par le public
+          <span class="font-bold text-green-400 mr-1">Visible</span>public
         </span>
         </div>
       </div>
@@ -68,7 +68,7 @@
     <div class="relative flex flex-col min-w-0 break-words bg-slate-900 shadow-xl rounded-2xl bg-clip-border border border-slate-800 hover:shadow-slate-700/50 transition-all duration-300">
     <div class="flex-auto p-5">
       <div class="flex flex-row -mx-3">
-      <div class="flex-none w-2/3 max-w-full px-3">
+      <div class="flex-none w-2/3 max-w-full px-2">
         <div>
         <p class="mb-1 font-sans text-sm font-semibold leading-normal uppercase text-white opacity-70">Archived Annonces</p>
         <h5 class="mb-2 font-bold text-white text-xl">{{$stats['archived_annonces']}}</h5>
@@ -76,7 +76,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
           </svg>
-          <span class="font-bold text-amber-400 mr-1">Stockées</span> pour référence
+          <span class="font-bold text-amber-400 mr-1">Stockées</span>
         </span>
         </div>
       </div>
@@ -100,7 +100,7 @@
       <div class="flex-none w-2/3 max-w-full px-3">
         <div>
         <p class="mb-1 font-sans text-sm font-semibold leading-normal uppercase text-white opacity-70">Total balance</p>
-        <h5 class="mb-2 font-bold text-white text-xl">{{$stats['total_revenue']}} USD</h5>
+        <h5 class="mb-2 font-bold text-white text-xl">{{ number_format($stats['total_revenue'],2)}} USD</h5>
         <span class="text-xs text-white/60 flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>

@@ -86,8 +86,11 @@ class EntrepriseController extends Controller
             ->join('annonces', 'paiements.annonce_id', '=', 'annonces.id')
             ->select('paiements.*', 'annonces.title', 'annonces.price')
             ->get();
+        $annonce = Annonce::where('user_id', $user->id)->pluck('id');
+        $totalRevenue = payments::whereIn('annonce_id', $annonce)->where('status','succeeded')->sum('amount');
+        
 
-        return view('dashboard entreprise.billing', compact('annonces'));
+        return view('dashboard entreprise.billing', compact('annonces', 'totalRevenue'));
     }
     public function changeStatusPayment($id)
     {

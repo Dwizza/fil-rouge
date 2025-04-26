@@ -472,7 +472,7 @@
                     À propos du vendeur
                 </h2>
 
-                <div class="flex flex-col items-center sm:flex-row sm:items-center">
+                <div class="flex flex-col items-center justify-center sm:flex-row sm:items-center">
                     <div class="flex-shrink-0 h-24 w-24 rounded-full bg-amber-100 flex items-center justify-center text-amber-600 text-2xl font-bold border-4 border-white shadow-lg">
                         {{ substr($annonce->user->name, 0, 1) }}
                     </div>
@@ -503,19 +503,21 @@
                         </div>
                     </div>
                     <div class="mt-4 sm:mt-0 sm:ml-6">
-                        <a href="/profile/view/{{$annonce->user->id}}" class="inline-flex items-center px-4 py-2 border border-amber-600 shadow-sm text-sm font-medium rounded-md text-amber-600 bg-white hover:bg-amber-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors">
+                        <a href="/profile/view/{{$annonce->user->id}}" class="inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-md !text-amber-600 bg-white hover:bg-amber-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             Voir le profil
                         </a>
                     </div>
-                    <a href="{{ route('chat', $annonce->user_id) }}" class="inline-flex items-center px-4 py-2 border border-green-600 shadow-sm text-sm font-medium rounded-md text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ml-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                        </svg>
-                        Envoyer un message
-                    </a>
+                    <div class="mt-4 sm:mt-0 sm:ml-6">
+                        <a href="{{ route('chat', $annonce->user_id) }}" class="inline-flex items-center px-4 py-2 shadow-sm text-sm font-medium rounded-md !text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors ml-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                            </svg>
+                            Envoyer un message
+                        </a>
+                    </div>
                 </div>
 
                 <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

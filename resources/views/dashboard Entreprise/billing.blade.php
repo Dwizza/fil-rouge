@@ -14,7 +14,7 @@
                 <div class="bg-gradient-to-br from-blue-900/40 to-indigo-900/40 border border-blue-800/50 rounded-lg shadow-lg px-4 py-3">
                     <p class="text-xs text-blue-300 mb-1">Montant total</p>
                     <p class="text-xl font-bold text-white">
-                        {{ number_format($annonces->sum('price'), 2) }} USD
+                        {{ number_format($totalRevenue, 2) }} USD
                     </p>
                 </div>
                 <div class="bg-gradient-to-br from-emerald-900/40 to-green-900/40 border border-emerald-800/50 rounded-lg shadow-lg px-4 py-3">

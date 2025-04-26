@@ -211,7 +211,7 @@
             </header>
 
             <!-- Main Content Area -->
-            <main class="flex-1 p-4 overflow-y-auto sm:p-6">
+            <main class="flex-1 p-2 overflow-y-auto">
                 @yield('dashboard.company')
             </main>
         </div>

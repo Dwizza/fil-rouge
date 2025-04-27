@@ -177,51 +177,180 @@
     <div class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
       <div>
 		<img src="{{ asset('assets1/images/JOTEA-logo.png') }}" alt="Logo" class="h-24 w-40 mb-4 rounded-lg drop-shadow-[0_10px_40px_rgba(255,250,0,0.5)] "/>
-        <p class="text-sm">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, magna eros eu erat.</p>
-        <p class="mt-4">Call us 24/7: <a href="tel:123456789" class="text-amber-500">+0123 456 789</a></p>
+        <p class="text-sm text-gray-300 leading-relaxed">JOTEA est votre plateforme de confiance pour trouver tout ce dont vous avez besoin, avec une expérience exceptionnelle et des transactions sécurisées.</p>
+        <div class="mt-6 flex items-center space-x-2">
+          <span class="text-amber-400 font-medium">Nous contacter:</span>
+          <a href="tel:123456789" class="group">
+            <span class="relative inline-block">
+              <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-white py-2 px-4 rounded-lg font-medium transform transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <span>+0123 456 789</span>
+              </span>
+              <span class="absolute inset-0 bg-gradient-to-r from-amber-300 to-amber-500 rounded-lg blur-sm opacity-70 -z-10 transform transition-all duration-300 group-hover:blur-md group-hover:opacity-100"></span>
+            </span>
+          </a>
+        </div>
       </div>
 
       <div>
-        <h4 class="font-semibold mb-3">Information</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-blue-400">About Us</a></li>
-          <li><a href="#" class="hover:text-blue-400">Faq</a></li>
-          <li><a href="#" class="hover:text-blue-400">Terms & Conditions</a></li>
-          <li><a href="#" class="hover:text-blue-400">Contact Us</a></li>
-          <li><a href="#" class="hover:text-blue-400">Help</a></li>
+        <h4 class="text-lg font-semibold mb-4 text-amber-400 border-b border-gray-700 pb-2">Informations</h4>
+        <ul class="space-y-2.5">
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>À propos de nous</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>FAQ</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Conditions générales</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Nous contacter</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Aide</span>
+            </a>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-semibold mb-3">Customer Service</h4>
-        <ul class="space-y-2 text-sm">
-          <li><a href="#" class="hover:text-blue-400">Payment Methods</a></li>
-          <li><a href="#" class="hover:text-blue-400">Money-back</a></li>
-          <li><a href="#" class="hover:text-blue-400">Returns</a></li>
-          <li><a href="#" class="hover:text-blue-400">Shipping</a></li>
-          <li><a href="#" class="hover:text-blue-400">Privacy Policy</a></li>
+        <h4 class="text-lg font-semibold mb-4 text-amber-400 border-b border-gray-700 pb-2">Service Client</h4>
+        <ul class="space-y-2.5">
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Moyens de paiement</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Remboursement</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Retours</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Expédition</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="group flex items-center text-gray-300 hover:text-amber-400 transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-2 text-amber-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Politique de confidentialité</span>
+            </a>
+          </li>
         </ul>
       </div>
 
       <div>
-        <h4 class="font-semibold mb-3">Get In Touch</h4>
-        <ul class="text-sm space-y-2">
-          <li>NO. 342 - London Oxford Street.</li>
-          <li>012 United Kingdom.</li>
-          <li>info@jotea.com</li>
-          <li>+032 3456 7890</li>
+        <h4 class="text-lg font-semibold mb-4 text-amber-400 border-b border-gray-700 pb-2">Contactez-nous</h4>
+        <ul class="text-sm space-y-3">
+          <li class="flex items-center space-x-2 group">
+            <div class="p-2 rounded-full bg-gray-800 text-amber-400 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <span class="text-gray-300">NO. 342 - London Oxford Street.</span>
+          </li>
+          <li class="flex items-center space-x-2 group">
+            <div class="p-2 rounded-full bg-gray-800 text-amber-400 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <span class="text-gray-300">012 United Kingdom.</span>
+          </li>
+          <li class="flex items-center space-x-2 group">
+            <div class="p-2 rounded-full bg-gray-800 text-amber-400 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <span class="text-gray-300">info@jotea.com</span>
+          </li>
+          <li class="flex items-center space-x-2 group">
+            <div class="p-2 rounded-full bg-gray-800 text-amber-400 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <span class="text-gray-300">+032 3456 7890</span>
+          </li>
         </ul>
-        <div class="flex space-x-3 mt-4">
-          <a href="#" class="text-white hover:text-blue-400"><i class="ti-facebook"></i></a>
-          <a href="#" class="text-white hover:text-blue-400"><i class="ti-twitter"></i></a>
-          <a href="#" class="text-white hover:text-blue-400"><i class="ti-flickr"></i></a>
-          <a href="#" class="text-white hover:text-blue-400"><i class="ti-instagram"></i></a>
+        <div class="flex space-x-3 mt-5">
+          <a href="#" class="p-2 bg-blue-700 rounded-full text-white hover:bg-blue-800 hover:scale-110 transition-all duration-300">
+            <i class="ti-facebook"></i>
+          </a>
+          <a href="#" class="p-2 bg-sky-500 rounded-full text-white hover:bg-sky-600 hover:scale-110 transition-all duration-300">
+            <i class="ti-twitter"></i>
+          </a>
+          <a href="#" class="p-2 bg-pink-600 rounded-full text-white hover:bg-pink-700 hover:scale-110 transition-all duration-300">
+            <i class="ti-instagram"></i>
+          </a>
+          <a href="#" class="p-2 bg-red-600 rounded-full text-white hover:bg-red-700 hover:scale-110 transition-all duration-300">
+            <i class="ti-youtube"></i>
+          </a>
         </div>
       </div>
     </div>
-    <div class="bg-gray-800 py-4 text-sm text-center">
+    <div class="bg-gray-800 py-4">
       <div class="container mx-auto px-4">
-        <p>Copyright © 2025 <a href="#" class="text-blue-400">JOTEA</a> - All Rights Reserved.</p>
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-sm text-gray-400 mb-4 md:mb-0">Copyright © 2025 <a href="#" class="text-amber-400 hover:text-amber-300 transition-colors">JOTEA</a> - Tous droits réservés.</p>
+          <div class="flex items-center space-x-4">
+            <a href="#" class="text-sm text-gray-400 hover:text-amber-400 transition-colors">Mentions légales</a>
+            <span class="text-gray-600">|</span>
+            <a href="#" class="text-sm text-gray-400 hover:text-amber-400 transition-colors">Confidentialité</a>
+            <span class="text-gray-600">|</span>
+            <a href="#" class="text-sm text-gray-400 hover:text-amber-400 transition-colors">Plan du site</a>
+          </div>
+        </div>
       </div>
     </div>
   </footer>

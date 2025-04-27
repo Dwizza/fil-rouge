@@ -42,14 +42,14 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-sm text-gray-500 uppercase font-semibold">Profile Views</p>
-              <h3 class="text-3xl font-bold text-gray-800">254</h3>
+              <h3 class="text-3xl font-bold text-gray-800">0</h3>
             </div>
             <div class="bg-green-100 p-3 rounded-full">
               <i class="ti-eye text-green-500 text-xl"></i>
             </div>
           </div>
           <div class="mt-4">
-            <span class="text-green-500 font-semibold text-sm">+12.8%</span>
+            <span class="text-green-500 font-semibold text-sm">+0%</span>
             <span class="text-gray-500 text-sm"> from last month</span>
           </div>
         </div>
@@ -58,7 +58,7 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-sm text-gray-500 uppercase font-semibold">Messages</p>
-              <h3 class="text-3xl font-bold text-gray-800">7</h3>
+              <h3 class="text-3xl font-bold text-gray-800">0</h3>
             </div>
             <div class="bg-purple-100 p-3 rounded-full">
               <i class="ti-comment-alt text-purple-500 text-xl"></i>
@@ -74,14 +74,14 @@
           <div class="flex items-center justify-between">
             <div>
               <p class="text-sm text-gray-500 uppercase font-semibold">Favorites</p>
-              <h3 class="text-3xl font-bold text-gray-800">18</h3>
+              <h3 class="text-3xl font-bold text-gray-800">0</h3>
             </div>
             <div class="bg-amber-100 p-3 rounded-full">
               <i class="ti-heart text-amber-500 text-xl"></i>
             </div>
           </div>
           <div class="mt-4">
-            <span class="text-green-500 font-semibold text-sm">+2</span>
+            <span class="text-green-500 font-semibold text-sm">0</span>
             <span class="text-gray-500 text-sm"> new favorites</span>
           </div>
         </div>
@@ -422,7 +422,7 @@
             </label>
             <div class="flex items-center">
               <input type="number" id="price" name="price" class="shadow-sm border border-gray-300 rounded-l-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0">
-              <span class="bg-gray-100 px-4 py-2 rounded-r-md border border-l-0 border-gray-300 text-gray-700 font-medium">DH</span>
+              <span class="bg-gray-100 px-4 py-2 rounded-r-md border border-l-0 border-gray-300 text-gray-700 font-medium">USD</span>
             </div>
           </div>
           

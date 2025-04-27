@@ -256,7 +256,7 @@
                                         </div>
                                         <div class="p-4">
                                             <div class="flex justify-between items-baseline">
-                                                <span class="text-sm font-semibold text-amber-700">{{ number_format($annonce->price, 2) }} €</span>
+                                                <span class="text-sm font-semibold text-amber-700">{{ number_format($annonce->price, 2) }} $</span>
                                                 <span class="text-xs text-gray-500">{{ $timeAgo }}</span>
                                             </div>
                                             <h3 class="mt-1 text-lg font-semibold text-gray-900 truncate">{{ $annonce->title }}</h3>

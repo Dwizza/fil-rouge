@@ -324,7 +324,7 @@
                     <!-- Price with badge -->
                     <div class="mt-6 mb-8">
                         <div class="inline-flex price-tag bg-gradient-to-r from-amber-400 to-amber-700 text-white font-bold text-2xl py-3 px-6 rounded-lg shadow-lg">
-                            {{ number_format($annonce->price, 2) }} €
+                            {{ number_format($annonce->price, 2) }} $
                         </div>
                     </div>
 
@@ -583,7 +583,7 @@
                         </div>
                         <div class="p-5">
                             <div class="flex justify-between items-baseline">
-                                <span class="text-sm font-semibold text-amber-700">{{ number_format($similarAnnonce->price, 2) }} €</span>
+                                <span class="text-sm font-semibold text-amber-700">{{ number_format($similarAnnonce->price, 2) }} $</span>
                                 <span class="text-xs text-gray-500">{{ $timeAgo }}</span>
                             </div>
                             <h3 class="mt-1 text-lg font-semibold text-gray-900 truncate">{{ $similarAnnonce->title }}</h3>

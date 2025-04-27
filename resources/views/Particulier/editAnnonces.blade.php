@@ -4,9 +4,9 @@
 
 <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 bg-white z-10">
     <h3 class="text-xl font-bold text-gray-800">Edit Annonce</h3>
-    <button id="closeEditAnnonceModal" class="text-gray-500 hover:text-gray-700">
+    <a href="/user/dashboard" id="closeEditAnnonceModal" class="text-gray-500 hover:text-gray-700">
       <i class="ti-close text-xl"></i>
-    </button>
+    </a>
   </div>
   
   <div class="p-6">
@@ -49,7 +49,7 @@
         </label>
         <div class="flex items-center">
           <input type="number" id="edit_price" name="price" value="{{ $annonce->price }}" class="shadow-sm border border-gray-300 rounded-l-md w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0">
-          <span class="bg-gray-100 px-4 py-2 rounded-r-md border border-l-0 border-gray-300 text-gray-700 font-medium">DH</span>
+          <span class="bg-gray-100 px-4 py-2 rounded-r-md border border-l-0 border-gray-300 text-gray-700 font-medium">USD</span>
         </div>
       </div>
       

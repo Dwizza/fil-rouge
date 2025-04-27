@@ -56,7 +56,7 @@
                                     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 </a>
                                 <div class="absolute top-4 right-4">
-                                    <span class="bg-white text-amber-600 px-4 py-1.5 rounded-full font-bold shadow-lg backdrop-blur-sm bg-opacity-80">{{ number_format($annonce->price, 2) }} €</span>
+                                    <span class="bg-white text-amber-600 px-4 py-1.5 rounded-full font-bold shadow-lg backdrop-blur-sm bg-opacity-80">{{ number_format($annonce->price, 2) }} $</span>
                                 </div>
                                 @if($annonce->category)
                                     <div class="absolute bottom-4 left-4">

@@ -28,8 +28,12 @@ route::get('/annonceDetails/{id}',[AnnonceController::class, 'annonceDetail'])->
 Route::get('/profile/view/{id}', [ParticulerController::class, 'viewProfile'])->name('user.profile.view');
 route::post('/annoncesBy', [AnnonceController::class, 'annoncesByCategories'])->name('user.annoncesBy');
 
+route::get('/error', function () {
+    return view('error');
+})->name('error');
 
-Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function () {
+
+Route::middleware(['auth', 'checkRole:2','checkStatusMiddleware'])->prefix('company')->group(function () {
     
     route::get('/', [EntrepriseController::class, 'index'])->name('company.dashboard');
     
@@ -50,18 +54,25 @@ Route::middleware(['auth', 'checkRole:2'])->prefix('company')->group(function ()
     // billing
     route::get('/billing', [EntrepriseController::class, 'billing'])->name('company.billing');
     route::get('/billing/{id}', [EntrepriseController::class, 'changeStatusPayment'])->name('change.status.payment');
-})->middleware('checkRole:2');
+});
 
 
 Route::middleware(['auth', 'checkRole:1'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    //categories crud
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::post('/categories/update', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+    // annonces
     Route::get('/annonces', [AdminController::class, 'annonces']);
-    Route::get('/users',[ AdminController::class, 'users'])->name('admin.users');
     Route::post('/annonces/{id}', [AdminController::class, 'updateStatus'])->name('updateStatus');
+
+    //users
+    Route::get('/users',[ AdminController::class, 'users'])->name('admin.users');
+    Route::post('/user/{id}', [AdminController::class, 'editStatusUsers'])->name('editStatusUsers');
 
     //reports
     route::get('/reports', [ReportController::class, 'showReports'])->name('admin.reports');

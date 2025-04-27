@@ -85,4 +85,17 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Status updated!');
     }
 
+    public function editStatusUsers(Request $request, $id){
+        $validate = $request->validate([
+            'status'=>'required'
+        ]);
+        
+
+        $user = User::findOrFail($id);
+
+        $user->update($validate);
+        
+        return redirect()->back()->with('success', 'Status updated!');
+    }
+
 }

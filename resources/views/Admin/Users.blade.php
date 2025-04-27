@@ -79,7 +79,13 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-center">
-                  <span class="px-3 py-1.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-emerald-400 border border-emerald-500/20">Actif</span>
+                  @if ($user->status == 'active')
+                    <span class="px-3 py-1.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-emerald-400">Active</span>
+                  @elseif ($user->status == 'inactive')
+                    <span class="px-3 py-1.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gradient-to-r from-red-500/20 to-red-500/20 text-red-400">Inactive</span>
+                  @elseif ($user->status == 'pending')
+                    <span class="px-3 py-1.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gradient-to-r from-yellow-500/20 to-yellow-500/20 text-yellow-400">pending</span>
+                  @endif
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-400">
                   {{ \Carbon\Carbon::parse($user->created_at)->format('d M Y, H:i') }}
@@ -92,7 +98,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                       </svg>
                     </a>
-                    <button class="text-blue-400 hover:text-blue-300 transition-colors">
+                    <button class="text-blue-400 hover:text-blue-300 transition-colors" onclick="openModal({{ $user->id }}, '{{ $user->status }}')">
                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                       </svg>
@@ -136,5 +142,43 @@
     </div>
   </div>
 </div>
+
+<!-- Modal for activating/deactivating users -->
+<div id="userStatusModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center">
+  <div class="bg-gray-800 rounded-lg shadow-lg w-96 p-6">
+    <h3 class="text-lg font-semibold text-white mb-4">Modifier le statut de l'utilisateur</h3>
+    <form id="userStatusForm">
+      <!-- CSRF Token -->
+      @csrf
+      <input type="hidden" name="user_id" id="modalUserId">
+      <div class="mb-4">
+        <label for="status" class="block text-sm font-medium text-gray-300 mb-2">Statut</label>
+        <select name="status" id="status" class="w-full px-4 py-2 bg-gray-700 text-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+          <option value="active">Active</option>
+          <option value="pending">pending</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button type="button" class="px-4 py-2 bg-gray-600 text-gray-300 rounded-lg hover:bg-gray-500" onclick="closeModal()">Annuler</button>
+        <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openModal(userId, currentStatus) {
+    document.getElementById('modalUserId').value = userId;
+    document.getElementById('status').value = currentStatus;
+    document.getElementById('userStatusModal').classList.remove('hidden');
+    document.getElementById('userStatusForm').setAttribute('action', 'user/' + userId);
+    document.getElementById('userStatusForm').setAttribute('method', 'POST');
+  }
+
+  function closeModal() {
+    document.getElementById('userStatusModal').classList.add('hidden');
+  }
+</script>
 
 @endsection

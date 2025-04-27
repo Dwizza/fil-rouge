@@ -594,7 +594,7 @@
 					<div class="single-banner">
 						<img src="https://cdn.thewirecutter.com/wp-content/media/2024/11/BEST-LAPTOPS-PHOTO-VIDEO-EDITING-2048px-6.jpg" alt="#">
 						<div class="content">
-							<p>Man's Collectons</p>
+							<p>Laptop</p>
 							<h3>Man's items <br>Up to<span> 50%</span></h3>
 							<a href="#">Shop Now</a>
 						</div>
@@ -604,9 +604,9 @@
 				<!-- Single Banner  -->
 				<div class="col-lg-6 col-md-6 col-12">
 					<div class="single-banner">
-						<img src="https://via.placeholder.com/600x370" alt="#">
+						<img src="https://lovapets.fr/cdn/shop/articles/2.-Le-chat-Bengal-le-leopard.jpg?height=450&v=1683305699" alt="#">
 						<div class="content">
-							<p>shoes women</p>
+							<p>Cat</p>
 							<h3>mid season <br> up to <span>70%</span></h3>
 							<a href="#" class="btn">Shop Now</a>
 						</div>
@@ -689,16 +689,16 @@
 				<div class="row">
 					<div class="col-lg-6 col-12 padding-right">
 						<div class="image">
-							<img src="https://cdn.thewirecutter.com/wp-content/media/2024/11/BEST-LAPTOPS-PHOTO-VIDEO-EDITING-2048px-6.jpg" alt="#">
+							<img src="https://i5.walmartimages.com/asr/867463c2-f136-45c4-8f18-0f1b93cade93.c9d29f44cf41a80606cedc15ee635e85.jpeg" alt="#">
 						</div>	
 					</div>	
 					<div class="col-lg-6 col-12 padding-left">
 						<div class="content">
 							<div class="heading-block">
 								<p class="small-title">Deal of day</p>
-								<h3 class="title">Beatutyful dress for women</h3>
+								<h3 class="title">AirPods</h3>
 								<p class="text">Suspendisse massa leo, vestibulum cursus nulla sit amet, frungilla placerat lorem. Cars fermentum, sapien. </p>
-								<h1 class="price">$1200 <s>$1890</s></h1>
+								<h1 class="price">$250 <s>$380</s></h1>
 								<div class="coming-time">
 									<div class="clearfix" data-countdown="2021/02/30"></div>
 								</div>

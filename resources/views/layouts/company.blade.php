@@ -1,271 +1,364 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="zxx">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets1/images/JOTEA-logo.png') }}" />
-    <link rel="icon" type="image/png" href="{{ asset('assets1/images/JOTEA-logo.png') }}" />
-    <title>JOTEA - Company Dashboard</title>
-    <!-- Inter font for clean modern look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/e9ee48a8e3.js" crossorigin="anonymous"></script>
-    <!-- Tailwind CSS with dark mode support -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#fef2f2',
-                            100: '#fee2e2',
-                            200: '#fecaca',
-                            300: '#fca5a5',
-                            400: '#f87171',
-                            500: '#ef4444',
-                            600: '#dc2626',
-                            700: '#b91c1c',
-                            800: '#991b1b',
-                            900: '#7f1d1d',
-                            950: '#450a0a',
-                        },
-                        brand: {
-                            amber: '#f59e0b',
-                            'amber-light': '#fbbf24',
-                            'amber-dark': '#d97706',
-                        },
-                        'dark-bg': '#0f172a',
-                        'dark-card': '#1e293b',
-                        'dark-border': '#334155',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            },
-        }
-    </script>
-    <style>
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #f59e0b;
-            border-radius: 8px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #d97706;
-        }
-        
-        /* Smooth transitions */
-        .transition-all {
-            transition-property: all;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 300ms;
-        }
+  <!-- Meta Tag -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name='copyright' content=''>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        /* Glassmorphism effects */
-        .glass {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="user-id" content="{{ auth()->id() }}">
+  
+  <!-- Title Tag  -->
+  <title>Jotea - Company Dashboard</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ asset('assets1/images/JOTEA-logo.png') }}">
+  <!-- Web Font -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+  
+  <!-- StyleSheet -->
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/bootstrap.css') }}">
+  <!-- Magnific Popup -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/magnific-popup.min.css') }}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/font-awesome.css') }}">
+  <!-- Fancybox -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/jquery.fancybox.min.css') }}">
+  <!-- Themify Icons -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/themify-icons.css') }}">
+  <!-- Nice Select CSS -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/niceselect.css') }}">
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/animate.css') }}">
+  <!-- Flex Slider CSS -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/flex-slider.min.css') }}">
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/owl-carousel.css') }}">
+  <!-- Slicknav -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/slicknav.min.css') }}">
+  
+  <!-- Eshop StyleSheet -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/reset.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets1/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets1/css/responsive.css') }}">
 
-        /* Custom animations */
-        @keyframes pulse-gentle {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        .animate-pulse-gentle {
-            animation: pulse-gentle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-    </style>
+  <!-- Color CSS -->
+  <link rel="stylesheet" href="{{ asset('assets1/css/color/color1.css') }}">
+
+  <link rel="stylesheet" href="#" id="colors">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  {{-- font-awesome --}}
+  <script src="https://kit.fontawesome.com/e9ee48a8e3.js" crossorigin="anonymous"></script>
+
+  {{-- cdn pusher --}}
+  <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
+  {{-- cdn jquery --}}
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    
+    /* Responsive improvements */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 998;
+    }
+    
+    @media (max-width: 1024px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        height: 100%;
+        width: 280px;
+        z-index: 999;
+        transition: left 0.3s ease;
+      }
+      
+      .sidebar.active {
+        left: 0;
+      }
+      
+      .sidebar-overlay.active {
+        display: block;
+      }
+      
+      .main-content {
+        width: 100%;
+        margin-left: 0;
+        transition: margin 0.3s ease;
+      }
+      
+      .mobile-menu-toggle {
+        display: block;
+      }
+    }
+    
+    @media (min-width: 1025px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 280px;
+        z-index: 999;
+      }
+      
+      .main-content {
+        width: calc(100% - 280px);
+        margin-left: 280px;
+      }
+      
+      .mobile-menu-toggle {
+        display: none;
+      }
+    }
+  </style>
+  @vite(['resources/js/app.js'])
+
 </head>
+<body class="bg-gray-100">
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay"></div>
 
-<body class="font-sans antialiased text-gray-200 bg-dark-bg min-h-screen">
-    <!-- Page wrapper -->
-    <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-64 transition-transform duration-300 transform md:translate-x-0 -translate-x-full bg-dark-card border-r border-dark-border h-full">
-            <!-- Logo -->
-            <div class="flex items-center justify-center h-16 px-6 py-4">
-                <a href="{{ route('company.dashboard') }}" class="flex items-center space-x-3">
-                    <img src="{{ asset('assets1/images/JOTEA-logo.png') }}" class="h-10" alt="JOTEA Logo" />
-                    
-                </a>
-            </div>
-
-            <!-- Divider -->
-            <hr class="border-dark-border opacity-50" />
-
-            <!-- Navigation -->
-            <div class="flex flex-col justify-between flex-1 px-3 py-4 overflow-y-auto">
-                <ul class="space-y-2">
-                    <!-- Dashboard -->
-                    <li>
-                        <a href="{{ route('company.dashboard') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('company.dashboard') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
-                            <i class="flex items-center justify-center w-5 h-5 text-brand-amber transition duration-75 fa-solid fa-chart-line"></i>
-                            <span class="ml-3">Dashboard</span>
-                        </a>
-                    </li>
-
-                    <!-- My Annonces -->
-                    <li>
-                        <a href="{{ route('annonce.show') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('annonce.show') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
-                            <i class="flex items-center justify-center w-5 h-5 text-orange-400 transition duration-75 fa-solid fa-list"></i>
-                            <span class="ml-3">My Annonces</span>
-                        </a>
-                    </li>
-
-                    <!-- Add Annonce -->
-                    <li>
-                        <a href="{{ route('addannonce') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('addannonce') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
-                            <i class="flex items-center justify-center w-5 h-5 text-emerald-400 transition duration-75 fa-solid fa-plus"></i>
-                            <span class="ml-3">Add Annonce</span>
-                        </a>
-                    </li>
-
-                    <!-- Messages -->
-                    <li>
-                        <a href="{{ route('entreprise.conversation') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('entreprise.conversation') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
-                            <i class="flex items-center justify-center w-5 h-5 text-purple-400 transition duration-75 fa-solid fa-inbox"></i>
-                            <span class="ml-3">Messages</span>
-                        </a>
-                    </li>
-
-                    <!-- Billing -->
-                    <li>
-                        <a href="{{ route('company.billing') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('company.billing') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
-                            <i class="flex items-center justify-center w-5 h-5 text-green-400 transition duration-75 fa-solid fa-credit-card"></i>
-                            <span class="ml-3">Billing</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <div class="pt-4 mt-6 space-y-2 border-t border-dark-border">
-                    <p class="px-4 text-xs font-medium uppercase text-gray-500">Account</p>
-                    
-                    <!-- Edit Profile -->
-                    <a href="{{ route('company.profile') }}" class="flex items-center px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group {{ request()->routeIs('company.profile') ? 'bg-brand-amber/10 text-brand-amber' : '' }}">
-                        <i class="flex items-center justify-center w-5 h-5 text-gray-400 transition duration-75 fa-solid fa-user"></i>
-                        <span class="ml-3">Edit Profile</span>
-                    </a>
-                    
-                    <!-- Logout -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="flex items-center w-full px-4 py-3 text-gray-200 rounded-lg hover:bg-gray-700 group">
-                            <i class="flex items-center justify-center w-5 h-5 text-red-400 transition duration-75 fa-solid fa-sign-out-alt"></i>
-                            <span class="ml-3">Logout</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Main Content -->
-        <div class="flex flex-col flex-1 w-full md:pl-64">
-            <!-- Top Navigation -->
-            <header class="sticky top-0 z-30 flex items-center justify-between w-full h-16 px-4 bg-dark-card border-b border-dark-border shadow-md">
-                <!-- Mobile Sidebar Toggle -->
-                <button id="sidebar-toggle" class="p-2 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-brand-amber text-gray-400 hover:bg-gray-700">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-
-                <!-- Theme Toggle -->
-                <div class="mx-auto">
-                    <button id="theme-toggle" type="button" class="text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-brand-amber rounded-lg text-sm p-2">
-                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                        </svg>
-                        <svg id="theme-toggle-light-icon" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="flex items-center">
-                    <!-- Home link -->
-                    <a href="{{ route('home') }}" class="flex items-center p-2 mr-4 text-gray-400 rounded-lg hover:bg-gray-700 hover:text-gray-200">
-                        <i class="fa-solid fa-home"></i>
-                        <span class="ml-2 text-sm font-medium hidden sm:inline-block">Home</span>
-                    </a>
-                    
-                    <!-- User Profile -->
-                    <div class="relative">
-                        <button type="button" class="flex items-center text-sm bg-gray-800 rounded-full focus:ring-2 focus:ring-brand-amber p-1" id="user-menu-button" aria-expanded="false">
-                            <img class="w-8 h-8 rounded-full" src="{{ asset('assets/img/team-3.jpg') }}" alt="user photo">
-                            <span class="hidden mx-2 text-gray-200 sm:inline-block">{{ Auth::user()->name ?? 'My Profile' }}</span>
-                        </button>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Main Content Area -->
-            <main class="flex-1 p-2 overflow-y-auto">
-                @yield('dashboard.company')
-            </main>
-        </div>
+  <!-- Sidebar -->
+  <aside class="sidebar bg-white shadow-lg overflow-y-auto">
+    <div class="p-5 border-b">
+      <div class="flex justify-between items-center">
+        <a href="/">
+          <img src="{{ asset('assets1/images/JOTEA-logo.png') }}" alt="Logo" class="h-10">
+        </a>
+        <button class="sidebar-close p-2 rounded-full bg-gray-100 lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <!-- Core Scripts -->
-    <script>
-        // Wait for DOM to load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Theme toggle functionality
-            const themeToggleBtn = document.getElementById('theme-toggle');
-            const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-            const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    <div class="p-5">
+      @auth
+        @php
+          $user = Auth::user();
+        @endphp
+        
+        <div class="flex items-center gap-4 mb-6 pb-4 border-b">
+          <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+            @if($user->photo)
+              <img src="{{ asset('storage/'.$user->photo) }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+            @else
+              <div class="w-full h-full flex items-center justify-center bg-amber-100 text-amber-600 text-xl font-bold">
+                {{ substr($user->name, 0, 1) }}
+              </div>
+            @endif
+          </div>
+          <div>
+            <p class="font-medium">{{ $user->name }}</p>
+            <p class="text-sm text-gray-500">{{ $user->email }}</p>
+          </div>
+        </div>
+        
+        <nav>
+          <ul class="space-y-2">
+            <li>
+              <a href="{{ route('company.dashboard') }}" class="flex items-center gap-3 p-3 rounded-lg {{ request()->routeIs('company.dashboard') ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100 text-gray-700' }} transition-colors duration-200">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('annonce.show') }}" class="flex items-center gap-3 p-3 rounded-lg {{ request()->routeIs('annonce.show') ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100 text-gray-700' }} transition-colors duration-200">
+                <i class="fa-solid fa-tags"></i>
+                <span>Mes Annonces</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('addannonce') }}" class="flex items-center gap-3 p-3 rounded-lg {{ request()->routeIs('addannonce') ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100 text-gray-700' }} transition-colors duration-200">
+                <i class="fa-solid fa-plus"></i>
+                <span>Ajouter Annonce</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('entreprise.conversation') }}" class="flex items-center gap-3 p-3 rounded-lg {{ request()->routeIs('entreprise.conversation') ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100 text-gray-700' }} transition-colors duration-200">
+                <i class="fa-solid fa-comments"></i>
+                <span>Messages</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('company.billing') }}" class="flex items-center gap-3 p-3 rounded-lg {{ request()->routeIs('company.billing') ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100 text-gray-700' }} transition-colors duration-200">
+                <i class="fa-solid fa-credit-card"></i>
+                <span>Facturation</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('company.profile') }}" class="flex items-center gap-3 p-3 rounded-lg {{ request()->routeIs('company.profile') ? 'bg-amber-100 text-amber-700' : 'hover:bg-gray-100 text-gray-700' }} transition-colors duration-200">
+                <i class="fa-solid fa-user"></i>
+                <span>Profil</span>
+              </a>
+            </li>
+            <li class="pt-6">
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="flex items-center gap-3 p-3 w-full rounded-lg text-left hover:bg-red-50 text-red-600 transition-colors duration-200">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  <span>Déconnexion</span>
+                </button>
+              </form>
+            </li>
+          </ul>
+        </nav>
+      @endauth
+    </div>
+  </aside>
 
-            // Mobile sidebar toggle
-            const sidebarToggle = document.getElementById('sidebar-toggle');
-            const sidebar = document.getElementById('sidebar');
-            
-            if (sidebarToggle) {
-                sidebarToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('-translate-x-full');
-                });
-            }
+  <!-- Main Content -->
+  <div class="main-content min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+      <div class="px-4 py-4 flex items-center justify-between">
+        <button class="mobile-menu-toggle p-2 rounded-md text-gray-700 hover:bg-gray-100">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        
+        <div class="flex items-center gap-4">
+          <a href="/" class="text-sm text-gray-600 hover:text-amber-500">
+            <i class="fa-solid fa-home mr-1"></i>
+            <span>Retour au site</span>
+          </a>
+          
+          <div class="relative" id="notification-dropdown">
+            <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600 relative">
+              <i class="fa-solid fa-bell"></i>
+              <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">3</span>
+            </button>
+          </div>
+          
+          <!-- Mobile Profile -->
+          <div class="relative lg:hidden" id="profile-dropdown-mobile">
+            <button class="flex items-center gap-2 hover:bg-gray-100 p-1.5 rounded-full">
+              <div class="w-8 h-8 bg-gray-200 rounded-full overflow-hidden">
+                @if(Auth::user()->photo)
+                  <img src="{{ asset('storage/'.Auth::user()->photo) }}" alt="{{ Auth::user()->name }}" class="w-full h-full object-cover">
+                @else
+                  <div class="w-full h-full flex items-center justify-center bg-amber-100 text-amber-600 text-sm font-bold">
+                    {{ substr(Auth::user()->name, 0, 1) }}
+                  </div>
+                @endif
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-            // Close sidebar when clicking outside on mobile
-            document.addEventListener('click', function(event) {
-                const isClickInsideSidebar = sidebar.contains(event.target);
-                const isClickOnToggle = sidebarToggle && sidebarToggle.contains(event.target);
-                
-                if (!isClickInsideSidebar && !isClickOnToggle && !sidebar.classList.contains('-translate-x-full') && window.innerWidth < 768) {
-                    sidebar.classList.add('-translate-x-full');
-                }
-            });
+    <!-- Content -->
+    <main class="p-4 md:p-6">
+      @if(session('success'))
+        <div class="mb-6 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded">
+          <div class="flex items-center">
+            <i class="fa-solid fa-check-circle mr-2"></i>
+            <p>{{ session('success') }}</p>
+          </div>
+        </div>
+      @endif
 
-            // Handle theme toggle
-            if (themeToggleBtn) {
-                themeToggleBtn.addEventListener('click', function() {
-                    document.documentElement.classList.toggle('dark');
-                    
-                    // Toggle icons
-                    themeToggleDarkIcon.classList.toggle('hidden');
-                    themeToggleLightIcon.classList.toggle('hidden');
+      @if(session('error'))
+        <div class="mb-6 bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded">
+          <div class="flex items-center">
+            <i class="fa-solid fa-exclamation-circle mr-2"></i>
+            <p>{{ session('error') }}</p>
+          </div>
+        </div>
+      @endif
+      
+      @yield('content')
+    </main>
+  </div>
 
-                    // Save preference to local storage
-                    if (document.documentElement.classList.contains('dark')) {
-                        localStorage.setItem('color-theme', 'dark');
-                    } else {
-                        localStorage.setItem('color-theme', 'light');
-                    }
-                });
-            }
+  <!-- JavaScript for Menu Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+      const sidebarClose = document.querySelector('.sidebar-close');
+      const sidebar = document.querySelector('.sidebar');
+      const sidebarOverlay = document.querySelector('.sidebar-overlay');
+      
+      // Show sidebar
+      if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+          sidebar.classList.add('active');
+          sidebarOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Prevent scrolling
         });
-    </script>
-    
-    
+      }
+      
+      // Close sidebar
+      function closeSidebar() {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        document.body.style.overflow = ''; // Re-enable scrolling
+      }
+      
+      if (sidebarClose) {
+        sidebarClose.addEventListener('click', closeSidebar);
+      }
+      
+      if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+      }
+    });
+  </script>
+  
+  <!-- Jquery -->
+  <script src="{{ asset('assets1/js/jquery.min.js') }}"></script>
+  <script src="{{ asset('assets1/js/jquery-migrate-3.0.0.js') }}" defer></script>
+  <script src="{{ asset('assets1/js/jquery-ui.min.js') }}" defer></script>
+  <!-- Popper JS -->
+  <script src="{{ asset('assets1/js/popper.min.js') }}" defer></script>
+  <!-- Bootstrap JS -->
+  <script src="{{ asset('assets1/js/bootstrap.min.js') }}" defer></script>
+  <!-- Color JS -->
+  <script src="{{ asset('assets1/js/colors.js') }}" defer></script>
+  <!-- Slicknav JS -->
+  <script src="{{ asset('assets1/js/slicknav.min.js') }}" defer></script>
+  <!-- Owl Carousel JS -->
+  <script src="{{ asset('assets1/js/owl-carousel.js') }}" defer></script>
+  <!-- Magnific Popup JS -->
+  <script src="{{ asset('assets1/js/magnific-popup.js') }}" defer></script>
+  <!-- Fancybox JS -->
+  <script src="{{ asset('assets1/js/facnybox.min.js') }}" defer></script>
+  <!-- Waypoints JS -->
+  <script src="{{ asset('assets1/js/waypoints.min.js') }}" defer></script>
+  <!-- Countdown JS -->
+  <script src="{{ asset('assets1/js/finalcountdown.min.js') }}" defer></script>
+  <!-- Nice Select JS -->
+  <script src="{{ asset('assets1/js/nicesellect.js') }}" defer></script>
+  <!-- Ytplayer JS -->
+  <script src="{{ asset('assets1/js/ytplayer.min.js') }}" defer></script>
+  <!-- Flex Slider JS -->
+  <script src="{{ asset('assets1/js/flex-slider.js') }}" defer></script>
+  <!-- ScrollUp JS -->
+  <script src="{{ asset('assets1/js/scrollup.js') }}" defer></script>
+  <!-- Onepage Nav JS -->
+  <script src="{{ asset('assets1/js/onepage-nav.min.js') }}" defer></script>
+  <!-- Easing JS -->
+  <script src="{{ asset('assets1/js/easing.js') }}" defer></script>
+  <!-- Active JS -->
+  <script src="{{ asset('assets1/js/active.js') }}" defer></script>
 </body>
 </html>

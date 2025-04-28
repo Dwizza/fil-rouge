@@ -63,9 +63,55 @@
   {{-- cdn jquery --}}
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
   <style>
-    body { font-family: 'Poppins', sans-serif; }
+   /* Update these CSS media queries */
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: block !important;
+  }
+  .desktop-menu {
+    display: none;
+  }
+}
+
+/* Specific styles for tablet/laptop range */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .mobile-menu-toggle {
+    display: block !important;
+  }
+  .desktop-menu {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .mobile-menu-toggle {
+    display: none !important;
+  }
+  .desktop-menu {
+    display: block;
+  }
+}
+
+/* Make sure mobile menu is properly styled for all screen sizes below 1200px */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 80%;
+  max-width: 350px; /* Limit maximum width */
+  height: 100%;
+  background-color: white;
+  z-index: 9999;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  padding: 1rem;
+}
+
+.mobile-menu.active {
+  left: 0;
+}
   </style>
   @vite(['resources/js/app.js'])
 
@@ -93,12 +139,22 @@
       </div>
     </div>
 
-    <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between">
+		<!-- Logo -->
 		<div class="flex items-center gap-4">
 			<a href="/">
 			<img src="{{ asset('assets1/images/JOTEA-logo.png') }}" alt="Logo" class="h-10">
 			</a>
 		</div>
+		
+		<!-- Mobile Menu Toggle -->
+		<button class="mobile-menu-toggle hidden md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100">
+		  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+		    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+		  </svg>
+		</button>
+		
+		<!-- Search Bar - Desktop -->
 		<div class="hidden md:flex w-2/3 justify-center">
 			<form action="{{route('user.annoncesBy')}}" method="POST" class="flex w-full max-w-2xl bg-white rounded-full shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-2xl h-12">
 				@csrf
@@ -117,7 +173,9 @@
 				</button>
 			</form>
 		</div>
-		<div>
+		
+		<!-- Auth Links - Desktop -->
+		<div class="hidden md:block">
 			@auth
 				@php
 					$user = Auth::user();
@@ -166,7 +224,122 @@
 			@endauth
 		</div>
     </div>
+    
+    <!-- Mobile Search Bar -->
+    <div class="md:hidden px-4 pb-4">
+      <form action="{{route('user.annoncesBy')}}" method="POST" class="flex flex-col w-full bg-white rounded-lg shadow-md border border-gray-200">
+        @csrf
+        <select name="category" class="w-full px-4 py-2 bg-white border-b border-gray-200 text-gray-800 focus:ring-2 focus:ring-blue-300 focus:outline-none font-medium">
+          <option value="">All categories</option>
+          @foreach ($categories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option>
+          @endforeach
+        </select>
+        
+        <div class="flex w-full">
+          <input type="text" name="search" placeholder="Search Products Here..." class="flex-grow px-4 py-2 bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+          
+          <button class="bg-gradient-to-r from-amber-300 to-amber-700 hover:from-amber-400 hover:to-amber-800 px-4 py-2 text-white font-bold flex items-center justify-center">
+            <i class="ti-search text-xl"></i>
+          </button>
+        </div>
+      </form>
+    </div>
   </header>
+  
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay"></div>
+  <div class="mobile-menu">
+    <div class="flex justify-between items-center mb-4 pb-2 border-b">
+      <a href="/">
+        <img src="{{ asset('assets1/images/JOTEA-logo.png') }}" alt="Logo" class="h-10">
+      </a>
+      <button class="mobile-menu-close p-2 rounded-full bg-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    
+    @auth
+      @php
+        $user = Auth::user();
+      @endphp
+      
+      <div class="flex items-center gap-4 mb-4 pb-4 border-b">
+        <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden">
+          @if($user->photo)
+            <img src="{{ asset('storage/'.$user->photo) }}" alt="{{ $user->name }}" class="w-full h-full object-cover">
+          @else
+            <div class="w-full h-full flex items-center justify-center text-gray-500 text-xl">
+              {{ substr($user->name, 0, 1) }}
+            </div>
+          @endif
+        </div>
+        <div>
+          <p class="font-medium">{{ $user->name }}</p>
+          <p class="text-sm text-gray-500">{{ $user->email }}</p>
+        </div>
+      </div>
+      
+      <!-- Mobile Menu Items -->
+      <div class="flex flex-col space-y-2">
+        @if($user->role && $user->role->name === 'admin')
+          <a href="/admin" class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Admin Dashboard</span>
+          </a>
+        @elseif($user->role && $user->role->name === 'company')
+          <a href="/company" class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+            <i class="fa-solid fa-gauge"></i>
+            <span>Company Dashboard</span>
+          </a>
+        @elseif($user->role && $user->role->name === 'particuler')
+          <a href="/user/dashboard" class="flex items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100">
+            <i class="fa-solid fa-user"></i>
+            <span>Your Account</span>
+          </a>
+        @endif
+        
+        <form method="POST" action="{{ route('logout') }}">
+          @csrf
+          <button type="submit" class="w-full flex items-center gap-2 p-3 bg-red-50 rounded-lg hover:bg-red-100 text-red-600">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </button>
+        </form>
+      </div>
+    @else
+      <div class="flex flex-col space-y-2">
+        <a href="/login" class="flex items-center gap-2 p-3 bg-blue-50 rounded-lg hover:bg-blue-100">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        </a>
+        <a href="/register" class="flex items-center gap-2 p-3 bg-amber-50 rounded-lg hover:bg-amber-100">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Register</span>
+        </a>
+      </div>
+    @endauth
+    
+    <div class="mt-6 pt-4 border-t">
+      <h3 class="font-semibold text-gray-700 mb-2">Categories</h3>
+      <ul class="space-y-1">
+        @foreach($categories as $category)
+          <li>
+            <form action="{{route('user.annoncesBy')}}" method="POST" class="w-full">
+              @csrf
+              <input type="hidden" name="category" value="{{$category->id}}">
+              <button type="submit" class="w-full text-left p-2 rounded hover:bg-gray-100 flex items-center justify-between">
+                <span>{{ $category->name }}</span>
+                <i class="fa-solid fa-chevron-right text-xs text-gray-400"></i>
+              </button>
+            </form>
+          </li>
+        @endforeach
+      </ul>
+    </div>
+  </div>
 
   <main class="container mx-auto px-4 py-10">
     @yield('content')
@@ -174,7 +347,7 @@
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white">
-    <div class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="container mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div>
 		<img src="{{ asset('assets1/images/JOTEA-logo.png') }}" alt="Logo" class="h-24 w-40 mb-4 rounded-lg drop-shadow-[0_10px_40px_rgba(255,250,0,0.5)] "/>
         <p class="text-sm text-gray-300 leading-relaxed">JOTEA est votre plateforme de confiance pour trouver tout ce dont vous avez besoin, avec une expérience exceptionnelle et des transactions sécurisées.</p>
@@ -194,7 +367,7 @@
         </div>
       </div>
 
-      <div>
+      <div class="hidden md:block">
         <h4 class="text-lg font-semibold mb-4 text-amber-400 border-b border-gray-700 pb-2">Informations</h4>
         <ul class="space-y-2.5">
           <li>
@@ -240,7 +413,7 @@
         </ul>
       </div>
 
-      <div>
+      <div class="hidden md:block">
         <h4 class="text-lg font-semibold mb-4 text-amber-400 border-b border-gray-700 pb-2">Service Client</h4>
         <ul class="space-y-2.5">
           <li>
@@ -354,41 +527,95 @@
       </div>
     </div>
   </footer>
+
+  <!-- JavaScript for Mobile Menu -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  const mobileMenuClose = document.querySelector('.mobile-menu-close');
+  const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+  
+  // Adjusted function to handle medium screens properly
+  function shouldShowMobileMenu() {
+    return window.innerWidth < 1200;
+  }
+  
+  // Show mobile menu
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', function() {
+      // Remove the small screen check to allow menu to show on tablets/laptops too
+      mobileMenu.classList.add('active');
+      mobileMenuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+  }
+  
+  // Close mobile menu
+  function closeMenu() {
+    mobileMenu.classList.remove('active');
+    mobileMenuOverlay.classList.remove('active');
+    document.body.style.overflow = ''; // Re-enable scrolling
+  }
+  
+  // Initial setup
+  function adjustMenuVisibility() {
+    if (!shouldShowMobileMenu()) {
+      closeMenu();
+      mobileMenuToggle.style.display = 'none';
+    } else {
+      mobileMenuToggle.style.display = 'block';
+    }
+  }
+  
+  // Call on page load and resize
+  adjustMenuVisibility();
+  window.addEventListener('resize', adjustMenuVisibility);
+  
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', closeMenu);
+  }
+  
+  if (mobileMenuOverlay) {
+    mobileMenuOverlay.addEventListener('click', closeMenu);
+  }
+});
+  </script>
 </body>
 <!-- Jquery -->
 <script src="{{ asset('assets1/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets1/js/jquery-migrate-3.0.0.js') }}"></script>
-<script src="{{ asset('assets1/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('assets1/js/jquery-migrate-3.0.0.js') }}" defer></script>
+<script src="{{ asset('assets1/js/jquery-ui.min.js') }}" defer></script>
 <!-- Popper JS -->
-<script src="{{ asset('assets1/js/popper.min.js') }}"></script>
+<script src="{{ asset('assets1/js/popper.min.js') }}" defer></script>
 <!-- Bootstrap JS -->
-<script src="{{ asset('assets1/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets1/js/bootstrap.min.js') }}" defer></script>
 <!-- Color JS -->
-<script src="{{ asset('assets1/js/colors.js') }}"></script>
+<script src="{{ asset('assets1/js/colors.js') }}" defer></script>
 <!-- Slicknav JS -->
-<script src="{{ asset('assets1/js/slicknav.min.js') }}"></script>
+<script src="{{ asset('assets1/js/slicknav.min.js') }}" defer></script>
 <!-- Owl Carousel JS -->
-<script src="{{ asset('assets1/js/owl-carousel.js') }}"></script>
+<script src="{{ asset('assets1/js/owl-carousel.js') }}" defer></script>
 <!-- Magnific Popup JS -->
-<script src="{{ asset('assets1/js/magnific-popup.js') }}"></script>
+<script src="{{ asset('assets1/js/magnific-popup.js') }}" defer></script>
 <!-- Fancybox JS -->
-<script src="{{ asset('assets1/js/facnybox.min.js') }}"></script>
+<script src="{{ asset('assets1/js/facnybox.min.js') }}" defer></script>
 <!-- Waypoints JS -->
-<script src="{{ asset('assets1/js/waypoints.min.js') }}"></script>
+<script src="{{ asset('assets1/js/waypoints.min.js') }}" defer></script>
 <!-- Countdown JS -->
-<script src="{{ asset('assets1/js/finalcountdown.min.js') }}"></script>
+<script src="{{ asset('assets1/js/finalcountdown.min.js') }}" defer></script>
 <!-- Nice Select JS -->
-<script src="{{ asset('assets1/js/nicesellect.js') }}"></script>
+<script src="{{ asset('assets1/js/nicesellect.js') }}" defer></script>
 <!-- Ytplayer JS -->
-<script src="{{ asset('assets1/js/ytplayer.min.js') }}"></script>
+<script src="{{ asset('assets1/js/ytplayer.min.js') }}" defer></script>
 <!-- Flex Slider JS -->
-<script src="{{ asset('assets1/js/flex-slider.js') }}"></script>
+<script src="{{ asset('assets1/js/flex-slider.js') }}" defer></script>
 <!-- ScrollUp JS -->
-<script src="{{ asset('assets1/js/scrollup.js') }}"></script>
+<script src="{{ asset('assets1/js/scrollup.js') }}" defer></script>
 <!-- Onepage Nav JS -->
-<script src="{{ asset('assets1/js/onepage-nav.min.js') }}"></script>
+<script src="{{ asset('assets1/js/onepage-nav.min.js') }}" defer></script>
 <!-- Easing JS -->
-<script src="{{ asset('assets1/js/easing.js') }}"></script>
+<script src="{{ asset('assets1/js/easing.js') }}" defer></script>
 <!-- Active JS -->
-<script src="{{ asset('assets1/js/active.js') }}"></script>
+<script src="{{ asset('assets1/js/active.js') }}" defer></script>
 </html>

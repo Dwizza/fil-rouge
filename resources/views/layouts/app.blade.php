@@ -68,14 +68,23 @@
           scrollbar-width: thin;
           scrollbar-color: rgba(245, 158, 11, 0.5) rgba(30, 41, 59, 0.2);
       }
+      
+      /* Mobile menu fix */
+      @media (max-width: 1280px) {
+        .sidenav-toggled {
+          transform: translateX(0) !important;
+        }
+      }
     </style>
   </head>
 
   <body class="m-0 font-sans text-base antialiased font-normal bg-gray-900 leading-default text-gray-300">
+    <div id="sidenav-overlay" class="fixed inset-0 bg-black/50 z-980 hidden xl:hidden" onclick="closeSidenav()"></div>
+    
     <!-- sidenav -->
-    <aside class="fixed inset-y-0 left-0 flex-wrap items-center justify-between block w-72 p-0 my-4 overflow-hidden transition-all duration-300 -translate-x-full border-0 shadow-2xl xl:ml-6 xl:translate-x-0 rounded-2xl z-990 bg-gradient-to-b from-gray-900 to-gray-800 border border-gray-700/50 max-w-[18rem]" aria-expanded="false">
+    <aside id="sidenav-main" class="fixed inset-y-0 left-0 flex-wrap items-center justify-between block w-72 p-0 my-4 overflow-hidden transition-all duration-300 -translate-x-full border-0 shadow-2xl xl:ml-6 xl:translate-x-0 rounded-2xl z-990 bg-gradient-to-b from-gray-900 to-gray-800 border border-gray-700/50 max-w-[18rem]" aria-expanded="false">
       <div class="h-20 flex items-center px-8 border-b border-gray-700/30">
-        <i class="absolute top-0 right-0 p-4 opacity-70 cursor-pointer fas fa-times text-amber-500 hover:text-white transition-colors xl:hidden" sidenav-close></i>
+        <i class="absolute top-0 right-0 p-4 opacity-70 cursor-pointer fas fa-times text-amber-500 hover:text-white transition-colors xl:hidden" onclick="closeSidenav()"></i>
         <a class="flex items-center gap-2 text-lg font-bold text-white" href="{{ route('admin.dashboard') }}">
           <img src="{{ asset('assets/img/JOTEA-logo.png') }}" class="h-full max-h-10 transition-all duration-200" alt="JOTEA" />
           <span class="text-amber-400">ADMIN</span>
@@ -182,7 +191,7 @@
               <span class="hidden md:block">Home</span>
             </a>
             
-            <button class="px-3 py-2 text-sm font-medium text-gray-300 transition-all duration-200 rounded-lg xl:hidden hover:bg-gray-800" sidenav-trigger>
+            <button onclick="toggleSidenav()" class="px-3 py-2 text-sm font-medium text-gray-300 transition-all duration-200 rounded-lg xl:hidden hover:bg-gray-800" id="burger-btn">
               <i class="fa-solid fa-bars text-gray-400"></i>
             </button>
             
@@ -224,8 +233,40 @@
 
 
   <!-- Main scripts -->
+  <script>
+    // Sidenav mobile toggle
+    function toggleSidenav() {
+      const sidenav = document.getElementById('sidenav-main');
+      const overlay = document.getElementById('sidenav-overlay');
+      
+      sidenav.classList.toggle('-translate-x-full');
+      sidenav.classList.toggle('sidenav-toggled');
+      overlay.classList.toggle('hidden');
+    }
+    
+    function closeSidenav() {
+      const sidenav = document.getElementById('sidenav-main');
+      const overlay = document.getElementById('sidenav-overlay');
+      
+      sidenav.classList.add('-translate-x-full');
+      sidenav.classList.remove('sidenav-toggled');
+      overlay.classList.add('hidden');
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      // Close sidenav when clicking outside on mobile
+      document.addEventListener('click', function(event) {
+        const sidenav = document.getElementById('sidenav-main');
+        const burgerBtn = document.getElementById('burger-btn');
+        
+        if (window.innerWidth < 1280 && !sidenav.contains(event.target) && !burgerBtn.contains(event.target) && !sidenav.classList.contains('-translate-x-full')) {
+          closeSidenav();
+        }
+      });
+    });
+  </script>
   <script src="{{ asset('assets/js/argon-dashboard-tailwind.min.js') }}"></script>
   <script src="{{ asset('assets/js/perfect-scrollbar.js') }}"></script>
   <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>
-  <script src="{{ asset('assets/js/sidenav-burger.js') }}"></script>
 </html>

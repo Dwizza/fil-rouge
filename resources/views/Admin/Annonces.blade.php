@@ -70,7 +70,7 @@
                           </div>
       
                           <div class="my-auto max-w-[calc(100%-5rem)]">
-                            <h6 class="mb-0 text-sm leading-normal text-white font-medium truncate">{{$annonce->title}}</h6>
+                            <h6 class="mb-0 text-sm leading-normal text-white font-medium truncate"><a href="/annonceDetails/{{$annonce->id}}">{{$annonce->title}}</a></h6>
                             <p class="mb-0 text-xs leading-tight text-gray-400 mt-1">ID: #{{$annonce->id}}</p>
                           </div>
                         </div>
@@ -363,7 +363,7 @@
 
   // Show toast after submit
   document.getElementById('statusForm').addEventListener('submit', function () {
-    showToast("✅ Status saved successfully!");
+    showToast("Status saved successfully!");
   });
 </script>
 

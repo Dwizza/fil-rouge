@@ -1,5 +1,5 @@
 @extends('layouts.company')
-@section('dashboard.company')
+@section('content')
 <div class="w-full px-4 py-6">
     <div class="flex flex-col">
         <!-- Header section -->

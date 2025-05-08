@@ -1,5 +1,5 @@
 @extends('layouts.company')
-@section('dashboard.company')
+@section('content')
 <!-- cards -->
 <div class="w-full px-6 py-6 mx-auto dark">
   <!-- row 1 -->

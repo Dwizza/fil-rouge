@@ -1,5 +1,5 @@
 @extends('layouts.company')
-@section('dashboard.company')
+@section('content')
 
 <div class="w-full p-6 mx-auto">
   <form action="{{route('editprofile')}}" method="POST" enctype="multipart/form-data">

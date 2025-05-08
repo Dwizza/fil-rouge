@@ -1,5 +1,5 @@
 @extends('layouts.company')
-@section('dashboard.company')
+@section('content')
 
 <div class="container mx-auto max-w-5xl p-6">
     <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-2xl border border-gray-700/50 backdrop-blur-sm overflow-hidden">
